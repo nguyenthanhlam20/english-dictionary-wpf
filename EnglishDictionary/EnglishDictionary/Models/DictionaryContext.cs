@@ -12,7 +12,9 @@ namespace EnglishDictionary.Models
 
         public DbSet<Account> Accounts { get; set; }
 
-        public DbSet<Type> Types { get; set; }
+        public DbSet<WordType> WordTypes { get; set; }
+        public DbSet<WordExample> WordExamples { get; set; }
+        public DbSet<WordMeaning> WordMeanings { get; set; }
 
         public DbSet<Word> Words { get; set; }
 

@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
-                    
+                    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
                     >
     <Style x:Key="StyledTextBox" TargetType="{x:Type TextBox}">
         <Setter Property="AllowDrop"  Value="true" />
@@ -130,7 +130,9 @@
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}">
                         <Grid >
-                            <PasswordBox Password="{Binding Path=Password, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                            <PasswordBox
+                                
+                                Password="{Binding Path=Password, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                      x:Name="passwordSource" 
                                      Background="{TemplateBinding Background}" 
                                      Foreground="{TemplateBinding Foreground}"

@@ -34,36 +34,13 @@ namespace EnglishDictionary.Migrations
                     b.ToTable("Accounts");
                 });
 
-            modelBuilder.Entity("EnglishDictionary.Models.Type", b =>
-                {
-                    b.Property<int>("TypeId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("TypeName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("TypeId");
-
-                    b.ToTable("Types");
-                });
-
             modelBuilder.Entity("EnglishDictionary.Models.Word", b =>
                 {
                     b.Property<int>("WordId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Examples")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("IPA")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Meanings")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -81,15 +58,99 @@ namespace EnglishDictionary.Migrations
                     b.ToTable("Words");
                 });
 
+            modelBuilder.Entity("EnglishDictionary.Models.WordExample", b =>
+                {
+                    b.Property<int>("ExampleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ExampleContent")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("WordId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("ExampleId");
+
+                    b.HasIndex("WordId");
+
+                    b.ToTable("WordExamples");
+                });
+
+            modelBuilder.Entity("EnglishDictionary.Models.WordMeaning", b =>
+                {
+                    b.Property<int>("MeaningId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("MeaningContent")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("WordId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("MeaningId");
+
+                    b.HasIndex("WordId");
+
+                    b.ToTable("WordMeanings");
+                });
+
+            modelBuilder.Entity("EnglishDictionary.Models.WordType", b =>
+                {
+                    b.Property<int>("WordTypeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("WordTypeName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("WordTypeId");
+
+                    b.ToTable("WordTypes");
+                });
+
             modelBuilder.Entity("EnglishDictionary.Models.Word", b =>
                 {
-                    b.HasOne("EnglishDictionary.Models.Type", "WordType")
+                    b.HasOne("EnglishDictionary.Models.WordType", "Type")
                         .WithMany()
                         .HasForeignKey("WordTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("WordType");
+                    b.Navigation("Type");
+                });
+
+            modelBuilder.Entity("EnglishDictionary.Models.WordExample", b =>
+                {
+                    b.HasOne("EnglishDictionary.Models.Word", "Word")
+                        .WithMany("WordExamples")
+                        .HasForeignKey("WordId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Word");
+                });
+
+            modelBuilder.Entity("EnglishDictionary.Models.WordMeaning", b =>
+                {
+                    b.HasOne("EnglishDictionary.Models.Word", "Word")
+                        .WithMany("WordMeanings")
+                        .HasForeignKey("WordId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Word");
+                });
+
+            modelBuilder.Entity("EnglishDictionary.Models.Word", b =>
+                {
+                    b.Navigation("WordExamples");
+
+                    b.Navigation("WordMeanings");
                 });
 #pragma warning restore 612, 618
         }

@@ -7,7 +7,13 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="UI\Admin\AddWordWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UI\Admin\AdminMainWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UI\Admin\EditWordWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -42,7 +48,13 @@
     <Page Update="Themes\LightTheme.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="UI\Admin\AddWordWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="UI\Admin\AdminMainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\Admin\EditWordWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UI\Public\Views\MainWindowView.xaml">

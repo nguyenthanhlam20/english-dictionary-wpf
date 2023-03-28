@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Me9sWnKKJxelksZc8IvcPvZOq9vT097CwrXmOsYCQYgzxC5zSBNgmhDgQ9dGv0Hb5+krOu0kXZhk376I1NEsFQ==",
+  "dgSpecHash": "z9+KYuVBbuYRvPC02y6BHxs6ViVD+8Q9Ks5XLafL0gLSUPZONDCFtI0sudWFcWB3Wdb3ORk4OMkQsRv72T8iQw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ADMIN\\Documents\\C#_Project\\EnglishDictionary\\EnglishDictionary\\EnglishDictionary.csproj",
+  "projectFilePath": "C:\\Users\\ADMIN\\Documents\\C#_Project\\english-dictionary-wpf\\EnglishDictionary\\EnglishDictionary\\EnglishDictionary.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ADMIN\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\mahapps.metro.iconpacks.material\\4.11.0\\mahapps.metro.iconpacks.material.4.11.0.nupkg.sha512",

@@ -1,4 +1,5 @@
-﻿using FinancialWPFApp.UI.Public.ViewModels.Pages;
+﻿using EnglishDictionary.Models;
+using FinancialWPFApp.UI.Public.ViewModels.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,58 +25,53 @@ namespace FinancialWPFApp.UI.Public.Views.Pages
     {
 
         private LoginViewModel _viewModel;
-        private string password = "";
 
-        private bool isShowPassword = false;
         public LoginView()
         {
             InitializeComponent();
             _viewModel = new LoginViewModel();
             DataContext = _viewModel;
+
         }
 
-        
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        public void InitializeWordType()
         {
-
-            TextBox txt = sender as TextBox;
-
-            if (password.Length < txt.Text.Length)
+            using (var context = new DictionaryContext())
             {
-                if(txt.Text.ElementAt(txt.Text.Length - 1).ToString() != "*")
+                List<WordType> words = new List<WordType>()
                 {
-                    password += txt.Text.ElementAt(txt.Text.Length - 1);
-              }
-               
 
-            }
-            if (password.Length > txt.Text.Length)
-            {
-                if (password.Length > 0)
+                     new WordType() { WordTypeName = "noun" },
+                     new WordType() { WordTypeName = "verb" },
+                     new WordType() { WordTypeName = "adverb" },
+                     new WordType() { WordTypeName = "pronoun" },
+                     new WordType() { WordTypeName = "adjective" },
+                     new WordType() { WordTypeName = "determiner" },
+                     new WordType() { WordTypeName = "determiner" },
+                     new WordType() { WordTypeName = "preposition" },
+                  };
+
+
+                foreach (WordType w in words)
                 {
-                    password = password.Substring(0, password.Length - 1);
+                    context.WordTypes.Add(w);
                 }
-            }
 
-            if (isShowPassword == false)
-            {
-                string maskedString = new string('*', txt.Text.Length);
-                if (maskedString.Length > 0)
+                int chages = context.SaveChanges();
+
+                if (chages > 0)
                 {
-
-                    txt.Text = txt.Text.Replace(txt.Text, maskedString);
+                    MessageBox.Show($"Save {chages} successful");
                 }
-            }
 
-          
-          
-            //MessageBox.Show(password);
+            }
         }
 
-        private void Login_Click(object sender, RoutedEventArgs e)
+        private void passwordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            _viewModel.Password = password;
+            _viewModel.Password = (sender as PasswordBox).Password;
+
         }
     }
 }

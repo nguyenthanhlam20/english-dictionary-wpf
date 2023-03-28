@@ -70,7 +70,7 @@ namespace FinancialWPFApp.UI.Public.Views {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/EnglishDictionary;V1.0.0.0;component/ui/public/views/mainwindowview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/EnglishDictionary;component/ui/public/views/mainwindowview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\..\UI\Public\Views\MainWindowView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

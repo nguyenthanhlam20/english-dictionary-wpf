@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 C:\Users\ADMIN\Documents\C#_Project\english-dictionary-wpf\EnglishDictionary\EnglishDictionary\App.xaml
-14805954890
+161616187629
 
-25-1521461939
+27652722151
 214-1413292274
-Assets\Values\Sizes.xaml;Assets\Values\Strings.xaml;Styles\ButtonStyle.xaml;Styles\ControlStyles.xaml;Styles\DataGridStyle.xaml;Styles\LabelStyle.xaml;Styles\RadioButtonStyle.xaml;Styles\TextBoxStyle.xaml;Themes\DarkTheme.xaml;Themes\LightTheme.xaml;UI\Admin\AdminMainWindow.xaml;UI\Public\Views\MainWindowView.xaml;UI\Public\Views\Pages\LoginView.xaml;UI\Public\Views\Pages\RegisterView.xaml;
+Assets\Values\Sizes.xaml;Assets\Values\Strings.xaml;Styles\ButtonStyle.xaml;Styles\ControlStyles.xaml;Styles\DataGridStyle.xaml;Styles\LabelStyle.xaml;Styles\RadioButtonStyle.xaml;Styles\TextBoxStyle.xaml;Themes\DarkTheme.xaml;Themes\LightTheme.xaml;UI\Admin\AddWordWindow.xaml;UI\Admin\AdminMainWindow.xaml;UI\Admin\EditWordWindow.xaml;UI\Public\Views\MainWindowView.xaml;UI\Public\Views\Pages\LoginView.xaml;UI\Public\Views\Pages\RegisterView.xaml;
 
-True
+False
 

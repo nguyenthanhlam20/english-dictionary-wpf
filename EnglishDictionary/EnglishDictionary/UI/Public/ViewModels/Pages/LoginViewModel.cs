@@ -25,57 +25,31 @@ namespace FinancialWPFApp.UI.Public.ViewModels.Pages
         [NotNull]
         public ReplayCommand SignInCommand { get; set; }
 
-        [NotNull]
-        public ReplayCommand SignInWithGoogleCommand { get; set; }
 
         [NotNull]
         public ReplayCommand RedirectToSignUpCommand { get; set; }
 
-        [NotNull]
-        public ReplayCommand RedirectToForgotPasswordCommand { get; set; }
 
         [NotNull]
-        private string _email;
+        private string _username;
 
-        public string Email
+        public string Username
         {
-            get { return _email; }
+            get { return _username; }
             set
             {
-                _email = value;
+                _username = value;
                 OnPropertyChanged("Email");
             }
         }
 
-        [NotNull]
-        private bool _isRemember;
-        public bool IsRemember
-        {
-            get { return _isRemember; }
-            set
-            {
-                _isRemember = value;
-                OnPropertyChanged("IsRemember");
-            }
-        }
 
-        [NotNull]
-        private string _password;
-
-        public string Password
-        {
-            get { return _password; }
-            set
-            {
-                _password = value;
-                OnPropertyChanged("Password");
-            }
-        }
+        public string Password { get; set; }
 
 
         public LoginViewModel()
         {
-            Email= string.Empty;
+            Username = string.Empty;
             LoginCommand commands = new LoginCommand(this);
         }
 

@@ -56,7 +56,7 @@ namespace FinancialWPFApp.UI.Public.Views.Pages {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/EnglishDictionary;V1.0.0.0;component/ui/public/views/pages/registerview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/EnglishDictionary;component/ui/public/views/pages/registerview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\..\..\UI\Public\Views\Pages\RegisterView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

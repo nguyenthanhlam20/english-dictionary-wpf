@@ -29,8 +29,7 @@ namespace FinancialWPFApp.UI.Public.Commands.Pages
 
             Frame frame = (Frame)Application.Current.MainWindow.FindName("frameContent");
 
-            if (String.IsNullOrEmpty(_viewModel.Email) || String.IsNullOrEmpty(_viewModel.Password)
-                || String.IsNullOrEmpty(_viewModel.FullName) || String.IsNullOrEmpty(_viewModel.ConfirmPassword))
+            if (String.IsNullOrEmpty(_viewModel.Email) || String.IsNullOrEmpty(_viewModel.Password) || String.IsNullOrEmpty(_viewModel.ConfirmPassword))
             {
                 MessageBox.Show("Please enter all required feilds");
             }

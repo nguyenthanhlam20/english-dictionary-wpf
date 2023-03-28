@@ -26,15 +26,13 @@ namespace FinancialWPFApp.UI.Public.Commands.Pages
             _viewModel = viewModel;
             _viewModel.RedirectToSignUpCommand = new ReplayCommand(RedirectToSignUp);
             _viewModel.SignInCommand = new ReplayCommand(SignIn);
-            _viewModel.SignInWithGoogleCommand = new ReplayCommand(SignInWithGoogle);
-            _viewModel.RedirectToForgotPasswordCommand = new ReplayCommand(RedirectToForgotPassword);
         }
 
         private void SignIn(object parameter)
         {
             Frame frame = (Frame)Application.Current.MainWindow.FindName("frameContent");
 
-            if (String.IsNullOrEmpty(_viewModel.Email) || String.IsNullOrEmpty(_viewModel.Password))
+            if (String.IsNullOrEmpty(_viewModel.Username) || String.IsNullOrEmpty(_viewModel.Password))
             {
                 MessageBox.Show("Please enter email and password");
             }
@@ -44,7 +42,7 @@ namespace FinancialWPFApp.UI.Public.Commands.Pages
 
                 using (var context = new DictionaryContext())
                 {
-                    Account account = context.Accounts.SingleOrDefault(u => u.Username == _viewModel.Email && u.Password == _viewModel.Password);
+                    Account account = context.Accounts.SingleOrDefault(u => u.Username == _viewModel.Username && u.Password == _viewModel.Password);
                     if (account != null)
                     {
                         Application.Current.MainWindow.Hide();
@@ -77,12 +75,6 @@ namespace FinancialWPFApp.UI.Public.Commands.Pages
 
 
         }
-
-        private void RedirectToForgotPassword(object parameter)
-        {
-           
-        }
-
         private void RedirectToSignUp(object parameter)
         {
             Frame frame = (Frame)Application.Current.MainWindow.FindName("frameContent");

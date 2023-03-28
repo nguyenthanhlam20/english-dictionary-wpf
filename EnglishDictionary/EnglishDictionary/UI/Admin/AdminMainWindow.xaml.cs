@@ -1,4 +1,5 @@
 ﻿using EnglishDictionary.Models;
+using FinancialWPFApp.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,10 +21,34 @@ namespace EnglishDictionary.UI.Admin
     /// </summary>
     public partial class AdminMainWindow : Window
     {
+
+
+        private AddWordWindow _addWindow;
+
+        private ReplayCommand EditWordCommand { get; set; }
+        private ReplayCommand ViewWordCommand { get; set; }
         public AdminMainWindow()
         {
             InitializeComponent();
             InitializePageSize();
+
+            InitializeCommand();
+            DataContext = this;
+        }
+
+        public void InitializeCommand()
+        {
+            EditWordCommand = new ReplayCommand(ShowEditWordWindow);
+            ViewWordCommand = new ReplayCommand(ShowViewWordWindow);
+        }
+
+        public void ShowEditWordWindow(object parameter)
+        {
+
+        }
+
+        public void ShowViewWordWindow(object parameter)
+        {
 
         }
 
@@ -63,13 +88,13 @@ namespace EnglishDictionary.UI.Admin
             if (totalRecord == 0)
             {
                 bottomContent.Visibility = Visibility.Collapsed;
-                dgWallet.Visibility = Visibility.Collapsed;
+                dgWords.Visibility = Visibility.Collapsed;
                 lbNoRecords.Visibility = Visibility.Visible;
             }
             else
             {
                 bottomContent.Visibility = Visibility.Visible;
-                dgWallet.Visibility = Visibility.Visible;
+                dgWords.Visibility = Visibility.Visible;
                 lbNoRecords.Visibility = Visibility.Collapsed;
             }
             Button btn = new Button();
@@ -152,10 +177,7 @@ namespace EnglishDictionary.UI.Admin
             }
         }
 
-        private void btnSearch_Click(object sender, RoutedEventArgs e)
-        {
 
-        }
 
         private void txtSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -164,6 +186,19 @@ namespace EnglishDictionary.UI.Admin
                 filterSearch = txtSearch.Text;
                 InitializePagination();
                 LoadWords(false);
+            }
+        }
+
+        private void btnAddWord_Click(object sender, RoutedEventArgs e)
+        {
+            if (_addWindow == null)
+            {
+                _addWindow = new AddWordWindow();
+                _addWindow.Show();
+            }
+            else
+            {
+                _addWindow.Activate();
             }
         }
     }

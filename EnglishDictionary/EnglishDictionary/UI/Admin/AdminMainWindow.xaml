@@ -6,58 +6,60 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EnglishDictionary.UI.Admin"
         mc:Ignorable="d"
-        Title="AdminMainWindow" Height="450" Width="800">
-    <StackPanel Background="{DynamicResource SecondaryBackgroundColor}" >
-        <DockPanel  HorizontalAlignment="Stretch" Margin="0 0 0 20" >
-            <StackPanel Orientation="Horizontal">
+        Title="AdminMainWindow" MaxHeight="700" Width="1200">
+    <Border Padding="30" Background="{DynamicResource SecondaryBackgroundColor}">
+        <StackPanel  >
+            <DockPanel  HorizontalAlignment="Stretch" Margin="0 0 0 20" >
+                <StackPanel Orientation="Horizontal">
 
-                <Border BorderBrush="{DynamicResource ButtonHover}" BorderThickness="2"
+                    <Border BorderBrush="{DynamicResource ButtonHover}" BorderThickness="2"
                         CornerRadius="7 0 0 7" 
                         Padding="10" 
                         Height="38"
                         Background="{DynamicResource ButtonHover}">
-                    <Icon:PackIconMaterial BorderBrush="Transparent" BorderThickness="1"
+                        <Icon:PackIconMaterial BorderBrush="Transparent" BorderThickness="1"
                                       
                                        Kind="SearchWeb" Width="15" Height="15"   Foreground="{DynamicResource TertiaryWhiteColor}"
                                        Background="Transparent" />
-                </Border>
-                <TextBox DockPanel.Dock="Left" Width="250" Height="40"
+                    </Border>
+                    <TextBox DockPanel.Dock="Left" Width="250" Height="40"
                          Style="{DynamicResource StyledTextBoxSearch}" 
                          HorizontalAlignment="Left" 
-                         Tag="Search by wallet name"
+                         Tag="Search word"
                          x:Name="txtSearch"
                          TextChanged="txtSearch_TextChanged"
                          >
 
-                </TextBox>
+                    </TextBox>
 
-            </StackPanel>
-            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+                </StackPanel>
+                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
 
-                <Button Style="{StaticResource AddButton}" Width="150" Margin="5"
-                        Command="{Binding Path=AddNewWalletCommand}"
+                    <Button Style="{StaticResource AddButton}" Width="150" Margin="5"
+                       x:Name="btnAddWord"
+                        Click="btnAddWord_Click"
                         >
-                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal">
 
-                        <Icon:PackIconMaterial Kind="Plus" VerticalAlignment="Center" Width="{DynamicResource textFontSize}" Height="{DynamicResource textFontSize}" 
+                            <Icon:PackIconMaterial Kind="Plus" VerticalAlignment="Center" Width="{DynamicResource textFontSize}" Height="{DynamicResource textFontSize}" 
                                    Margin="0 0 10 0" />
-                        <TextBlock Text="New Wallet" FontSize="{DynamicResource textFontSize}" VerticalAlignment="Center" />
-                    </StackPanel>
-                </Button>
-            </StackPanel>
-        </DockPanel>
+                            <TextBlock Text="New Word" FontWeight="Bold" FontSize="{DynamicResource textFontSize}" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </DockPanel>
 
 
-        <Separator Height="1" Background="#dae2ea" Margin="0 -1 0 8" />
-        <Label x:Name="lbNoRecords"
+            <Separator Height="1" Background="#dae2ea" Margin="0 -1 0 8" />
+            <Label x:Name="lbNoRecords"
                Content="There are no records found"
                HorizontalAlignment="Center"
                FontSize="{DynamicResource textFontSize}" 
                FontWeight="Bold"
                Foreground="{DynamicResource SecondaryTextColor}"
                VerticalAlignment="Center" Visibility="Collapsed"/>
-        <!-- Datagrid -->
-        <DataGrid ItemsSource="{Binding Path=Wallets}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" x:Name="dgWallet"
+            <!-- Datagrid -->
+            <DataGrid ItemsSource="{Binding Path=Wallets}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" x:Name="dgWords"
                  Style="{DynamicResource DataGridStyle1}" 
                   CellStyle="{DynamicResource DataGridCellStyle1}" 
                   RowStyle="{DynamicResource DataGridRowStyle1}"
@@ -66,101 +68,92 @@
                   >
 
 
-            <DataGrid.Columns>
+                <DataGrid.Columns>
 
 
 
 
-                <DataGridTextColumn Header="Name" IsReadOnly="True" CanUserResize="False" Width="150" Binding="{Binding Path=WalletName}" />
-                <DataGridTextColumn Header="Balance" IsReadOnly="True" CanUserResize="False" Width="150" Binding="{Binding Path=Balance, StringFormat={}{0:C}}" />
-                <DataGridTextColumn Header="Description" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding Path=Description}" />
-                <DataGridTemplateColumn Header="Action" IsReadOnly="True"  Width="125" >
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <Button Style="{StaticResource GridButton}" Margin="0 0 10 0"
-                                        Command="{Binding DataContext.ViewtWalletCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
-                                        CommandParameter="{Binding Path=WalletId}"
+                    <DataGridTextColumn Header="Word" IsReadOnly="True" CanUserResize="False" Width="150" Binding="{Binding Path=WordName}" />
+                    <DataGridTextColumn Header="IPA" IsReadOnly="True" CanUserResize="False" Width="150" Binding="{Binding Path=IPA}" />
+                    <DataGridTextColumn Header="Type" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding Path=WordType.WordTypeName}" />
+                    <DataGridTextColumn Header="Meanings" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding Path=DisplayMeaning}" />
+                    <DataGridTextColumn Header="Examples" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding Path=DisplayExample}" />
+                    <DataGridTemplateColumn Header="Action" IsReadOnly="True"  Width="125" >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Style="{StaticResource GridButton}" Margin="0 0 10 0"
+                                        Command="{Binding DataContext.ViewWordCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                        CommandParameter="{Binding Path=WordId}"
                                         Background="BlueViolet"
                                         >
-                                    <Icon:PackIconMaterial Kind="Eye"  Style="{StaticResource GridButtonIcon}" />
-                                </Button>
-                                <Button Style="{StaticResource GridButton}"
-                                        Command="{Binding DataContext.EditWalletCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
-                                        CommandParameter="{Binding Path=WalletId}"
+                                        <Icon:PackIconMaterial Kind="Eye"  Style="{StaticResource GridButtonIcon}" />
+                                    </Button>
+                                    <Button Style="{StaticResource GridButton}"
+                                        Command="{Binding DataContext.EditWordCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                        CommandParameter="{Binding Path=WordId}"
                                         >
-                                    <Icon:PackIconMaterial Kind="PencilOutline" Style="{StaticResource GridButtonIcon}" />
-                                </Button>
+                                        <Icon:PackIconMaterial Kind="PencilOutline" Style="{StaticResource GridButtonIcon}" />
+                                    </Button>
 
-                            </StackPanel>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
 
 
-            </DataGrid.Columns>
+                </DataGrid.Columns>
 
-        </DataGrid>
-        <Separator Height="1" Background="#dae2ea" Margin="0 10 0 10" />
-        <!-- Pagination -->
-        <DockPanel x:Name="bottomContent" >
-            <StackPanel VerticalAlignment="Center" DockPanel.Dock="Left" Orientation="Horizontal" >
+            </DataGrid>
+            <Separator Height="1" Background="#dae2ea" Margin="0 10 0 10" />
+            <!-- Pagination -->
+            <DockPanel x:Name="bottomContent" >
+                <StackPanel VerticalAlignment="Center" DockPanel.Dock="Left" Orientation="Horizontal" >
 
-                <Label Foreground="{DynamicResource PrimaryTextColor}" Padding="0" Content="Display " FontSize="{DynamicResource textFontSize}" />
-                <Label Padding="0" FontSize="{DynamicResource textFontSize}" Content="{Binding Path=FromIndex}" FontWeight="Black"
-                       
-                       Foreground="{DynamicResource PrimaryTextColor}" />
-                <Label Padding="0" FontSize="{DynamicResource textFontSize}" Content=" - " Foreground="{DynamicResource PrimaryTextColor}" />
-                <Label Padding="0" FontSize="{DynamicResource textFontSize}" Content="{Binding Path=ToIndex}" FontWeight="Black" 
-                       Foreground="{DynamicResource PrimaryTextColor}" />
-                <Label Padding="0" FontSize="{DynamicResource textFontSize}" Content=" wallets " Foreground="{DynamicResource PrimaryTextColor}" />
-                <Label Padding="0" FontSize="{DynamicResource textFontSize}" Content="in total of " Foreground="{DynamicResource PrimaryTextColor}" />
-                <Label Padding="0" FontSize="{DynamicResource textFontSize}" Content="{Binding Path=TotalWallet}"
-                       FontWeight="Black" Foreground="{DynamicResource PrimaryTextColor}"/>
-                <Label Padding="0" FontSize="{DynamicResource textFontSize}" Content=" wallets " Foreground="{DynamicResource PrimaryTextColor}" />
-
-            </StackPanel>
-            <StackPanel HorizontalAlignment="Right"   Orientation="Horizontal">
-                <StackPanel VerticalAlignment="Center" Orientation="Horizontal" Margin="0 0 15 0">
-                    <Label Foreground="{DynamicResource PrimaryTextColor}" Content="Display" FontSize="{DynamicResource textFontSize}" VerticalAlignment="Center" FontWeight="Bold"></Label>
-                    <Border
+                 
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Right"   Orientation="Horizontal">
+                    <StackPanel VerticalAlignment="Center" Orientation="Horizontal" Margin="0 0 15 0">
+                        <Label Foreground="{DynamicResource PrimaryTextColor}" Content="Display" FontSize="{DynamicResource textFontSize}" VerticalAlignment="Center" FontWeight="Bold"></Label>
+                        <Border
                             CornerRadius="7"
                             Padding="1"
                             BorderBrush="#dee4ec"
                             BorderThickness="2" >
-                        <ComboBox SelectionChanged="cbPage_SelectionChanged" x:Name="cbPage" Width="60" Height="30" Background="Transparent" 
+                            <ComboBox SelectionChanged="cbPage_SelectionChanged" x:Name="cbPage" Width="60" Height="30" Background="Transparent" 
                                   BorderBrush="Transparent"  BorderThickness="0"
                                   VerticalContentAlignment="Center"
                                   FontSize="{DynamicResource textFontSize}"
                                   VerticalAlignment="Center"  />
-                    </Border>
-                </StackPanel>
-                <Border DockPanel.Dock="Right" HorizontalAlignment="Stretch" BorderBrush="#dee4ec" BorderThickness="1"
+                        </Border>
+                    </StackPanel>
+                    <Border DockPanel.Dock="Right" HorizontalAlignment="Stretch" BorderBrush="#dee4ec" BorderThickness="1"
                 CornerRadius="5" Padding="5" Background="White" Margin="0 10 10 10">
-                    <StackPanel Orientation="Horizontal">
-                        <Button x:Name="btnLeft" Click="btnLeft_Click" Style="{StaticResource PagingButton}">
-                            <Icon:PackIconMaterial Kind="ChevronLeft" />
+                        <StackPanel Orientation="Horizontal">
+                            <Button x:Name="btnLeft" Click="btnLeft_Click" Style="{StaticResource PagingButton}">
+                                <Icon:PackIconMaterial Kind="ChevronLeft" />
 
-                        </Button>
-                        <Rectangle Width="1" Fill="#dee4ec" Margin="3 7" />
-                        <StackPanel Orientation="Horizontal" x:Name="pageContainer">
+                            </Button>
+                            <Rectangle Width="1" Fill="#dee4ec" Margin="3 7" />
+                            <StackPanel Orientation="Horizontal" x:Name="pageContainer">
 
+                            </StackPanel>
+
+                            <Rectangle Width="1" Fill="#dee4ec" Margin="3 7" />
+
+                            <Button x:Name="btnRight" Click="btnRight_Click" Style="{StaticResource PagingButton}">
+                                <Icon:PackIconMaterial Kind="ChevronRight" />
+
+                            </Button>
                         </StackPanel>
 
-                        <Rectangle Width="1" Fill="#dee4ec" Margin="3 7" />
-
-                        <Button x:Name="btnRight" Click="btnRight_Click" Style="{StaticResource PagingButton}">
-                            <Icon:PackIconMaterial Kind="ChevronRight" />
-
-                        </Button>
-                    </StackPanel>
-
-                </Border>
-            </StackPanel>
+                    </Border>
+                </StackPanel>
 
 
-        </DockPanel>
+            </DockPanel>
 
 
-    </StackPanel>
+        </StackPanel>
+    </Border>
 </Window>
