@@ -1,0 +1,317 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+                    >
+
+
+    <Style x:Key="PagingButtonIcon" TargetType="Icon:PackIconMaterial">
+        <Setter Property ="Width" Value="10" />
+        <Setter Property ="Height" Value="10" />
+        <Setter Property ="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="TextBoxSearch" TargetType="TextBox">
+        <Setter Property ="Background" Value="#fff" />
+        <Setter Property ="Foreground" Value="#b0b9c6" />
+        <Setter Property ="BorderThickness" Value="0" />
+        <Setter Property ="FontSize" Value="12" />
+        <Setter Property ="Padding" Value="15 18" />
+        <Setter Property ="VerticalAlignment" Value="Center" />
+        <Setter Property ="Margin" Value="0 10" />
+        <Setter Property ="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border x:Name="Border" CornerRadius="20" Background="{TemplateBinding Background}" SnapsToDevicePixels="true"
+                            BorderThickness="1" BorderBrush="#e0e6ed">
+                        <ScrollViewer x:Name="PART_ContentHost" Focusable="False" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" />
+                    </Border>
+
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True" >
+                            <Setter Property="BorderBrush" Value="#d9d9d9" TargetName="Border" />
+                        </Trigger>
+
+
+                        <Trigger Property="IsKeyboardFocused" Value="True" >
+                            <Setter Property="BorderBrush" Value="#d9d9d9" TargetName="Border" />
+                        </Trigger>
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+
+    <Style x:Key="AddButton" TargetType="Button">
+        <Setter Property ="Background" Value="#6741d9" />
+        <Setter Property ="Foreground" Value="{DynamicResource TertiaryWhiteColor}" />
+        <Setter Property ="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property ="Height" Value="40" />
+        <Setter Property ="HorizontalAlignment" Value="Right" />
+        <Setter Property ="Margin" Value="0" />
+        <Setter Property ="FontSize" Value="13" />
+        <Setter Property ="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Border" CornerRadius="7" Background="{TemplateBinding Background}"
+                           
+                            >
+
+
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+                    </Border>
+                </ControlTemplate>
+
+            </Setter.Value>
+
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True" >
+                <Setter Property="Background" Value="{DynamicResource ButtonHover}" />
+                <Setter Property="Foreground" Value="{DynamicResource TertiaryWhiteColor}" />
+            </Trigger>
+        </Style.Triggers>
+
+    </Style>
+
+    <Style x:Key="SearchButton" TargetType="Button">
+        <Setter Property ="Background" Value="#6741d9" />
+        <Setter Property ="Foreground" Value="{DynamicResource TertiaryWhiteColor}" />
+        <Setter Property ="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property ="Height" Value="40" />
+        <Setter Property ="HorizontalAlignment" Value="Right" />
+        <Setter Property ="Margin" Value="0" />
+        <Setter Property ="FontSize" Value="13" />
+        <Setter Property ="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Border" CornerRadius="0 7 7 0" Background="{TemplateBinding Background}"
+                           
+                            >
+
+
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+                    </Border>
+                </ControlTemplate>
+
+            </Setter.Value>
+
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True" >
+                <Setter Property="Background" Value="{DynamicResource ButtonHover}" />
+                <Setter Property="Foreground" Value="{DynamicResource TertiaryWhiteColor}" />
+            </Trigger>
+        </Style.Triggers>
+
+    </Style>
+    <Style x:Key="PagingButton" TargetType="Button">
+        <Setter Property ="Background" Value="Transparent" />
+        <Setter Property ="Foreground" Value="#6c7682" />
+        <Setter Property ="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property ="Margin" Value="1 0" />
+        <Setter Property ="FontSize" Value="13" />
+        <Setter Property ="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Border" CornerRadius="5" 
+                            Background="{TemplateBinding Background}"
+                            Padding="10 5">
+                        <ContentPresenter HorizontalAlignment="Center" 
+                                          VerticalAlignment="Center"
+                                          Margin="0 0 0 1"/>
+                    </Border>
+                </ControlTemplate>
+
+            </Setter.Value>
+
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True" >
+                <Setter Property="Background" Value="{DynamicResource ButtonHover}" />
+                <Setter Property="Foreground" Value="{DynamicResource TertiaryWhiteColor}" />
+            </Trigger>
+        </Style.Triggers>
+
+    </Style>
+    <Style x:Key="PowerOffButton" TargetType="Button">
+        <Setter Property ="Background" Value="Transparent" />
+        <Setter Property ="Foreground" Value="#6c7682" />
+        <Setter Property ="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property ="Margin" Value="1 0" />
+        <Setter Property ="FontSize" Value="13" />
+        <Setter Property ="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Border" CornerRadius="5" 
+                            Background="{TemplateBinding Background}"
+                            Padding="10 5">
+                        <ContentPresenter HorizontalAlignment="Center" 
+                                          VerticalAlignment="Center"
+                                          Margin="0 0 0 1"/>
+                    </Border>
+                </ControlTemplate>
+
+            </Setter.Value>
+
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True" >
+                <Setter Property="Foreground" Value="{DynamicResource SecondaryTextColor}" />
+            </Trigger>
+        </Style.Triggers>
+
+    </Style>
+    <Style x:Key="GridButtonIcon" TargetType="Icon:PackIconMaterial">
+        <Setter Property ="Width" Value="{DynamicResource textFontSize}" />
+        <Setter Property ="Height" Value="{DynamicResource textFontSize}" />
+        <Setter Property ="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="GridButton" TargetType="Button">
+        <Setter Property ="Background" Value="#512da8" />
+        <Setter Property ="BorderBrush" Value="#4a148c" />
+        <Setter Property ="Foreground" Value="#ffffff" />
+        <Setter Property ="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property ="VerticalAlignment" Value="Center" />
+        <Setter Property ="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Border" CornerRadius="5" 
+                            BorderThickness="1"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            Background="{TemplateBinding Background}"
+                            Padding="10 5">
+                        <ContentPresenter HorizontalAlignment="Center" 
+                                          VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+
+            </Setter.Value>
+
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True" >
+                <Setter Property="Background" Value="{DynamicResource ButtonHover}" />
+                <Setter Property="Foreground" Value="{DynamicResource TertiaryWhiteColor}" />
+            </Trigger>
+        </Style.Triggers>
+
+    </Style>
+
+    <Style x:Key="PasswordButton" TargetType="{x:Type Button}">
+        <Setter Property ="Foreground" Value="Black" />
+        <Setter Property ="VerticalAlignment" Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Width="13" Height="13">
+                        <Icon:PackIconMaterial Kind="{TemplateBinding Tag}" Foreground="Black" Background="Black" Width="13" Height="13" />
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="Blue"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Foreground" Value="Blue"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True" >
+              
+                <Setter Property="Foreground" Value="{DynamicResource PrimaryBlueColor}" />
+            </Trigger>
+        </Style.Triggers>
+
+    </Style>
+
+    <Style x:Key="StyledComboBox" TargetType="{x:Type ComboBox}">
+        <Setter Property="FontSize" Value="{DynamicResource textFontSize}" />
+        <Setter Property="Background" Value="{DynamicResource TertiaryWhiteColor}" />
+        <Setter Property="Foreground" Value="{DynamicResource PrimaryBlackColor}" />
+
+        <Setter Property="Height" Value="35" />
+        <Setter Property="Width" Value="60" />
+        <Setter Property="Padding" Value="10 5" />
+        <Setter Property="Template">
+
+
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ComboBox}">
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="ComboBoxItemStyle" TargetType="{x:Type ComboBoxItem}">
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="Padding" Value="5 15 5 15"/>
+        
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <!--<Setter Property="BorderBrush" Value="{DynamicResource BorderTextBoxColor}"/>-->
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Background" Value="{DynamicResource TertiaryBackgroundColor}"/>
+        <Setter Property="Foreground" Value="{DynamicResource SecondaryTextColor}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ComboBoxItem}">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}">
+                        <ContentPresenter />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource ButtonHover}"/>
+                <Setter Property="Foreground" Value="{DynamicResource TertiaryWhiteColor}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
+
+    <Style x:Key="PasswordBoxStyle" TargetType="{x:Type TextBox}">
+        <Setter Property="AllowDrop"  Value="true" />
+        <Setter Property="BorderBrush" Value="{DynamicResource BorderButtonColor}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="FontSize" Value="{DynamicResource textFontSize}" />
+        <Setter Property="Foreground" Value="{DynamicResource PrimaryBlackColor}" />
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="CaretBrush" Value="Aqua" />
+        <Setter Property="Height" Value="45" />
+        <Setter Property="Padding" Value="10 5" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBox}">
+                    <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        SnapsToDevicePixels="True">
+                        <PasswordBox x:Name="PART_PasswordBox"
+                                 PasswordChar="*"
+                                 Password="{Binding Path=Text, RelativeSource={RelativeSource TemplatedParent}}"
+                                 HorizontalAlignment="Stretch"
+                                 VerticalAlignment="Stretch"
+                                 Margin="0"
+                                
+                                 />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+</ResourceDictionary>

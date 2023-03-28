@@ -1,0 +1,100 @@
+﻿<Page x:Class="FinancialWPFApp.UI.Public.Views.Pages.RegisterView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FinancialWPFApp.UI.Public.Views.Pages"
+      xmlns:vm="clr-namespace:FinancialWPFApp.UI.Public.ViewModels.Pages"
+      xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+
+      mc:Ignorable="d" 
+      d:DesignHeight="750" d:DesignWidth="550"
+      Title="RegisterView">
+
+    <Page.DataContext>
+        <vm:RegisterViewModel />
+    </Page.DataContext>
+    <Border Background="{DynamicResource TertiaryBackgroundColor}">
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+                <Icon:PackIconMaterial Kind="Book" Foreground="{DynamicResource SecondaryTextColor}" Margin="0 0 10 0" Width="{DynamicResource appFontSize}" Height="{DynamicResource appFontSize}" VerticalAlignment="Center" />
+                <Label Foreground="{DynamicResource SecondaryTextColor}" Content="English Dictionary" 
+                       Style="{DynamicResource StyledLabel}"
+                       FontWeight="ExtraBold"
+                       FontSize="{DynamicResource appFontSize}" />
+
+
+            </StackPanel>
+            <StackPanel Margin="0 50 0 0" Orientation="Vertical">
+                <Label Foreground="{DynamicResource SecondaryTextColor}" Style="{DynamicResource StyledLabel}" Content="{DynamicResource signUpTitle}" FontSize="{DynamicResource titleFontSize}" FontWeight="Bold"   />
+                <Label Foreground="{DynamicResource SecondaryTextColor}" Style="{DynamicResource StyledLabel}" Content="{DynamicResource signUpMessage}" FontSize="{DynamicResource textFontSize}" Opacity="0.8" />
+               
+                <StackPanel Margin="0 30 0 0 " Orientation="Vertical">
+                    <Label Foreground="{DynamicResource SecondaryTextColor}" Style="{DynamicResource StyledLabel}"
+                           Content="Username" 
+                           FontWeight="SemiBold" 
+                           Margin="0 0 0 5"/>
+                    <TextBox Style="{DynamicResource StyledTextBox}" 
+                             Text="{Binding Email}"
+                             Tag="{DynamicResource enterEmail}"
+                            
+                             />
+                </StackPanel>
+                <StackPanel Margin="0 10 0 0" Orientation="Vertical">
+                    <Label Foreground="{DynamicResource SecondaryTextColor}" Style="{DynamicResource StyledLabel}" 
+                           Content="Password" 
+                           FontWeight="SemiBold"
+                           
+                           Margin="0 0 0 5"/>
+                    <TextBox Style="{DynamicResource StyledTextBox}" 
+                             Text="{Binding Password}"
+                             Tag="{DynamicResource enterPassword}"
+                             
+                             />
+                </StackPanel>
+                <StackPanel Margin="0 10 0 20" Orientation="Vertical">
+                    <Label Style="{DynamicResource StyledLabel}" 
+                           Content="Confirm Password" 
+                           FontWeight="SemiBold"
+                           Foreground="{DynamicResource SecondaryTextColor}"
+                           Margin="0 0 0 5"/>
+                    <TextBox Style="{DynamicResource StyledTextBox}" 
+                             Text="{Binding ConfirmPassword}"
+                             Tag="{DynamicResource confirmPassword}"
+                             
+                             />
+                </StackPanel>
+             
+                <Button Style="{DynamicResource ProButtonStyle}" 
+                        Content="Sign up" 
+                        Background="{DynamicResource SecondaryBlueColor}" 
+                        FontWeight="Bold" 
+                        Foreground="{DynamicResource TertiaryWhiteColor}"
+                        Command="{Binding Path=SignUpCommand}"
+                        FontSize="{DynamicResource textFontSize}"/>
+
+
+               
+            </StackPanel>
+
+            <StackPanel HorizontalAlignment="Center" 
+                        Orientation="Horizontal"
+                        Margin="0 20 0 0">
+                <Label Foreground="{DynamicResource SecondaryTextColor}" Style="{DynamicResource StyledLabel}" 
+                       Content="Already have an account?"
+                       Opacity="0.7"/>
+                <Button 
+                        Margin="5 0 0 5"
+                    Padding="0"
+                    Height="Auto"
+                    Foreground="{DynamicResource PrimaryButtonColor}"
+                      Style="{DynamicResource ProButtonStyle}" 
+                       Content="Sign in"
+                    Background="Transparent"
+                    Command="{Binding RedirectToSignInCommand}"
+                    CommandParameter="{RelativeSource Mode=FindAncestor, AncestorType=Frame}"
+                       FontWeight="Bold" />
+            </StackPanel>
+        </StackPanel>
+    </Border>
+</Page>

@@ -1,0 +1,46 @@
+﻿<Window x:Class="FinancialWPFApp.UI.Public.Views.MainWindowView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FinancialWPFApp.UI.Public.Views"
+        xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+        mc:Ignorable="d"
+        x:Name="PublicMainWindow"
+        xmlns:vm="clr-namespace:FinancialWPFApp.UI.Public.ViewModels"
+        Title="MainWindowView" Height="650" Width="1200" 
+        WindowStartupLocation="CenterScreen" 
+        
+        ResizeMode="NoResize"
+        WindowState="Normal">
+
+
+    <Window.Resources>
+        <Style x:Key="FrameTrigger" TargetType="{x:Type Frame}" >
+            <Style.Triggers>
+                
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    
+    
+    <Border Background="{DynamicResource PrimaryBackgroundColor}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="650" />
+            </Grid.ColumnDefinitions>
+            <Border Grid.Column="0" Background="{DynamicResource SecondaryBackgroundColor}" >
+                <Frame
+                    Padding="60 30 60 30" 
+                    Background="{DynamicResource TertiaryBackgroundColor}"
+                    Content="{Binding CurrentPage}" 
+                       x:Name="frameContent"
+                       NavigationUIVisibility="Hidden" 
+                        />
+            </Border>
+            <Image Grid.Column="1" Source="/Assets/Images/cover-img.png" Stretch="Fill" />
+
+        </Grid>
+    </Border>
+</Window>

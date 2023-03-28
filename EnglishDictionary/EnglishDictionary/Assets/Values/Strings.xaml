@@ -1,0 +1,27 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <sys:String x:Key="appName" >Fimo.</sys:String>
+   
+    <!-- Sign In -->
+    <sys:String x:Key="signIn">Sign in</sys:String>
+    <sys:String x:Key="forgotPassword">Forgot password</sys:String>
+    <sys:String x:Key="signInTitle">Welcome back</sys:String>
+    <sys:String x:Key="signInMessage">Welcome back! Please enter your details.</sys:String>
+    <sys:String x:Key="signInWithGoogle">Sign in with Google</sys:String>
+    <sys:String x:Key="dontHaveAccount">Don't have an account?</sys:String>
+    <sys:String x:Key="signUpForFree">Sign up for free</sys:String>
+    <sys:String x:Key="rememberMessage">Remeber for 30 Days</sys:String>
+    <sys:String x:Key="enterEmail">Enter your email</sys:String>
+    <sys:String x:Key="enterPassword">Enter your password</sys:String>
+    <sys:String x:Key="confirmPassword">Confirm your password</sys:String>
+    
+    
+    
+    <!-- Sign Up -->
+    <sys:String x:Key="signUpTitle">Create new account</sys:String>
+    <sys:String x:Key="signUpMessage">Give us some of your information to get free access to fieldly.</sys:String>
+    <sys:String x:Key="enterFullname">Enter your full name</sys:String>
+    
+
+</ResourceDictionary>
