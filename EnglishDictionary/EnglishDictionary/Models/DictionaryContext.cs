@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,10 +20,26 @@ namespace EnglishDictionary.Models
         public DbSet<Word> Words { get; set; }
 
 
-        public string path = @"C:\Temp\dictionary.db";
+        private static string GetDatabasePath()
+        {
+            string databaseName = "dictionary.db";
+            string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            string folderName = "EnglishDictionary";
+            string databasePath = Path.Combine(appDataPath, folderName, databaseName);
+
+            if (!Directory.Exists(Path.GetDirectoryName(databasePath)))
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(databasePath));
+            }
+
+            return databasePath;
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-       => optionsBuilder.UseSqlite($"Data Source={path}");
+        {
+            string databasePath = GetDatabasePath();
+            optionsBuilder.UseSqlite($"Data Source={databasePath}");
+        }
 
     }
 }

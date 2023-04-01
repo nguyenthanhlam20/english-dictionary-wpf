@@ -31,7 +31,7 @@ namespace FinancialWPFApp.UI.Public.Views.Pages
             InitializeComponent();
             _viewModel = new LoginViewModel();
             DataContext = _viewModel;
-
+            //InitializeWordType();
         }
 
 

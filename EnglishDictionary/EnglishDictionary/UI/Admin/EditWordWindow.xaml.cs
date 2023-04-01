@@ -19,9 +19,12 @@ namespace EnglishDictionary.UI.Admin
     /// </summary>
     public partial class EditWordWindow : Window
     {
-        public EditWordWindow()
+
+        private int _wordId;
+        public EditWordWindow(int wordId)
         {
             InitializeComponent();
+            _wordId = wordId;
         }
     }
 }

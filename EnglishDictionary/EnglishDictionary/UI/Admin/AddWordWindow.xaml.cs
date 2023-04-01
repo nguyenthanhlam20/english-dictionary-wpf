@@ -26,10 +26,15 @@ namespace EnglishDictionary.UI.Admin
         private TextBox txtInput;
         private int reusableInt = 0;
 
-        public AddWordWindow()
+
+        private AdminMainWindow _mainWindow;
+
+        public AddWordWindow(AdminMainWindow mainWindow)
         {
             InitializeComponent();
             LoadWordTypes();
+
+            _mainWindow = mainWindow;
         }
 
         public void LoadWordTypes()
@@ -157,13 +162,128 @@ namespace EnglishDictionary.UI.Admin
             listExample.Children.Add(spConatainer);
         }
 
+        public Tuple<bool, string> ValidateInput()
+        {
+
+            // Check whether user input all required fields or not
+            if (String.IsNullOrEmpty(txtWord.Text) || String.IsNullOrEmpty(txtIPA.Text))
+            {
+                return new Tuple<bool, string>(false, "Please enter all word name and ipa");
+            }
+
+            return new Tuple<bool, string>(true, "Valid input"); ;
+        }
+
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
 
+            // Get validation result
+            Tuple<bool, string> validationResult = ValidateInput();
+
+            // If user pass all the criterias then allow to add new word
+            if (validationResult.Item1)
+            {
+                AddNewWord();
+                AddExamples();
+                AddMeanings();
+                _mainWindow.LoadWords(true);
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show(validationResult.Item2);
+            }
+
+        }
+
+        public void AddExamples()
+        {
+            using (var context = new DictionaryContext())
+            {
+                Word newWord = context.Words.OrderBy(w => w.WordId).Last();
+
+                TextBox txt = new TextBox();
+                WordMeaning wd = new WordMeaning();
+
+                // Interate through each text box in stack panel
+                foreach (StackPanel sp in listMeaning.Children)
+                {
+                    // Get textbox of each row in stack panel
+                    txt = (TextBox)sp.Children[0];
+
+                    // Check whether this text box is null or not if not so then add
+                    if (!String.IsNullOrEmpty(txt.Text))
+                    {
+
+                        // Create new Word Meaning
+                        wd = new WordMeaning() { MeaningContent = txt.Text, WordId = newWord.WordId };
+
+
+                        // Add it to database
+                        context.WordMeanings.Add(wd);
+                    }
+                }
+
+                if (context.SaveChanges() > 0)
+                {
+                    MessageBox.Show("Add meanings successful");
+                }
+            }
+        }
+
+        public void AddMeanings()
+        {
+            using (var context = new DictionaryContext())
+            {
+                Word newWord = context.Words.OrderBy(w => w.WordId).Last();
+
+                TextBox txt = new TextBox();
+                WordExample wd = new WordExample();
+
+                foreach (StackPanel sp in listExample.Children)
+                {
+                    txt = (TextBox)sp.Children[0];
+
+                    // Check if the row is not empty then add
+                    if (String.IsNullOrEmpty(txt.Text) == false)
+                    {
+                        wd = new WordExample() { ExampleContent = txt.Text, WordId = newWord.WordId };
+
+                        context.WordExamples.Add(wd);
+                    }
+                }
+
+                if (context.SaveChanges() > 0)
+                {
+                    MessageBox.Show("Add examples successful");
+                }
+            }
+        }
+
+        private void AddNewWord()
+        {
+            using (var context = new DictionaryContext())
+            {
+                Word w = new Word()
+                {
+
+                    WordName = txtWord.Text,
+                    IPA = txtIPA.Text,
+                    WordTypeId = int.Parse(cbWordType.SelectedValue.ToString()),
+
+                };
+                context.Words.Add(w);
+                if (context.SaveChanges() > 0)
+                {
+                    MessageBox.Show("Add word successful");
+                }
+
+            }
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
+
             this.Close();
         }
 

@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\Images\app-icon.png" />
     <None Remove="Assets\Images\cover-img.png" />
   </ItemGroup>
 
@@ -25,6 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\Images\app-icon.png" />
     <Resource Include="Assets\Images\cover-img.png" />
   </ItemGroup>
 

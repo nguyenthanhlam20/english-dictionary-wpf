@@ -1,5 +1,6 @@
 ﻿using EnglishDictionary.Models;
 using FinancialWPFApp.UI;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,15 +25,20 @@ namespace EnglishDictionary.UI.Admin
 
 
         private AddWordWindow _addWindow;
+        private ViewWordWindow _viewWindow;
+        private EditWordWindow _editWindow;
 
-        private ReplayCommand EditWordCommand { get; set; }
-        private ReplayCommand ViewWordCommand { get; set; }
+        public ReplayCommand EditWordCommand { get; set; }
+        public ReplayCommand ViewWordCommand { get; set; }
         public AdminMainWindow()
         {
             InitializeComponent();
             InitializePageSize();
 
             InitializeCommand();
+
+         
+
             DataContext = this;
         }
 
@@ -44,18 +50,27 @@ namespace EnglishDictionary.UI.Admin
 
         public void ShowEditWordWindow(object parameter)
         {
+            int wordId = (int)parameter;
+            _editWindow = new EditWordWindow(wordId);
+            _editWindow.Show();
 
         }
 
         public void ShowViewWordWindow(object parameter)
         {
+            int wordId = (int)parameter;
+            _viewWindow = new ViewWordWindow(wordId);
+            _viewWindow.Show();
 
         }
 
 
         public void LoadWords(bool isInsert)
         {
-
+            using(var context = new DictionaryContext())
+            {
+                dgWords.ItemsSource = context.Words.Include(w => w.Type).ToList();
+            }
         }
 
         public void InitializePageSize()
@@ -191,15 +206,18 @@ namespace EnglishDictionary.UI.Admin
 
         private void btnAddWord_Click(object sender, RoutedEventArgs e)
         {
-            if (_addWindow == null)
-            {
-                _addWindow = new AddWordWindow();
-                _addWindow.Show();
-            }
-            else
-            {
-                _addWindow.Activate();
-            }
+            //if (_addWindow == null )
+            //{
+            //    _addWindow = new AddWordWindow();
+            //    _addWindow.Show();
+            //}
+            //else
+            //{
+            //    _addWindow.Activate();
+            //}
+
+            _addWindow = new AddWordWindow(this);
+            _addWindow.Show();
         }
     }
 }

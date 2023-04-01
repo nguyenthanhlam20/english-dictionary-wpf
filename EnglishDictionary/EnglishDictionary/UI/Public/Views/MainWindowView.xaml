@@ -8,9 +8,10 @@
         mc:Ignorable="d"
         x:Name="PublicMainWindow"
         xmlns:vm="clr-namespace:FinancialWPFApp.UI.Public.ViewModels"
-        Title="MainWindowView" Height="650" Width="1200" 
+        Title="Access" Height="650" Width="1200" 
         WindowStartupLocation="CenterScreen" 
-        
+                Icon="/Assets/Images/app-icon.png"
+
         ResizeMode="NoResize"
         WindowState="Normal">
 

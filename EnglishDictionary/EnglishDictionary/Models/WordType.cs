@@ -7,12 +7,15 @@ using System.Threading.Tasks;
 
 namespace EnglishDictionary.Models
 {
-   public class WordType
+    public class WordType
     {
 
         [Key]
         public int WordTypeId { get; set; }
         public string WordTypeName { get; set; }
+
+
+        public List<Word> Words { get; set; }
 
     }
 

@@ -6,9 +6,11 @@
         xmlns:local="clr-namespace:EnglishDictionary.UI.Admin"
         xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
+        
+        Icon="/Assets/Images/app-icon.png"
         ResizeMode="NoResize"
        WindowStartupLocation="CenterScreen"
-        Title="AddWordWindow" Height="750" Width="850">
+        Title="Add New Word" Height="750" Width="850">
     <Border Padding="30 0 30 0" Background="{DynamicResource TertiaryBackgroundColor}">
         <StackPanel Orientation="Vertical">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -124,7 +126,9 @@
                 </Button>
                 <Button Click="btnCancel_Click"
                         x:Name="btnCancel"
-                        Background="Tomato" Style="{DynamicResource AddButton}" Width="376">
+                        Background="Tomato" 
+                        Style="{DynamicResource AddButton}"
+                        Width="376">
                     <StackPanel Orientation="Horizontal">
                         <Icon:PackIconMaterial HorizontalAlignment="Center"
                                                VerticalAlignment="Center"
