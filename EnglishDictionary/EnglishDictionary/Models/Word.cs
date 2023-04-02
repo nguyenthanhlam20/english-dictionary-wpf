@@ -50,7 +50,7 @@ namespace EnglishDictionary.Models
                 using (var context = new DictionaryContext())
                 {
 
-                    WordExamples = context.WordExamples.Where(w => w.WordId!= WordId).ToList();
+                    WordExamples = context.WordExamples.Where(w => w.WordId== WordId).ToList();
 
                     if (WordExamples != null && WordExamples.Count() > 0)
                     {

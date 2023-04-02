@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -30,15 +31,14 @@ namespace EnglishDictionary.UI.Admin
 
         public ReplayCommand EditWordCommand { get; set; }
         public ReplayCommand ViewWordCommand { get; set; }
+        public ReplayCommand DeleteWordCommand { get; set; }
         public AdminMainWindow()
         {
             InitializeComponent();
             InitializePageSize();
-
             InitializeCommand();
 
-         
-
+            InitializePagination();
             DataContext = this;
         }
 
@@ -46,12 +46,56 @@ namespace EnglishDictionary.UI.Admin
         {
             EditWordCommand = new ReplayCommand(ShowEditWordWindow);
             ViewWordCommand = new ReplayCommand(ShowViewWordWindow);
+            DeleteWordCommand = new ReplayCommand(ShowConfirmWindow);
+        }
+
+        public void ShowConfirmWindow(object parameter)
+        {
+            int wordId = (int)parameter;
+
+            DeleteWord(wordId);
+        }
+
+        public void DeleteWord(int wordId)
+        {
+            using (var context = new DictionaryContext())
+            {
+                Word word = context.Words.SingleOrDefault(w => w.WordId == wordId);
+
+                MessageBoxResult result = MessageBox.Show($"Are you sure you want to delete \"{word.WordName}\" word?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    List<WordExample> examples = context.WordExamples.Where(w => w.WordId == wordId).ToList();
+                    List<WordMeaning> meanings = context.WordMeanings.Where(w => w.WordId == wordId).ToList();
+
+
+                    foreach (WordExample example in examples)
+                    {
+                        context.WordExamples.Remove(example);
+                    }
+
+                    foreach (WordMeaning meaning in meanings)
+                    {
+                        context.WordMeanings.Remove(meaning);
+                    }
+
+                    context.Words.Remove(word);
+                    if (context.SaveChanges() > 0)
+                    {
+                        LoadWords(false);
+                        MessageBox.Show("Delete word successful");
+
+                    }
+                }
+
+            }
         }
 
         public void ShowEditWordWindow(object parameter)
         {
             int wordId = (int)parameter;
-            _editWindow = new EditWordWindow(wordId);
+            _editWindow = new EditWordWindow(wordId, this);
             _editWindow.Show();
 
         }
@@ -67,9 +111,14 @@ namespace EnglishDictionary.UI.Admin
 
         public void LoadWords(bool isInsert)
         {
-            using(var context = new DictionaryContext())
+            using (var context = new DictionaryContext())
             {
                 dgWords.ItemsSource = context.Words.Include(w => w.Type).ToList();
+                if (isInsert == true)
+                {
+                    InitializePagination();
+                   
+                }
             }
         }
 
@@ -98,7 +147,6 @@ namespace EnglishDictionary.UI.Admin
             totalRecord = words.Count();
 
             totalPage = totalRecord % pageSize != 0 ? (totalRecord / pageSize) + 1 : totalRecord / pageSize;
-
 
             if (totalRecord == 0)
             {

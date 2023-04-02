@@ -61,7 +61,7 @@ namespace EnglishDictionary.UI.Admin
         {
             txtInput = new TextBox();
             txtInput.Tag = tag;
-            txtInput.Width = 600;
+            txtInput.Width = 680;
             txtInput.Name = name;
             txtInput.Style = System.Windows.Application.Current.Resources["StyledTextBox"] as System.Windows.Style;
         }
@@ -89,7 +89,7 @@ namespace EnglishDictionary.UI.Admin
             CreateSpContainer("spMeaning" + reusableInt);
 
             // Add input feild
-            CreateInputText("txtMeaning" + reusableInt, "Enter new meaning");
+            CreateInputText("txtMeaning" + reusableInt, "Enter new definition");
 
             // Add remove button
             CreateRemoveBtn("btnMeaning" + reusableInt);
@@ -226,7 +226,7 @@ namespace EnglishDictionary.UI.Admin
 
                 if (context.SaveChanges() > 0)
                 {
-                    MessageBox.Show("Add meanings successful");
+                    //MessageBox.Show("Add meanings successful");
                 }
             }
         }
@@ -255,7 +255,7 @@ namespace EnglishDictionary.UI.Admin
 
                 if (context.SaveChanges() > 0)
                 {
-                    MessageBox.Show("Add examples successful");
+                    //MessageBox.Show("Add examples successful");
                 }
             }
         }

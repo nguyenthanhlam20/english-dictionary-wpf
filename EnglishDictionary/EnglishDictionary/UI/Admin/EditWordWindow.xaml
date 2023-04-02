@@ -4,9 +4,137 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EnglishDictionary.UI.Admin"
+        xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
-        Title="EditWordWindow" Height="450" Width="800">
-    <Grid>
         
-    </Grid>
+        Icon="/Assets/Images/app-icon.png"
+        ResizeMode="NoResize"
+       WindowStartupLocation="CenterScreen"
+        Title="" Height="750" Width="850">
+    <Border Padding="30 0 30 0" Background="{DynamicResource TertiaryBackgroundColor}">
+        <DockPanel >
+            <StackPanel DockPanel.Dock="Top" Orientation="Vertical">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Icon:PackIconMaterial Kind="BookEdit" 
+                                   Margin="0 0 10 0"
+                                   Width="{DynamicResource titleFontSize}" 
+                                   Height="{DynamicResource titleFontSize}" VerticalAlignment="Center" />
+                    <Label FontSize="{DynamicResource titleFontSize}" Content="Edit Word" 
+                   Foreground="{DynamicResource SecondaryTextColor}"
+                   FontWeight="Bold"/>
+                </StackPanel>
+                <StackPanel Margin="0 0 0 0" Orientation="Vertical">
+                    <Label FontSize="{DynamicResource textFontSize}" Content="Word" 
+                   Foreground="{DynamicResource SecondaryTextColor}"
+                   FontWeight="Bold"/>
+                    <TextBox x:Name="txtWord" Style="{StaticResource StyledTextBox}" Tag="Enter word" />
+                </StackPanel>
+                <StackPanel Margin="0 10 0 0"  Orientation="Horizontal">
+                    <StackPanel Orientation="Vertical">
+                        <Label FontSize="{DynamicResource textFontSize}" Content="IPA" 
+                   Foreground="{DynamicResource SecondaryTextColor}"
+                   FontWeight="Bold"/>
+                        <TextBox x:Name="txtIPA" Style="{StaticResource StyledTextBox}" Width="377" Tag="Enter ipa" />
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="20 0 0 0">
+                        <Label FontSize="{DynamicResource textFontSize}" Content="Word Type" 
+                   Foreground="{DynamicResource SecondaryTextColor}"
+                   FontWeight="Bold"/>
+                        <Border Padding="2"  BorderBrush="#ccc" BorderThickness="1" CornerRadius="7">
+                            <ComboBox x:Name="cbWordType" ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
+                              Height="39" 
+                                Padding="10"
+                                  Background="Transparent"
+                              BorderBrush="Transparent"
+                              BorderThickness="0"
+                              Width="372" />
+                        </Border>
+                    </StackPanel>
+                </StackPanel>
+
+                <ScrollViewer VerticalScrollBarVisibility="Hidden" MaxHeight="400" Margin="0 10 0 0" >
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel   Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <Label FontSize="{DynamicResource textFontSize}" Content="Definitions" 
+                   Foreground="{DynamicResource SecondaryTextColor}"
+                       
+                   FontWeight="Bold"/>
+                                <Button Style="{DynamicResource AddButton}" 
+                        x:Name="btnAddMeaning" Click='btnAddMeaning_Click' 
+                           VerticalAlignment="Center"
+                        Width="20" Height="20">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Icon:PackIconMaterial HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"
+                                              Kind="Plus" Width="10" 
+                                           Height="10" />
+
+
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" x:Name="listMeaning">
+                              
+                            </StackPanel>
+
+                        </StackPanel>
+                        <StackPanel Margin="0 10 0 0"   Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <Label FontSize="{DynamicResource textFontSize}" Content="Examples" 
+                   Foreground="{DynamicResource SecondaryTextColor}"
+                       
+                   FontWeight="Bold"/>
+                                <Button Style="{DynamicResource AddButton}" 
+                        x:Name="btnAddExample" Click='btnAddExample_Click' 
+                           VerticalAlignment="Center"
+                        Width="20" Height="20">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Icon:PackIconMaterial HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"
+                                              Kind="Plus" Width="10" 
+                                           Height="10" />
+
+
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" x:Name="listExample">
+                               
+                            </StackPanel>
+
+                        </StackPanel>
+                    </StackPanel>
+
+                </ScrollViewer>
+            </StackPanel>
+            <StackPanel DockPanel.Dock="Bottom" Margin="0 30 0 30" VerticalAlignment="Bottom"  Orientation="Horizontal">
+                <Button x:Name="btnSave" Click="btnSave_Click" Style="{DynamicResource AddButton}" Width="376" Margin="0 0 20 0">
+                    <StackPanel Orientation="Horizontal">
+                        <Icon:PackIconMaterial HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"
+                                               Margin="0 0 5 0" Kind="ContentSave" Width="{DynamicResource textFontSize}" 
+                                           Height="{DynamicResource textFontSize}" />
+                        <Label Content="Save" FontSize="{DynamicResource textFontSize}" FontWeight="Bold" 
+                           Foreground="{DynamicResource TertiaryWhiteColor}" />
+                    </StackPanel>
+                </Button>
+                <Button Click="btnCancel_Click"
+                        x:Name="btnCancel"
+                        Background="Tomato" 
+                        Style="{DynamicResource AddButton}"
+                        Width="376">
+                    <StackPanel Orientation="Horizontal">
+                        <Icon:PackIconMaterial HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"
+                                               Margin="0 0 5 0" Kind="Cancel" Width="{DynamicResource textFontSize}" 
+                                           Height="{DynamicResource textFontSize}" />
+                        <Label Content="Cancel" FontSize="{DynamicResource textFontSize}" FontWeight="Bold" 
+                           Foreground="{DynamicResource TertiaryWhiteColor}" />
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </DockPanel>
+    </Border>
 </Window>
+
