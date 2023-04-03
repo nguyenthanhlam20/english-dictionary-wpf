@@ -1,8 +1,16 @@
-﻿using EnglishDictionary.Models;
+﻿using CsvHelper;
+using CsvHelper.Configuration;
+using EnglishDictionary.Models;
 using FinancialWPFApp.UI;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
@@ -15,7 +23,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
 namespace EnglishDictionary.UI.Admin
 {
     /// <summary>
@@ -117,7 +124,7 @@ namespace EnglishDictionary.UI.Admin
                 if (isInsert == true)
                 {
                     InitializePagination();
-                   
+
                 }
             }
         }
@@ -266,6 +273,149 @@ namespace EnglishDictionary.UI.Admin
 
             _addWindow = new AddWordWindow(this);
             _addWindow.Show();
+        }
+
+        private void btnImport_Click(object sender, RoutedEventArgs e)
+        {
+            // Show an open file dialog and allow the user to choose a CSV file
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "CSV files (*.csv)|*.csv";
+            openFileDialog.Multiselect = false;
+            openFileDialog.ShowDialog();
+
+            int jump = 1;
+
+            // Load the CSV file into a list of objects using CsvHelper
+            string filePath = openFileDialog.FileName;
+            using (var reader = new StreamReader(filePath))
+            using (var csv = new CsvReader(reader, System.Globalization.CultureInfo.InvariantCulture))
+            {
+                using (var context = new DictionaryContext())
+                {
+                    while (csv.Read())
+                    {
+                        string[] row = csv.GetRecord<string[]>();
+
+                        WordType type = context.WordTypes.SingleOrDefault(w => w.WordTypeName == row[1].Trim());
+                        if (type == null)
+                        {
+                            type = context.WordTypes.SingleOrDefault(w => w.WordTypeName == "noun");
+                        }
+                        Word word = new Word()
+                        {
+                            WordName = row[0].Trim(),
+                            WordTypeId = type.WordTypeId,
+                            IPA = row[2].Trim(),
+                        };
+
+                        context.Words.Add(word);
+
+                        Word newWord = context.Words.OrderBy(w => w.WordId).Last();
+
+                        string[] meanings = row[3].Split("\n");
+
+                        foreach (var meaning in meanings)
+                        {
+                            WordMeaning me = new WordMeaning()
+                            {
+                                WordId = newWord.WordId + jump,
+                                MeaningContent = meaning,
+                            };
+
+                            context.WordMeanings.Add(me);
+                        }
+
+                        string[] examples = row[4].Split("\n");
+                        foreach (var example in examples)
+                        {
+                            WordExample ex = new WordExample()
+                            {
+                                WordId = newWord.WordId + jump,
+                                ExampleContent = example,
+                            };
+                            context.WordExamples.Add(ex);
+                        }
+
+                        jump++;
+                    }
+
+
+                    int newWords = context.SaveChanges();
+
+                    if (newWords > 0)
+                    {
+                        MessageBox.Show("success " + newWords);
+                    }
+                }
+            }
+        }
+
+        private void btnExport_Click(object sender, RoutedEventArgs e)
+        {
+            // Create a SaveFileDialog to allow the user to choose the file to export to
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "CSV files (*.csv)|*.csv";
+            saveFileDialog.Title = "Export to CSV";
+            saveFileDialog.ShowDialog();
+            var encoding = new System.Text.UTF8Encoding(true);
+            // If the user clicked OK and entered a file name, export to the file
+            if (!string.IsNullOrEmpty(saveFileDialog.FileName))
+            {
+
+
+                // Open the file for writing
+                using (var writer = new StreamWriter(saveFileDialog.FileName, false, encoding))
+                using (var csv = new CsvWriter(writer, System.Globalization.CultureInfo.InvariantCulture))
+                {
+
+
+
+                    // Write the header row
+                    csv.WriteField("Word".PadRight(100));
+                    csv.WriteField("Type".PadRight(100));
+                    csv.WriteField("IPA".PadRight(100));
+                    csv.WriteField("Definition".PadRight(300));
+                    csv.WriteField("Example".PadRight(300));
+                    csv.NextRecord();
+
+                    // Write the data rows
+                    using (var context = new DictionaryContext())
+                    {
+                        List<Word> words = context.Words.Include(w => w.Type).ToList();
+                        string meaningStr = "";
+                        string exampleStr = "";
+                        List<WordExample> examples = new();
+                        List<WordMeaning> meanings = new();
+                        foreach (Word word in words)
+                        {
+                            examples = context.WordExamples.Where(w => w.WordId == word.WordId).ToList();
+                            meanings = context.WordMeanings.Where(w => w.WordId == word.WordId).ToList();
+
+
+                            foreach (WordExample example in examples)
+                            {
+                                exampleStr += $"{example.ExampleContent}\n";
+                            }
+
+                            foreach (WordMeaning meaning in meanings)
+                            {
+                                meaningStr += $"{meaning.MeaningContent}\n";
+                            }
+
+                            csv.WriteField(word.WordName);
+                            csv.WriteField(word.Type.WordTypeName);
+                            csv.WriteField(word.IPA);
+                            csv.WriteField(exampleStr);
+                            csv.WriteField(meaningStr);
+                            csv.NextRecord();
+
+
+                            exampleStr = "";
+                            meaningStr = "";
+                        }
+                    }
+                }
+            }
         }
     }
 }

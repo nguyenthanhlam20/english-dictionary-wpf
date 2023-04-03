@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "z9+KYuVBbuYRvPC02y6BHxs6ViVD+8Q9Ks5XLafL0gLSUPZONDCFtI0sudWFcWB3Wdb3ORk4OMkQsRv72T8iQw==",
+  "dgSpecHash": "KemXTxI9Uh+9E1kbGlzM68mRtIrh47hSbMd6s09BbF8yTeuE0+5djfFBIKB9Y8XbpI4Z3qeR87HuQ8Q6Q/OB+A==",
   "success": true,
   "projectFilePath": "C:\\Users\\ADMIN\\Documents\\C#_Project\\english-dictionary-wpf\\EnglishDictionary\\EnglishDictionary\\EnglishDictionary.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\ADMIN\\.nuget\\packages\\csvhelper\\30.0.1\\csvhelper.30.0.1.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\mahapps.metro.iconpacks.material\\4.11.0\\mahapps.metro.iconpacks.material.4.11.0.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.data.sqlite.core\\6.0.15\\microsoft.data.sqlite.core.6.0.15.nupkg.sha512",

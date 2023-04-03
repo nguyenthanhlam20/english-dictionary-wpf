@@ -174,3 +174,4 @@ C:\Users\ADMIN\Documents\C#_Project\english-dictionary-wpf\EnglishDictionary\Eng
 C:\Users\ADMIN\Documents\C#_Project\english-dictionary-wpf\EnglishDictionary\EnglishDictionary\obj\Debug\net6.0-windows\UI\Admin\EditWordWindow.baml
 C:\Users\ADMIN\Documents\C#_Project\english-dictionary-wpf\EnglishDictionary\EnglishDictionary\obj\Debug\net6.0-windows\UI\Admin\ViewWordWindow.g.cs
 C:\Users\ADMIN\Documents\C#_Project\english-dictionary-wpf\EnglishDictionary\EnglishDictionary\obj\Debug\net6.0-windows\UI\Admin\ViewWordWindow.baml
+C:\Users\ADMIN\Documents\C#_Project\english-dictionary-wpf\EnglishDictionary\EnglishDictionary\bin\Debug\net6.0-windows\CsvHelper.dll

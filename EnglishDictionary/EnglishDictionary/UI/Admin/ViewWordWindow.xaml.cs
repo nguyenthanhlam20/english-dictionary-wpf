@@ -65,7 +65,10 @@ namespace EnglishDictionary.UI.Admin
         {
             exampleContainer.Children.Clear();
 
-            txtExample.Text = examples.ElementAt(0).ExampleContent;
+            if (examples.Count > 0)
+            {
+                txtExample.Text = examples.ElementAt(0).ExampleContent;
+            }
             foreach (WordExample we in examples)
             {
                 // Create row container
@@ -100,7 +103,10 @@ namespace EnglishDictionary.UI.Admin
         private void GenerateWordMeaning(List<WordMeaning> meanings)
         {
             meaningContainer.Children.Clear();
-            txtMeaning.Text = meanings.ElementAt(0).MeaningContent;
+            if (meanings.Count > 0)
+            {
+                txtMeaning.Text = meanings.ElementAt(0).MeaningContent;
+            }
             foreach (WordMeaning we in meanings)
             {
                 // Create row container
