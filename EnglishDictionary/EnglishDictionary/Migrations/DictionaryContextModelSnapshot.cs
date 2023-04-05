@@ -116,7 +116,7 @@ namespace EnglishDictionary.Migrations
             modelBuilder.Entity("EnglishDictionary.Models.Word", b =>
                 {
                     b.HasOne("EnglishDictionary.Models.WordType", "Type")
-                        .WithMany()
+                        .WithMany("Words")
                         .HasForeignKey("WordTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -151,6 +151,11 @@ namespace EnglishDictionary.Migrations
                     b.Navigation("WordExamples");
 
                     b.Navigation("WordMeanings");
+                });
+
+            modelBuilder.Entity("EnglishDictionary.Models.WordType", b =>
+                {
+                    b.Navigation("Words");
                 });
 #pragma warning restore 612, 618
         }

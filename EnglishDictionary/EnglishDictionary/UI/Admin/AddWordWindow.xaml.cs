@@ -186,7 +186,7 @@ namespace EnglishDictionary.UI.Admin
                 AddNewWord();
                 AddExamples();
                 AddMeanings();
-                _mainWindow.LoadWords(true);
+                _mainWindow.LoadWordInitialization();
                 this.Close();
             }
             else

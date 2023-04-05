@@ -21,6 +21,9 @@
     <Compile Update="UI\Admin\ViewWordWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UI\User\UserMainWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Assets\Values\Sizes.xaml">
@@ -72,6 +75,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UI\Public\Views\Pages\RegisterView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\User\UserMainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

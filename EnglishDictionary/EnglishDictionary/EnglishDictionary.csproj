@@ -10,6 +10,7 @@
   <ItemGroup>
     <None Remove="Assets\Images\app-icon.png" />
     <None Remove="Assets\Images\cover-img.png" />
+    <None Remove="Assets\template.csv" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,12 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="UI\User\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Resource Include="Assets\Images\app-icon.png" />
     <Resource Include="Assets\Images\cover-img.png" />
+    <Resource Include="Assets\template.csv" />
   </ItemGroup>
 
 </Project>

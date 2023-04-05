@@ -11,6 +11,7 @@
         Title="Admin" 
         MinWidth="1050"
         Height="800" 
+        Closing="Window_Closing"
         MinHeight="750"
         Width="1300">
     <Border Padding="30" 
@@ -78,15 +79,15 @@
                             </StackPanel>
                         </Button>
                         <Button Style="{StaticResource AddButton}" Width="120" Margin="5"
-                       x:Name="btnFilter"
+                       x:Name="btnDownloadTemplate"
                             Background="IndianRed"
-                        Click="btnExport_Click"
+                        Click="DownloadButton_Click"
                         >
                             <StackPanel Orientation="Horizontal">
 
-                                <Icon:PackIconMaterial Kind="Filter" VerticalAlignment="Center" Width="{DynamicResource textFontSize}" Height="{DynamicResource textFontSize}" 
+                                <Icon:PackIconMaterial Kind="BookOpen" VerticalAlignment="Center" Width="{DynamicResource textFontSize}" Height="{DynamicResource textFontSize}" 
                                    Margin="0 0 10 0" />
-                                <TextBlock Text="Filter" FontWeight="Bold" FontSize="{DynamicResource textFontSize}" VerticalAlignment="Center" />
+                                <TextBlock Text="Template" FontWeight="Bold" FontSize="{DynamicResource textFontSize}" VerticalAlignment="Center" />
                             </StackPanel>
                         </Button>
                     </StackPanel>
@@ -147,6 +148,7 @@
                 <StackPanel Orientation="Vertical">
                     <DockPanel  x:Name="bottomContent" >
                         <StackPanel VerticalAlignment="Center" DockPanel.Dock="Left" Orientation="Horizontal" >
+                            <Label FontWeight="Bold" x:Name="lbMessage" FontSize="{DynamicResource textFontSize}" />
                         </StackPanel>
                         <StackPanel DockPanel.Dock="Right" HorizontalAlignment="Right" Orientation="Horizontal">
                             <StackPanel VerticalAlignment="Center" Orientation="Horizontal" Margin="0 0 15 0">
@@ -187,7 +189,7 @@
                     <Button x:Name="btnExit"
                             Margin="0 0 0 0" 
                             Background="Transparent"
-                            
+                            Click="btnExit_Click"
                             HorizontalAlignment="Left" Style="{StaticResource AddButton}">
                         <Icon:PackIconMaterial Kind="Logout" HorizontalAlignment="Left" Width="36" Height="36" Flip="Horizontal" Foreground="Red"></Icon:PackIconMaterial>
                     </Button>

@@ -36,27 +36,36 @@ namespace FinancialWPFApp.UI.Public.Commands.Pages
             else
             {
 
-                using (var context = new DictionaryContext())
+                if (_viewModel.Email.StartsWith("admin") == false)
                 {
-                    Account account = new Account();
-                    account.Username = _viewModel.Email;
-                    account.Password = _viewModel.Password;
-                    account.Role = "User";
 
-
-                    context.Accounts.Add(account);
-                    if (context.SaveChanges() > 0)
+                    using (var context = new DictionaryContext())
                     {
+                        Account account = new Account();
+                        account.Username = _viewModel.Email;
+                        account.Password = _viewModel.Password;
+                        account.Role = "User";
 
-                        RedirectToSignIn(parameter);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Failed to sign up new account");
+
+                        context.Accounts.Add(account);
+                        if (context.SaveChanges() > 0)
+                        {
+
+                            RedirectToSignIn(parameter);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Failed to sign up new account");
+                        }
+
                     }
 
                 }
+                else
+                {
+                    MessageBox.Show("Your username cannot start with \"admin\"");
 
+                }
 
             }
 

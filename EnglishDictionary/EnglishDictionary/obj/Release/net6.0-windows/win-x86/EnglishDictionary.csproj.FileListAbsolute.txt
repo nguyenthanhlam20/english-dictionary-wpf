@@ -66,3 +66,8 @@ C:\Users\ADMIN\Documents\C#_Project\english-dictionary-wpf\EnglishDictionary\Eng
 C:\Users\ADMIN\Documents\C#_Project\english-dictionary-wpf\EnglishDictionary\EnglishDictionary\obj\Release\net6.0-windows\win-x86\EnglishDictionary.pdb
 C:\Users\ADMIN\Documents\C#_Project\english-dictionary-wpf\EnglishDictionary\EnglishDictionary\obj\Release\net6.0-windows\win-x86\EnglishDictionary.genruntimeconfig.cache
 C:\Users\ADMIN\Documents\C#_Project\english-dictionary-wpf\EnglishDictionary\EnglishDictionary\obj\Release\net6.0-windows\win-x86\ref\EnglishDictionary.dll
+C:\Users\ADMIN\Documents\C#_Project\english-dictionary-wpf\EnglishDictionary\EnglishDictionary\bin\Release\net6.0-windows\win-x86\CsvHelper.dll
+C:\Users\ADMIN\Documents\C#_Project\english-dictionary-wpf\EnglishDictionary\EnglishDictionary\obj\Release\net6.0-windows\win-x86\UI\Admin\ViewWordWindow.g.cs
+C:\Users\ADMIN\Documents\C#_Project\english-dictionary-wpf\EnglishDictionary\EnglishDictionary\obj\Release\net6.0-windows\win-x86\UI\User\UserMainWindow.g.cs
+C:\Users\ADMIN\Documents\C#_Project\english-dictionary-wpf\EnglishDictionary\EnglishDictionary\obj\Release\net6.0-windows\win-x86\UI\Admin\ViewWordWindow.baml
+C:\Users\ADMIN\Documents\C#_Project\english-dictionary-wpf\EnglishDictionary\EnglishDictionary\obj\Release\net6.0-windows\win-x86\UI\User\UserMainWindow.baml

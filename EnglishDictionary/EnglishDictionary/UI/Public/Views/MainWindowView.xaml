@@ -11,7 +11,7 @@
         Title="Access" Height="650" Width="1200" 
         WindowStartupLocation="CenterScreen" 
                 Icon="/Assets/Images/app-icon.png"
-
+Closing="PublicMainWindow_Closing"
         ResizeMode="NoResize"
         WindowState="Normal">
 

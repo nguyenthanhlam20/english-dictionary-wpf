@@ -25,5 +25,10 @@ namespace FinancialWPFApp.UI.Public.Views
             InitializeComponent();
             DataContext = new MainWindowViewModel();
         }
+
+        private void PublicMainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
     }
 }

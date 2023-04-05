@@ -87,3 +87,8 @@ C:\Users\ADMIN\Documents\C#_Project\english-dictionary-wpf\EnglishDictionary\Eng
 C:\Users\ADMIN\Documents\C#_Project\english-dictionary-wpf\EnglishDictionary\EnglishDictionary\obj\Release\net6.0-windows\EnglishDictionary.pdb
 C:\Users\ADMIN\Documents\C#_Project\english-dictionary-wpf\EnglishDictionary\EnglishDictionary\obj\Release\net6.0-windows\EnglishDictionary.genruntimeconfig.cache
 C:\Users\ADMIN\Documents\C#_Project\english-dictionary-wpf\EnglishDictionary\EnglishDictionary\obj\Release\net6.0-windows\ref\EnglishDictionary.dll
+C:\Users\ADMIN\Documents\C#_Project\english-dictionary-wpf\EnglishDictionary\EnglishDictionary\bin\Release\net6.0-windows\CsvHelper.dll
+C:\Users\ADMIN\Documents\C#_Project\english-dictionary-wpf\EnglishDictionary\EnglishDictionary\obj\Release\net6.0-windows\UI\Admin\ViewWordWindow.g.cs
+C:\Users\ADMIN\Documents\C#_Project\english-dictionary-wpf\EnglishDictionary\EnglishDictionary\obj\Release\net6.0-windows\UI\User\UserMainWindow.g.cs
+C:\Users\ADMIN\Documents\C#_Project\english-dictionary-wpf\EnglishDictionary\EnglishDictionary\obj\Release\net6.0-windows\UI\Admin\ViewWordWindow.baml
+C:\Users\ADMIN\Documents\C#_Project\english-dictionary-wpf\EnglishDictionary\EnglishDictionary\obj\Release\net6.0-windows\UI\User\UserMainWindow.baml

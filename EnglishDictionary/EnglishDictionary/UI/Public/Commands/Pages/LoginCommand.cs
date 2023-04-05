@@ -2,6 +2,7 @@
 
 using EnglishDictionary.Models;
 using EnglishDictionary.UI.Admin;
+using EnglishDictionary.UI.User;
 using FinancialWPFApp.UI.Public.ViewModels.Pages;
 using FinancialWPFApp.UI.Public.Views.Pages;
 
@@ -46,21 +47,21 @@ namespace FinancialWPFApp.UI.Public.Commands.Pages
                     if (account != null)
                     {
                         Application.Current.MainWindow.Hide();
-                        if (account.Role == "Admin")
+                        if (account.Role.ToLower() == "admin")
                         {
 
-                            AdminMainWindow window = new AdminMainWindow();
-                            Application.Current.MainWindow = window;
-
+                            AdminMainWindow adminWindow = new AdminMainWindow();
+                            Application.Current.MainWindow = adminWindow;
+                            adminWindow.Show();
                         }
                         else
                         {
-                            AdminMainWindow window = new AdminMainWindow();
+                            UserMainWindow window = new UserMainWindow();
                             Application.Current.MainWindow = window;
-
+                            window.Show();
 
                         }
-                        Application.Current.MainWindow.Show();
+                        
                     }
                     else
                     {
