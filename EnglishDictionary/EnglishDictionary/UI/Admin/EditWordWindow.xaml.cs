@@ -335,7 +335,7 @@ namespace EnglishDictionary.UI.Admin
                 UpdateWord();
                 AddMeanings();
                 AddExamples();
-                _mainWindow.LoadWordInitialization();
+                _mainWindow.LoadWords();
                 this.Close();
             }
             else

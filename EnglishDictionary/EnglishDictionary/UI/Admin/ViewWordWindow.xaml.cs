@@ -41,8 +41,11 @@ namespace EnglishDictionary.UI.Admin
             using (var context = new DictionaryContext())
             {
                 Word word = context.Words.Include(w => w.Type).SingleOrDefault(w => w.WordId == _targetWordId);
-                GenerateWordDetails(word);
 
+                if (word != null)
+                {
+                    GenerateWordDetails(word);
+                }
                 List<WordExample> examples = context.WordExamples.Where(we => we.WordId == _targetWordId).ToList();
                 GenerateWordExample(examples);
 

@@ -76,7 +76,7 @@
                             <StackPanel Orientation="Vertical" x:Name="listMeaning">
                                 <StackPanel Name="spMeaning0">
                                     <TextBox Style="{StaticResource StyledTextBox}" Width="680" 
-                                 HorizontalAlignment="Left" Tag="Enter meaning" />
+                                 HorizontalAlignment="Left" Tag="Enter definition" />
                                 </StackPanel>
                             </StackPanel>
 

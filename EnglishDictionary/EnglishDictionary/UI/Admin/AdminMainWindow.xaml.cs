@@ -11,11 +11,14 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Metadata;
+using System.Reflection.PortableExecutable;
+using System.Runtime.Intrinsics.X86;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -26,6 +29,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+
 namespace EnglishDictionary.UI.Admin
 {
     /// <summary>
@@ -234,19 +239,29 @@ namespace EnglishDictionary.UI.Admin
 
         private void Btn_Click(object sender, RoutedEventArgs e)
         {
-            Button btn = sender as Button;
+            try
+            {
+                Button btn = sender as Button;
 
-            int pageIndex = int.Parse(btn.Content.ToString());
-            //MessageBox.Show("Clic " + pageIndex);
+                if (btn != null)
+                {
+                    int pageIndex = int.Parse(btn.Content.ToString());
+                    //MessageBox.Show("Clic " + pageIndex);
 
-            currentPage = pageIndex;
-            LoadWords();
+                    currentPage = pageIndex;
+                    LoadWords();
+                }
+            }
+            catch (Exception)
+            {
+
+            }
         }
 
         private void cbPage_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBox cb = sender as ComboBox;
-            if (cb.Text != "")
+            if (String.IsNullOrEmpty(cb.Text) == false)
             {
                 pageSize = int.Parse(cb.SelectedValue.ToString());
 
@@ -259,7 +274,6 @@ namespace EnglishDictionary.UI.Admin
         {
             if (currentPage > 1)
             {
-
                 currentPage -= 1;
                 LoadWords();
             }
@@ -318,73 +332,80 @@ namespace EnglishDictionary.UI.Admin
                 string filePath = openFileDialog.FileName;
                 if (String.IsNullOrEmpty(filePath) == false)
                 {
-                    using (var reader = new StreamReader(filePath))
-                    using (var csv = new CsvReader(reader, System.Globalization.CultureInfo.InvariantCulture))
-                    {
-                        using (var context = new DictionaryContext())
-                        {
-                            while (csv.Read())
-                            {
-                                string[] row = csv.GetRecord<string[]>();
 
-                                WordType type = context.WordTypes.SingleOrDefault(w => w.WordTypeName == row[1].Trim());
-                                if (type == null)
+                    using (var context = new DictionaryContext())
+                    using (var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                    using (var reader = new StreamReader(fileStream))
+                    using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+                    {
+                        // Read the CSV file and store the records in a list
+                        var records = csv.GetRecords<ImportWordData>().ToList();
+
+                        // Do something with the records
+                        foreach (ImportWordData record in records)
+                        {
+                            // Read the next line
+
+                            // Process each value
+                            WordType type = context.WordTypes.SingleOrDefault(w => w.WordTypeName == record.Word.Trim());
+                            if (type == null)
+                            {
+                                type = context.WordTypes.SingleOrDefault(w => w.WordTypeName == "noun");
+                            }
+                            Word word = new Word()
+                            {
+                                WordName = record.Word.Trim(),
+                                WordTypeId = type.WordTypeId,
+                                IPA = record.IPA.Trim(),
+                            };
+
+                            context.Words.Add(word);
+
+                            Word newWord = context.Words.OrderBy(w => w.WordId).Last();
+
+                            string[] meanings = record.Definition.Split("\n");
+
+                            foreach (var meaning in meanings)
+                            {
+                                WordMeaning me = new WordMeaning()
                                 {
-                                    type = context.WordTypes.SingleOrDefault(w => w.WordTypeName == "noun");
-                                }
-                                Word word = new Word()
-                                {
-                                    WordName = row[0].Trim(),
-                                    WordTypeId = type.WordTypeId,
-                                    IPA = row[2].Trim(),
+                                    WordId = newWord.WordId + jump,
+                                    MeaningContent = meaning,
                                 };
 
-                                context.Words.Add(word);
-
-                                Word newWord = context.Words.OrderBy(w => w.WordId).Last();
-
-                                string[] meanings = row[3].Split("\n");
-
-                                foreach (var meaning in meanings)
-                                {
-                                    WordMeaning me = new WordMeaning()
-                                    {
-                                        WordId = newWord.WordId + jump,
-                                        MeaningContent = meaning,
-                                    };
-
-                                    context.WordMeanings.Add(me);
-                                }
-
-                                string[] examples = row[4].Split("\n");
-                                foreach (var example in examples)
-                                {
-                                    WordExample ex = new WordExample()
-                                    {
-                                        WordId = newWord.WordId + jump,
-                                        ExampleContent = example,
-                                    };
-                                    context.WordExamples.Add(ex);
-                                }
-
-                                jump++;
+                                context.WordMeanings.Add(me);
                             }
 
-
-                            int newWords = context.SaveChanges();
-
-                            if (newWords > 0)
+                            string[] examples = record.Example.Split("\n");
+                            foreach (var example in examples)
                             {
-                                MessageBox.Show("success " + newWords);
+                                WordExample ex = new WordExample()
+                                {
+                                    WordId = newWord.WordId + jump,
+                                    ExampleContent = example,
+                                };
+                                context.WordExamples.Add(ex);
                             }
+
+                            jump++;
+                        }
+
+
+
+                        int newWords = context.SaveChanges();
+
+                        if (newWords > 0)
+                        {
+                            MessageBox.Show("success " + newWords);
                         }
                     }
+
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                MessageBox.Show("Cannot import file");
+                MessageBox.Show("Cannot import file, error " + ex);
             }
         }
         private void DownloadButton_Click(object sender, RoutedEventArgs e)
@@ -399,7 +420,7 @@ namespace EnglishDictionary.UI.Admin
                 // create save file dialog
                 var saveFileDialog = new SaveFileDialog();
                 saveFileDialog.FileName = "template.csv";
-                saveFileDialog.Filter = "Excel files (*.csv)|*.csv|All files (*.*)|*.*";
+                saveFileDialog.Filter = "CSV files (*.csv)|*.csv";
 
                 if (saveFileDialog.ShowDialog() == true)
                 {
@@ -473,8 +494,8 @@ namespace EnglishDictionary.UI.Admin
                                 csv.WriteField(word.WordName);
                                 csv.WriteField(word.Type.WordTypeName);
                                 csv.WriteField(word.IPA);
-                                csv.WriteField(exampleStr);
                                 csv.WriteField(meaningStr);
+                                csv.WriteField(exampleStr);
                                 csv.NextRecord();
 
 

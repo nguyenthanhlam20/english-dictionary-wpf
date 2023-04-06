@@ -111,7 +111,7 @@
                         <DataGridTextColumn Header="Word" IsReadOnly="True" CanUserResize="False" Width="150" Binding="{Binding Path=WordName}" />
                         <DataGridTextColumn Header="IPA" IsReadOnly="True" CanUserResize="False" Width="150" Binding="{Binding Path=IPA}" />
                         <DataGridTextColumn Header="Type" IsReadOnly="True" CanUserResize="False" Width="120" Binding="{Binding Path=Type.WordTypeName}" />
-                        <DataGridTextColumn Header="Meanings" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding Path=DisplayMeaning}" />
+                        <DataGridTextColumn Header="Definitions" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding Path=DisplayMeaning}" />
                         <DataGridTextColumn Header="Examples" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding Path=DisplayExample}" />
                         <DataGridTemplateColumn Header="Action" IsReadOnly="True"  Width="175" >
                             <DataGridTemplateColumn.CellTemplate>
