@@ -47,6 +47,7 @@ namespace EnglishDictionary.UI.Admin
         public ReplayCommand EditWordCommand { get; set; }
         public ReplayCommand ViewWordCommand { get; set; }
         public ReplayCommand DeleteWordCommand { get; set; }
+        public ReplayCommand SelectWordCommand { get; set; }
 
 
         private int totalRecord = 0;
@@ -55,6 +56,7 @@ namespace EnglishDictionary.UI.Admin
         private int currentPage = 1;
         private string filterSearch = "";
 
+        public List<Word> words = new();
 
         public void LoadWordInitialization()
         {
@@ -79,6 +81,36 @@ namespace EnglishDictionary.UI.Admin
             EditWordCommand = new ReplayCommand(ShowEditWordWindow);
             ViewWordCommand = new ReplayCommand(ShowViewWordWindow);
             DeleteWordCommand = new ReplayCommand(ShowConfirmWindow);
+            SelectWordCommand = new ReplayCommand(SelectWord);
+        }
+
+        public void SelectWord(object parameter)
+        {
+            int wordId = (int)parameter;
+
+            Word word = words.SingleOrDefault(w => w.WordId == wordId);
+            if (word.IsSelected == false)
+            {
+                words.SingleOrDefault(w => w.WordId == wordId).IsSelected = true;
+            }
+            else
+            {
+                words.SingleOrDefault(w => w.WordId == wordId).IsSelected = false;
+            }
+
+            if (words.Where(w => w.IsSelected == true).Count() > 0)
+            {
+                btnDeleteAll.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                btnDeleteAll.Visibility = Visibility.Hidden;
+
+            }
+
+            dgWords.ItemsSource = words;
+
+
         }
 
         public void ShowConfirmWindow(object parameter)
@@ -123,7 +155,31 @@ namespace EnglishDictionary.UI.Admin
 
             }
         }
+        public void DeleteWordNoConfirm(int wordId)
+        {
+            using (var context = new DictionaryContext())
+            {
+                Word word = context.Words.SingleOrDefault(w => w.WordId == wordId);
+                List<WordExample> examples = context.WordExamples.Where(w => w.WordId == wordId).ToList();
+                List<WordMeaning> meanings = context.WordMeanings.Where(w => w.WordId == wordId).ToList();
+                foreach (WordExample example in examples)
+                {
+                    context.WordExamples.Remove(example);
+                }
 
+                foreach (WordMeaning meaning in meanings)
+                {
+                    context.WordMeanings.Remove(meaning);
+                }
+
+                context.Words.Remove(word);
+                if (context.SaveChanges() > 0)
+                {
+                }
+
+
+            }
+        }
         public void ShowEditWordWindow(object parameter)
         {
             int wordId = (int)parameter;
@@ -143,7 +199,7 @@ namespace EnglishDictionary.UI.Admin
 
         public void LoadWords()
         {
-            List<Word> words = GetWords();
+            words = GetWords();
             InitializePagination(words);
             dgWords.ItemsSource = words;
         }
@@ -325,9 +381,7 @@ namespace EnglishDictionary.UI.Admin
                 openFileDialog.Filter = "CSV files (*.csv)|*.csv";
                 openFileDialog.Multiselect = false;
                 openFileDialog.ShowDialog();
-
-                int jump = 1;
-
+                int wordSuccess = 0;
                 // Load the CSV file into a list of objects using CsvHelper
                 string filePath = openFileDialog.FileName;
                 if (String.IsNullOrEmpty(filePath) == false)
@@ -336,58 +390,89 @@ namespace EnglishDictionary.UI.Admin
                     using (var context = new DictionaryContext())
                     using (var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
                     using (var reader = new StreamReader(fileStream))
-                    using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+                    using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
                     {
-                        // Read the CSV file and store the records in a list
-                        var records = csv.GetRecords<ImportWordData>().ToList();
+                        HasHeaderRecord = true,
+                        HeaderValidated = null,
+                        MissingFieldFound = null,
+                        IgnoreBlankLines = true,
 
-                        // Do something with the records
-                        foreach (ImportWordData record in records)
+                    }))
+                    {
+
+                        csv.Read(); // Skip the header row
+
+
+                        while (csv.Read())
                         {
-                            // Read the next line
-
-                            // Process each value
-                            WordType type = context.WordTypes.SingleOrDefault(w => w.WordTypeName == record.Word.Trim());
-                            if (type == null)
+                            // Read the data rows
+                            ImportWordData record = new ImportWordData()
                             {
-                                type = context.WordTypes.SingleOrDefault(w => w.WordTypeName == "noun");
-                            }
-                            Word word = new Word()
-                            {
-                                WordName = record.Word.Trim(),
-                                WordTypeId = type.WordTypeId,
-                                IPA = record.IPA.Trim(),
+                                Word = csv.GetField(0).ToString(),
+                                Type = csv.GetField(1).ToString(),
+                                IPA = csv.GetField(2).ToString(),
+                                Definition = csv.GetField(3).ToString(),
+                                Example = csv.GetField(4).ToString(),
                             };
-
-                            context.Words.Add(word);
-
-                            Word newWord = context.Words.OrderBy(w => w.WordId).Last();
-
-                            string[] meanings = record.Definition.Split("\n");
-
-                            foreach (var meaning in meanings)
+                            if (String.IsNullOrEmpty(record.Word) == false && String.IsNullOrEmpty(record.Type) == false
+                                 && String.IsNullOrEmpty(record.IPA) == false && String.IsNullOrEmpty(record.Definition) == false
+                                && String.IsNullOrEmpty(record.Example) == false)
                             {
-                                WordMeaning me = new WordMeaning()
+
+
+                                // Process each value
+                                WordType type = context.WordTypes.SingleOrDefault(w => w.WordTypeName == record.Type.Trim());
+                                if (type == null)
                                 {
-                                    WordId = newWord.WordId + jump,
-                                    MeaningContent = meaning,
+                                    type = context.WordTypes.SingleOrDefault(w => w.WordTypeName == "noun");
+                                }
+                                Word word = new Word()
+                                {
+                                    WordName = record.Word.Trim(),
+                                    WordTypeId = type.WordTypeId,
+                                    IPA = record.IPA.Trim(),
                                 };
 
-                                context.WordMeanings.Add(me);
-                            }
-
-                            string[] examples = record.Example.Split("\n");
-                            foreach (var example in examples)
-                            {
-                                WordExample ex = new WordExample()
+                                context.Words.Add(word);
+                                if (context.SaveChanges() > 0)
                                 {
-                                    WordId = newWord.WordId + jump,
-                                    ExampleContent = example,
-                                };
-                                context.WordExamples.Add(ex);
-                            }
+                                    wordSuccess++;
+                                }
 
-                            jump++;
+                                Word newWord = context.Words.OrderBy(w => w.WordId).Last();
+
+                                string[] meanings = record.Definition.Split("\n");
+
+
+                                foreach (var meaning in meanings)
+                                {
+                                    if (String.IsNullOrEmpty(meaning) == false)
+                                    {
+                                        WordMeaning me = new WordMeaning()
+                                        {
+                                            WordId = newWord.WordId,
+                                            MeaningContent = meaning,
+                                        };
+
+                                        context.WordMeanings.Add(me);
+                                    }
+                                }
+
+                                string[] examples = record.Example.Split("\n");
+                                foreach (var example in examples)
+                                {
+                                    if (String.IsNullOrEmpty(example) == false)
+                                    {
+                                        WordExample ex = new WordExample()
+                                        {
+                                            WordId = newWord.WordId,
+                                            ExampleContent = example,
+                                        };
+                                        context.WordExamples.Add(ex);
+                                    }
+                                }
+
+                            }
                         }
 
 
@@ -396,7 +481,9 @@ namespace EnglishDictionary.UI.Admin
 
                         if (newWords > 0)
                         {
-                            MessageBox.Show("success " + newWords);
+                            MessageBox.Show($"Import {wordSuccess} words successful");
+                            LoadWordInitialization();
+
                         }
                     }
 
@@ -453,18 +540,16 @@ namespace EnglishDictionary.UI.Admin
                 if (!string.IsNullOrEmpty(saveFileDialog.FileName))
                 {
                     // Open the file for writing
-                    using (var writer = new StreamWriter(saveFileDialog.FileName, false, encoding))
-                    using (var csv = new CsvWriter(writer, System.Globalization.CultureInfo.InvariantCulture))
+                    using (var stream = new FileStream(saveFileDialog.FileName, FileMode.Create, FileAccess.Write))
+                    using (var writer = new StreamWriter(stream, encoding))
+                    using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
                     {
-
-
-
                         // Write the header row
-                        csv.WriteField("Word".PadRight(100));
-                        csv.WriteField("Type".PadRight(100));
-                        csv.WriteField("IPA".PadRight(100));
-                        csv.WriteField("Definition".PadRight(100));
-                        csv.WriteField("Example".PadRight(100));
+                        csv.WriteField("Word");
+                        csv.WriteField("Type");
+                        csv.WriteField("IPA");
+                        csv.WriteField("Definition");
+                        csv.WriteField("Example");
                         csv.NextRecord();
 
                         // Write the data rows
@@ -511,7 +596,7 @@ namespace EnglishDictionary.UI.Admin
             catch (Exception)
             {
 
-                throw;
+                MessageBox.Show("Please close the file you want to override first");
             }
         }
 
@@ -532,6 +617,62 @@ namespace EnglishDictionary.UI.Admin
             // ...
 
             Application.Current.Shutdown(); // Exit the application
+        }
+
+        private void btnDeleteAll_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                MessageBoxResult result = MessageBox.Show("Are you sure you want to delete all selected words?", "Question", MessageBoxButton.YesNo);
+
+                int count = 0;
+                if (result == MessageBoxResult.Yes)
+                {
+                    foreach (Word word in words)
+                    {
+                        if (word.IsSelected == true)
+                        {
+                            count++;
+                            DeleteWordNoConfirm(word.WordId);
+                        }
+                    }
+                    if (count > 0)
+                    {
+                        MessageBox.Show($"Delete {count} words successful");
+                        LoadWordInitialization();
+                        btnDeleteAll.Visibility = Visibility.Hidden;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Cannot delete all selected words");
+            }
+        }
+
+        private void cbSelectAll_Checked(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0; i < words.Count(); i++)
+            {
+                words[i].IsSelected = true;
+            }
+
+            btnDeleteAll.Visibility = Visibility.Visible;
+            dgWords.ItemsSource = words;
+        }
+
+        private void cbSelectAll_Unchecked(object sender, RoutedEventArgs e)
+        {
+
+            for (int i = 0; i < words.Count(); i++)
+            {
+                words[i].IsSelected = false;
+            }
+            btnDeleteAll.Visibility = Visibility.Hidden;
+          
+            dgWords.ItemsSource = words;
+
         }
     }
 }

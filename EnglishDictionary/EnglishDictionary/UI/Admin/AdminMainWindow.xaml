@@ -42,7 +42,19 @@
 
                     </StackPanel>
                     <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+                        <Button Style="{StaticResource AddButton}" Width="150" Margin="5"
+                       x:Name="btnDeleteAll"
+                                Visibility="Hidden"
+                                Background="Red"
+                        Click="btnDeleteAll_Click"
+                        >
+                            <StackPanel Orientation="Horizontal">
 
+                                <Icon:PackIconMaterial Kind="TrashCan" VerticalAlignment="Center" Width="{DynamicResource textFontSize}" Height="{DynamicResource textFontSize}" 
+                                   Margin="0 0 10 0" />
+                                <TextBlock Text="Delete All" FontWeight="Bold" FontSize="{DynamicResource textFontSize}" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </Button>
                         <Button Style="{StaticResource AddButton}" Width="150" Margin="5"
                        x:Name="btnAddWord"
                         Click="btnAddWord_Click"
@@ -108,6 +120,24 @@
                   MaxHeight="500"  >
 
                     <DataGrid.Columns>
+                        <DataGridTemplateColumn IsReadOnly="False"  MinWidth="45"  MaxWidth="45">
+                            <DataGridTemplateColumn.HeaderTemplate>
+                                <DataTemplate>
+                                    <CheckBox  x:Name="cbSelectAll" 
+                                               Checked="cbSelectAll_Checked" 
+                                               Unchecked="cbSelectAll_Unchecked" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.HeaderTemplate>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox  
+                                        IsChecked="{Binding Path=IsSelected}"
+                                        Command="{Binding DataContext.SelectWordCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                        CommandParameter="{Binding Path=WordId}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        
                         <DataGridTextColumn Header="Word" IsReadOnly="True" CanUserResize="False" Width="150" Binding="{Binding Path=WordName}" />
                         <DataGridTextColumn Header="IPA" IsReadOnly="True" CanUserResize="False" Width="150" Binding="{Binding Path=IPA}" />
                         <DataGridTextColumn Header="Type" IsReadOnly="True" CanUserResize="False" Width="120" Binding="{Binding Path=Type.WordTypeName}" />

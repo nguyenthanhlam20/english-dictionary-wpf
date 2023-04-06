@@ -44,6 +44,9 @@ namespace EnglishDictionary.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("IsSelected")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("WordName")
                         .IsRequired()
                         .HasColumnType("TEXT");

@@ -20,6 +20,8 @@ namespace EnglishDictionary.Models
 
         public string IPA { get; set; }
 
+        public bool IsSelected { get; set; } = false;
+
         public List<WordMeaning> WordMeanings { get; set; }
         public List<WordExample> WordExamples { get; set; }
 
