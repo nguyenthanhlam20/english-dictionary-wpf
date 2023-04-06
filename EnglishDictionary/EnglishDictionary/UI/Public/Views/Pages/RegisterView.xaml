@@ -36,7 +36,6 @@
                            Margin="0 0 0 5"/>
                     <TextBox Style="{DynamicResource StyledTextBox}" 
                              Text="{Binding Email}"
-                             Tag="{DynamicResource enterEmail}"
                             
                              />
                 </StackPanel>
@@ -48,7 +47,6 @@
                            Margin="0 0 0 5"/>
                     <TextBox Style="{DynamicResource StyledTextBox}" 
                              Text="{Binding Password}"
-                             Tag="{DynamicResource enterPassword}"
                              
                              />
                 </StackPanel>
@@ -60,7 +58,6 @@
                            Margin="0 0 0 5"/>
                     <TextBox Style="{DynamicResource StyledTextBox}" 
                              Text="{Binding ConfirmPassword}"
-                             Tag="{DynamicResource confirmPassword}"
                              
                              />
                 </StackPanel>

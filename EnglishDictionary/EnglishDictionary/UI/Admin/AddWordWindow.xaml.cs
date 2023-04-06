@@ -82,84 +82,116 @@ namespace EnglishDictionary.UI.Admin
 
         private void btnAddMeaning_Click(object sender, RoutedEventArgs e)
         {
-            // Get number of rows
-            reusableInt = listMeaning.Children.Count;
+            try
+            {
+                // Get number of rows
+                reusableInt = listMeaning.Children.Count;
 
-            // Create container
-            CreateSpContainer("spMeaning" + reusableInt);
+                // Create container
+                CreateSpContainer("spMeaning" + reusableInt);
 
-            // Add input feild
-            CreateInputText("txtMeaning" + reusableInt, "Enter new definition");
+                // Add input feild
+                CreateInputText("txtMeaning" + reusableInt, "Enter new definition");
 
-            // Add remove button
-            CreateRemoveBtn("btnMeaning" + reusableInt);
-            btnRemove.Click += BtnRemoveMeaning_Click;
+                // Add remove button
+                CreateRemoveBtn("btnMeaning" + reusableInt);
+                btnRemove.Click += BtnRemoveMeaning_Click;
 
 
-            // Add textbox and button to stack panel
-            spConatainer.Children.Add(txtInput);
-            spConatainer.Children.Add(btnRemove);
+                // Add textbox and button to stack panel
+                spConatainer.Children.Add(txtInput);
+                spConatainer.Children.Add(btnRemove);
 
-            // Register name for container
-            listMeaning.RegisterName(spConatainer.Name, spConatainer);
+                // Register name for container
+                listMeaning.RegisterName(spConatainer.Name, spConatainer);
 
-            // Add to list meaning
-            listMeaning.Children.Add(spConatainer);
+                // Add to list meaning
+                listMeaning.Children.Add(spConatainer);
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Error when trying to add new definition");
+            }
         }
 
         private void BtnRemoveMeaning_Click(object sender, RoutedEventArgs e)
         {
-            // Get index
-            Button btn = sender as Button;
-            reusableInt = int.Parse(btn.Name.Replace("btnMeaning", ""));
+            try
+            {
+                // Get index
+                Button btn = sender as Button;
+                reusableInt = int.Parse(btn.Name.Replace("btnMeaning", ""));
 
-            // Find container
-            StackPanel sp = (StackPanel)listMeaning.FindName("spMeaning" + reusableInt);
+                // Find container
+                StackPanel sp = (StackPanel)listMeaning.FindName("spMeaning" + reusableInt);
 
-            // Remove container
-            listMeaning.UnregisterName(sp.Name);
-            listMeaning.Children.Remove(sp);
+                // Remove container
+                listMeaning.UnregisterName(sp.Name);
+                listMeaning.Children.Remove(sp);
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Error when trying to remove definition");
+            }
         }
 
         private void BtnRemoveExample_Click(object sender, RoutedEventArgs e)
         {
-            // Get index
-            Button btn = sender as Button;
-            reusableInt = int.Parse(btn.Name.Replace("btnExample", ""));
+            try
+            {
+                // Get index
+                Button btn = sender as Button;
+                reusableInt = int.Parse(btn.Name.Replace("btnExample", ""));
 
-            // Find container
-            StackPanel sp = (StackPanel)listExample.FindName("spExample" + reusableInt);
+                // Find container
+                StackPanel sp = (StackPanel)listExample.FindName("spExample" + reusableInt);
 
-            // Remove container
-            listExample.UnregisterName(sp.Name);
-            listExample.Children.Remove(sp);
+                // Remove container
+                listExample.UnregisterName(sp.Name);
+                listExample.Children.Remove(sp);
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Error when trying to remove example");
+            }
         }
 
         private void btnAddExample_Click(object sender, RoutedEventArgs e)
         {
-            // Get number of rows
-            reusableInt = listExample.Children.Count;
+            try
+            {
+                // Get number of rows
+                reusableInt = listExample.Children.Count;
 
-            // Create container
-            CreateSpContainer("spExample" + reusableInt);
+                // Create container
+                CreateSpContainer("spExample" + reusableInt);
 
-            // Add input feild
-            CreateInputText("txtExample" + reusableInt, "Enter new example");
+                // Add input feild
+                CreateInputText("txtExample" + reusableInt, "Enter new example");
 
-            // Add remove button
-            CreateRemoveBtn("btnExample" + reusableInt);
-            btnRemove.Click += BtnRemoveExample_Click;
+                // Add remove button
+                CreateRemoveBtn("btnExample" + reusableInt);
+                btnRemove.Click += BtnRemoveExample_Click;
 
 
-            // Add textbox and button to stack panel
-            spConatainer.Children.Add(txtInput);
-            spConatainer.Children.Add(btnRemove);
+                // Add textbox and button to stack panel
+                spConatainer.Children.Add(txtInput);
+                spConatainer.Children.Add(btnRemove);
 
-            // Register name for container
-            listExample.RegisterName(spConatainer.Name, spConatainer);
+                // Register name for container
+                listExample.RegisterName(spConatainer.Name, spConatainer);
 
-            // Add to list meaning
-            listExample.Children.Add(spConatainer);
+                // Add to list meaning
+                listExample.Children.Add(spConatainer);
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Error when trying to add new example");
+            }
         }
 
         public Tuple<bool, string> ValidateInput()
@@ -177,23 +209,31 @@ namespace EnglishDictionary.UI.Admin
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
 
-            // Get validation result
-            Tuple<bool, string> validationResult = ValidateInput();
-
-            // If user pass all the criterias then allow to add new word
-            if (validationResult.Item1)
+            try
             {
-                AddNewWord();
-                AddExamples();
-                AddMeanings();
-                _mainWindow.LoadWordInitialization();
-                this.Close();
-            }
-            else
-            {
-                MessageBox.Show(validationResult.Item2);
-            }
+                // Get validation result
+                Tuple<bool, string> validationResult = ValidateInput();
 
+                // If user pass all the criterias then allow to add new word
+                if (validationResult.Item1)
+                {
+                    AddNewWord();
+                    AddExamples();
+                    AddMeanings();
+                    _mainWindow.LoadWordInitialization();
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show(validationResult.Item2);
+                }
+
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Error when trying to add new word");
+            }
         }
 
         public void AddExamples()

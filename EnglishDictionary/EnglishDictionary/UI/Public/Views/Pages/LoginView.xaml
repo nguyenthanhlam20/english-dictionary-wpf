@@ -6,6 +6,7 @@
       xmlns:local="clr-namespace:FinancialWPFApp.UI.Public.Views.Pages"
       xmlns:vm="clr-namespace:FinancialWPFApp.UI.Public.ViewModels.Pages"
       xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="450"
       Title="LoginView">
@@ -38,7 +39,7 @@
                            FontWeight="SemiBold" 
                            Margin="0 0 0 5"/>
                     <TextBox Style="{DynamicResource StyledTextBox}" 
-                             Tag="{DynamicResource enterEmail}"
+                             
                              Text="{Binding Username}"
                              />
                 </StackPanel>
@@ -48,8 +49,12 @@
                            FontWeight="SemiBold"
                            
                            Margin="0 0 0 5"/>
-                    <Border BorderBrush="{DynamicResource PrimaryTextColor}" Padding="0" BorderThickness="1" CornerRadius="5" >
-                        <PasswordBox x:Name="passwordBox" 
+                    <Border BorderBrush="#ccc" Padding="0" BorderThickness="1" CornerRadius="5" >
+                        
+                        
+                        <PasswordBox
+                            
+                            x:Name="passwordBox" 
                                      BorderBrush="Transparent"
                                      Padding="10"
                                     PasswordChanged="passwordBox_PasswordChanged"

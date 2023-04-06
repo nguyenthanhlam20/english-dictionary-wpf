@@ -37,40 +37,57 @@ namespace EnglishDictionary.UI.User
 
         private void lvResults_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ListView lv = (ListView)sender;
-
-            Word word = lv.SelectedItem as Word;
-            if (word != null)
+            try
             {
-                _targetWordId = word.WordId;
+                ListView lv = (ListView)sender;
 
-                LoadWordDetails();
+                Word word = lv.SelectedItem as Word;
+                if (word != null)
+                {
+                    _targetWordId = word.WordId;
+
+                    LoadWordDetails();
+                }
+            }
+            catch (Exception)
+            {
+
+
             }
         }
 
         private void txtSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-            TextBox txt = sender as TextBox;
-
-            filterSearch = txt.Text;
-            if (String.IsNullOrEmpty(txt.Text) == false)
+            try
             {
-                List<Word> words = GetResult();
-                if (words.Count() > 0)
+                TextBox txt = sender as TextBox;
+
+                filterSearch = txt.Text;
+                if (String.IsNullOrEmpty(txt.Text) == false)
                 {
-                    lvResults.ItemsSource = words;
-                    resultContainer.Visibility = Visibility.Visible;
+                    List<Word> words = GetResult();
+                    if (words.Count() > 0)
+                    {
+                        lvResults.ItemsSource = words;
+                        resultContainer.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        resultContainer.Visibility = Visibility.Hidden;
+                        vocabulary.Visibility = Visibility.Hidden;
+                    }
                 }
                 else
                 {
                     resultContainer.Visibility = Visibility.Hidden;
                     vocabulary.Visibility = Visibility.Hidden;
-                }
-            } else
-            {
-                resultContainer.Visibility = Visibility.Hidden;
-                vocabulary.Visibility = Visibility.Hidden;
 
+                }
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Cannot search");
             }
         }
 
@@ -78,27 +95,35 @@ namespace EnglishDictionary.UI.User
         {
             using (var context = new DictionaryContext())
             {
-                return context.Words.Include(w => w.Type).Where(w => w.WordName.Contains(filterSearch) 
+                return context.Words.Include(w => w.Type).Where(w => w.WordName.Contains(filterSearch)
                 || filterSearch.Contains(w.WordName)).ToList();
             }
         }
 
         private void LoadWordDetails()
         {
-            vocabulary.Visibility = Visibility.Visible;
-            using (var context = new DictionaryContext())
+            try
             {
-                Word word = context.Words.Include(w => w.Type).SingleOrDefault(w => w.WordId == _targetWordId);
-                if (word != null)
+                vocabulary.Visibility = Visibility.Visible;
+                using (var context = new DictionaryContext())
                 {
-                    GenerateWordDetails(word);
+                    Word word = context.Words.Include(w => w.Type).SingleOrDefault(w => w.WordId == _targetWordId);
+                    if (word != null)
+                    {
+                        GenerateWordDetails(word);
+                    }
+                    List<WordExample> examples = context.WordExamples.Where(we => we.WordId == _targetWordId).ToList();
+                    GenerateWordExample(examples);
+
+                    List<WordMeaning> meanings = context.WordMeanings.Where(we => we.WordId == _targetWordId).ToList();
+                    GenerateWordMeaning(meanings);
+
                 }
-                List<WordExample> examples = context.WordExamples.Where(we => we.WordId == _targetWordId).ToList();
-                GenerateWordExample(examples);
+            }
+            catch (Exception)
+            {
 
-                List<WordMeaning> meanings = context.WordMeanings.Where(we => we.WordId == _targetWordId).ToList();
-                GenerateWordMeaning(meanings);
-
+                MessageBox.Show("Cannot show word details");
             }
         }
 
@@ -205,9 +230,6 @@ namespace EnglishDictionary.UI.User
             Application.Current.MainWindow.Show();
         }
 
-        private void lvResults_Scroll(object sender, System.Windows.Controls.Primitives.ScrollEventArgs e)
-        {
-
-        }
+      
     }
 }

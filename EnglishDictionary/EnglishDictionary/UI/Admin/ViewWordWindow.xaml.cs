@@ -38,20 +38,28 @@ namespace EnglishDictionary.UI.Admin
 
         private void LoadWordDetails()
         {
-            using (var context = new DictionaryContext())
+            try
             {
-                Word word = context.Words.Include(w => w.Type).SingleOrDefault(w => w.WordId == _targetWordId);
-
-                if (word != null)
+                using (var context = new DictionaryContext())
                 {
-                    GenerateWordDetails(word);
+                    Word word = context.Words.Include(w => w.Type).SingleOrDefault(w => w.WordId == _targetWordId);
+
+                    if (word != null)
+                    {
+                        GenerateWordDetails(word);
+                    }
+                    List<WordExample> examples = context.WordExamples.Where(we => we.WordId == _targetWordId).ToList();
+                    GenerateWordExample(examples);
+
+                    List<WordMeaning> meanings = context.WordMeanings.Where(we => we.WordId == _targetWordId).ToList();
+                    GenerateWordMeaning(meanings);
+
                 }
-                List<WordExample> examples = context.WordExamples.Where(we => we.WordId == _targetWordId).ToList();
-                GenerateWordExample(examples);
+            }
+            catch (Exception)
+            {
 
-                List<WordMeaning> meanings = context.WordMeanings.Where(we => we.WordId == _targetWordId).ToList();
-                GenerateWordMeaning(meanings);
-
+                MessageBox.Show("Error when trying to load word details");
             }
         }
 

@@ -3,12 +3,14 @@ using CsvHelper.Configuration;
 using EnglishDictionary.Models;
 using FinancialWPFApp.UI;
 using FinancialWPFApp.UI.Public.Views;
+using MahApps.Metro.IconPacks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Diagnostics;
@@ -36,8 +38,26 @@ namespace EnglishDictionary.UI.Admin
     /// <summary>
     /// Interaction logic for AdminMainWindow.xaml
     /// </summary>
-    public partial class AdminMainWindow : Window
+    public partial class AdminMainWindow : Window, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private bool _isSelectAllRecord = false;
+
+        public bool IsSelectAllRecord
+        {
+            get { return _isSelectAllRecord; }
+            set
+            {
+                _isSelectAllRecord = value;
+                OnPropertyChanged("IsSelectAllRecord");
+            }
+        }
 
 
         private AddWordWindow _addWindow;
@@ -55,14 +75,16 @@ namespace EnglishDictionary.UI.Admin
         private int totalPage = 0;
         private int currentPage = 1;
         private string filterSearch = "";
+        private bool _allowChangePage = true;
 
-        public List<Word> words = new();
-
+        private List<Word> words = new();
+     
         public void LoadWordInitialization()
         {
             pageSize = 10;
             currentPage = 1;
             filterSearch = "";
+            txtSearch.Text = "";
             LoadWords();
         }
 
@@ -199,9 +221,18 @@ namespace EnglishDictionary.UI.Admin
 
         public void LoadWords()
         {
-            words = GetWords();
-            InitializePagination(words);
-            dgWords.ItemsSource = words;
+            try
+            {
+                IsSelectAllRecord = false;
+                words = GetWords();
+                InitializePagination(words);
+                dgWords.ItemsSource = words;
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Error when loading word to table");
+            }
         }
 
         public void InitializePageSize()
@@ -233,8 +264,15 @@ namespace EnglishDictionary.UI.Admin
             }
             Button btn = new Button();
 
-            //MessageBox.Show(pageSize.ToString());
-            for (int i = 1; i <= totalPage; i++)
+            // Calculate the number of pages to show at a time
+            int maxPages = 4;
+
+            // Calculate the range of pages to show
+            int startPage = Math.Max(currentPage - (maxPages / 2), 1);
+            int endPage = Math.Min(startPage + maxPages - 1, totalPage);
+
+            // Add the page buttons
+            for (int i = startPage; i <= endPage; i++)
             {
                 btn = new Button();
                 btn.Content = i.ToString();
@@ -244,18 +282,55 @@ namespace EnglishDictionary.UI.Admin
                 {
                     btn.Background = Application.Current.Resources["ButtonHover"] as Brush;
                     btn.Foreground = Application.Current.Resources["TertiaryWhiteColor"] as Brush;
-
                 }
+
                 btn.Click += Btn_Click;
                 pageContainer.Children.Add(btn);
+            }
 
+            // Add a "Previous" button if necessary
+            if (startPage > 1)
+            {
+                btn = new Button();
+                btn.Style = Application.Current.Resources["PagingButton"] as Style;
+                btn.Click += btnLeft_Click;
+
+                PackIconMaterial icon = new PackIconMaterial();
+                icon.Kind = PackIconMaterialKind.ChevronLeft;
+
+                btn.Content = icon;
+                pageContainer.Children.Insert(0, btn);
+            }
+
+            // Add a "Next" button if necessary
+            if (endPage < totalPage)
+            {
+                btn = new Button();
+                btn.Style = Application.Current.Resources["PagingButton"] as Style;
+                btn.Click += btnRight_Click;
+
+                PackIconMaterial icon = new PackIconMaterial();
+                icon.Kind = PackIconMaterialKind.ChevronRight;
+
+                btn.Content = icon;
+
+                pageContainer.Children.Add(btn);
             }
         }
 
 
         public List<Word> GetWords()
         {
-
+            if (String.IsNullOrEmpty(filterSearch) == false && _allowChangePage == false)
+            {
+                currentPage = 1;
+                pageSize = 10;
+                _allowChangePage = true;
+            }
+            if (String.IsNullOrEmpty(filterSearch) == true && _allowChangePage == true)
+            {
+                _allowChangePage = false;
+            }
             using (var context = new DictionaryContext())
             {
 
@@ -299,11 +374,9 @@ namespace EnglishDictionary.UI.Admin
             {
                 Button btn = sender as Button;
 
-                if (btn != null)
+                int pageIndex = int.Parse(btn.Content.ToString());
+                if (currentPage != pageIndex)
                 {
-                    int pageIndex = int.Parse(btn.Content.ToString());
-                    //MessageBox.Show("Clic " + pageIndex);
-
                     currentPage = pageIndex;
                     LoadWords();
                 }
@@ -316,13 +389,22 @@ namespace EnglishDictionary.UI.Admin
 
         private void cbPage_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ComboBox cb = sender as ComboBox;
-            if (String.IsNullOrEmpty(cb.Text) == false)
+            try
             {
-                pageSize = int.Parse(cb.SelectedValue.ToString());
+                ComboBox cb = sender as ComboBox;
+                if (String.IsNullOrEmpty(cb.Text) == false)
+                {
 
-                currentPage = 1;
-                LoadWords();
+                    pageSize = int.Parse(cb.SelectedValue.ToString());
+
+                    currentPage = 1;
+                    LoadWords();
+                }
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Error when trying to change new page size");
             }
         }
 
@@ -339,13 +421,28 @@ namespace EnglishDictionary.UI.Admin
         {
             if (currentPage < totalPage)
             {
-
                 currentPage += 1;
                 LoadWords();
             }
         }
 
+        private void btnFirst_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentPage != 1)
+            {
+                currentPage = 1;
+                LoadWords();
+            }
+        }
 
+        private void btnLast_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentPage != totalPage)
+            {
+                currentPage = totalPage;
+                LoadWords();
+            }
+        }
 
         private void txtSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -358,15 +455,6 @@ namespace EnglishDictionary.UI.Admin
 
         private void btnAddWord_Click(object sender, RoutedEventArgs e)
         {
-            //if (_addWindow == null )
-            //{
-            //    _addWindow = new AddWordWindow();
-            //    _addWindow.Show();
-            //}
-            //else
-            //{
-            //    _addWindow.Activate();
-            //}
 
             _addWindow = new AddWordWindow(this);
             _addWindow.Show();
@@ -613,9 +701,6 @@ namespace EnglishDictionary.UI.Admin
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            // Perform any cleanup operations here
-            // ...
-
             Application.Current.Shutdown(); // Exit the application
         }
 
@@ -623,7 +708,7 @@ namespace EnglishDictionary.UI.Admin
         {
             try
             {
-                MessageBoxResult result = MessageBox.Show("Are you sure you want to delete all selected words?", "Question", MessageBoxButton.YesNo);
+                MessageBoxResult result = MessageBox.Show("Are you sure you want to delete all selected words?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
                 int count = 0;
                 if (result == MessageBoxResult.Yes)
@@ -658,6 +743,8 @@ namespace EnglishDictionary.UI.Admin
                 words[i].IsSelected = true;
             }
 
+            words = new List<Word>(words);
+
             btnDeleteAll.Visibility = Visibility.Visible;
             dgWords.ItemsSource = words;
         }
@@ -669,10 +756,14 @@ namespace EnglishDictionary.UI.Admin
             {
                 words[i].IsSelected = false;
             }
+
+            words = new List<Word>(words);
             btnDeleteAll.Visibility = Visibility.Hidden;
-          
+
             dgWords.ItemsSource = words;
 
         }
+
+
     }
 }
