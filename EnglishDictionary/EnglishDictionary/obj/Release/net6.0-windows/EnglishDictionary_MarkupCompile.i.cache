@@ -16,5 +16,5 @@ C:\Users\ADMIN\Documents\C#_Project\english-dictionary-wpf\EnglishDictionary\Eng
 2201556090832
 Assets\Values\Sizes.xaml;Assets\Values\Strings.xaml;Styles\ButtonStyle.xaml;Styles\ControlStyles.xaml;Styles\DataGridStyle.xaml;Styles\LabelStyle.xaml;Styles\RadioButtonStyle.xaml;Styles\TextBoxStyle.xaml;Themes\DarkTheme.xaml;Themes\LightTheme.xaml;UI\Admin\AddWordWindow.xaml;UI\Admin\AdminMainWindow.xaml;UI\Admin\EditWordWindow.xaml;UI\Admin\ViewWordWindow.xaml;UI\Public\Views\MainWindowView.xaml;UI\Public\Views\Pages\LoginView.xaml;UI\Public\Views\Pages\RegisterView.xaml;UI\User\UserMainWindow.xaml;
 
-True
+False
 

@@ -85,6 +85,7 @@ namespace EnglishDictionary.UI.Admin
             currentPage = 1;
             filterSearch = "";
             txtSearch.Text = "";
+            cbPage.Text = "10";
             LoadWords();
         }
 
