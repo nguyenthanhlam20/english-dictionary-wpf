@@ -65,6 +65,7 @@ namespace EnglishDictionary.UI.User
                 filterSearch = txt.Text;
                 if (String.IsNullOrEmpty(txt.Text) == false)
                 {
+                    btnClearSearch.Visibility = Visibility.Visible;
                     List<Word> words = GetResult();
                     if (words.Count() > 0)
                     {
@@ -81,6 +82,7 @@ namespace EnglishDictionary.UI.User
                 {
                     resultContainer.Visibility = Visibility.Hidden;
                     vocabulary.Visibility = Visibility.Hidden;
+                    btnClearSearch.Visibility = Visibility.Hidden;
 
                 }
             }
@@ -230,6 +232,9 @@ namespace EnglishDictionary.UI.User
             Application.Current.MainWindow.Show();
         }
 
-      
+        private void btnClearSearch_Click(object sender, RoutedEventArgs e)
+        {
+            txtSearch.Clear();
+        }
     }
 }

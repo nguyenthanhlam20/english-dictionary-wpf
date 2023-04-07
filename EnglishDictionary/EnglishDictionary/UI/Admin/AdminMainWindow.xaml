@@ -9,7 +9,7 @@
         Icon="/Assets/Images/app-icon.png"
         WindowStartupLocation="CenterScreen"
         Title="Admin" 
-        MinWidth="1050"
+        MinWidth="1200"
         Height="800" 
         Closing="Window_Closing"
         MinHeight="750"
@@ -30,7 +30,7 @@
                                        Kind="SearchWeb" Width="15" Height="15"   Foreground="{DynamicResource TertiaryWhiteColor}"
                                        Background="Transparent" />
                         </Border>
-                        <TextBox DockPanel.Dock="Left" Width="250" Height="40"
+                        <TextBox Width="250" Height="40"
                          Style="{DynamicResource StyledTextBoxSearch}" 
                          HorizontalAlignment="Left" 
                          Tag="Search word"
@@ -39,7 +39,17 @@
                          >
 
                         </TextBox>
+                        <Button Margin="5 0 0 0" Height="30" Style="{StaticResource AddButton}" Width="70"
+                       x:Name="btnClearSearch"
+                                Visibility="Hidden"
+                                Background="Red"
+                        Click="btnClearSearch_Click"
+                        >
+                            <StackPanel Orientation="Horizontal">
 
+                                <TextBlock Text="Clear" FontWeight="Bold" FontSize="{DynamicResource textFontSize}" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </Button>
                     </StackPanel>
                     <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
                         <Button Style="{StaticResource AddButton}" Width="150" Margin="5"

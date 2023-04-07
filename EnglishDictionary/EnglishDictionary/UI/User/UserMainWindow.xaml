@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Icon="/Assets/Images/app-icon.png"
         WindowStartupLocation="CenterScreen"
-        Title="Admin" 
+        Title="User" 
         MinWidth="1300"
         Height="800" 
         Closing="Window_Closing"
@@ -32,6 +32,7 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="40" />
                             <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="75" />
                         </Grid.ColumnDefinitions>
                         <Border Grid.Column="0" BorderBrush="{DynamicResource ButtonHover}" BorderThickness="2"
                         CornerRadius="7 0 0 7" 
@@ -51,6 +52,17 @@
                          >
 
                         </TextBox>
+                        <Button Grid.Column="2" Height="30" Style="{StaticResource AddButton}" Width="70"
+                       x:Name="btnClearSearch"
+                                Visibility="Hidden"
+                                Background="Red"
+                        Click="btnClearSearch_Click"
+                        >
+                            <StackPanel Orientation="Horizontal">
+                                
+                                <TextBlock Text="Clear" FontWeight="Bold" FontSize="{DynamicResource textFontSize}" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </Button>
                     </Grid>
                     <StackPanel x:Name="resultContainer" 
                                 Visibility="Hidden"

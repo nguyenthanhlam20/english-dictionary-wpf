@@ -7,7 +7,9 @@
                  xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
 
     <Application.Resources>
+      
         <ResourceDictionary>
+           
             <ResourceDictionary.MergedDictionaries>
                 <!-- Theme Resource -->
                 <ResourceDictionary Source="/Themes/LightTheme.xaml" />
@@ -24,6 +26,9 @@
                 <ResourceDictionary Source="/Assets/Values/Sizes.xaml" />
                 <ResourceDictionary Source="/Assets/Values/Strings.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+
+
             <Style x:Key="ColumnHeaderGripperStyle1" TargetType="{x:Type Thumb}">
                 <Setter Property="Width" Value="8"/>
                 <Setter Property="Background" Value="Transparent"/>

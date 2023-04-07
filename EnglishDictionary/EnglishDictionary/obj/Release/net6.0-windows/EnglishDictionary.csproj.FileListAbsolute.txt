@@ -109,3 +109,4 @@ C:\Users\ADMIN\Documents\C#_Project\english-dictionary-wpf\EnglishDictionary\Eng
 C:\Users\ADMIN\Documents\C#_Project\english-dictionary-wpf\EnglishDictionary\EnglishDictionary\bin\Release\net6.0-windows\ru\Xceed.Wpf.AvalonDock.NET5.resources.dll
 C:\Users\ADMIN\Documents\C#_Project\english-dictionary-wpf\EnglishDictionary\EnglishDictionary\bin\Release\net6.0-windows\sv\Xceed.Wpf.AvalonDock.NET5.resources.dll
 C:\Users\ADMIN\Documents\C#_Project\english-dictionary-wpf\EnglishDictionary\EnglishDictionary\bin\Release\net6.0-windows\zh-Hans\Xceed.Wpf.AvalonDock.NET5.resources.dll
+C:\Users\ADMIN\Documents\C#_Project\english-dictionary-wpf\EnglishDictionary\EnglishDictionary\obj\Release\net6.0-windows\EnglishDictionary_Content.g.cs

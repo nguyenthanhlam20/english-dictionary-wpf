@@ -5,12 +5,17 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>app-icon.ico</ApplicationIcon>
+    <PackageIcon>app-icon.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Assets\Images\app-icon.png" />
     <None Remove="Assets\Images\cover-img.png" />
     <None Remove="Assets\template.csv" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="app-icon.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,6 +33,13 @@
     <Resource Include="Assets\Images\app-icon.png" />
     <Resource Include="Assets\Images\cover-img.png" />
     <Resource Include="Assets\template.csv" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Assets\Images\app-icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

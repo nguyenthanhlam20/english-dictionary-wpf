@@ -35,7 +35,7 @@ namespace FinancialWPFApp.UI.Public.Commands.Pages
 
             if (String.IsNullOrEmpty(_viewModel.Username) || String.IsNullOrEmpty(_viewModel.Password))
             {
-                MessageBox.Show("Please enter email and password");
+                MessageBox.Show("Please enter username and password");
             }
             else
             {
@@ -65,7 +65,7 @@ namespace FinancialWPFApp.UI.Public.Commands.Pages
                     }
                     else
                     {
-                        MessageBox.Show("Incorrect email or password");
+                        MessageBox.Show("Incorrect username or password");
 
                     }
 

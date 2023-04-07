@@ -78,7 +78,7 @@ namespace EnglishDictionary.UI.Admin
         private bool _allowChangePage = true;
 
         private List<Word> words = new();
-     
+
         public void LoadWordInitialization()
         {
             pageSize = 10;
@@ -449,6 +449,15 @@ namespace EnglishDictionary.UI.Admin
         {
             if (txtSearch.Text != null)
             {
+                if (String.IsNullOrEmpty(txtSearch.Text))
+                {
+                    btnClearSearch.Visibility = Visibility.Hidden;
+                }
+                else
+                {
+                    btnClearSearch.Visibility = Visibility.Visible;
+                }
+
                 filterSearch = txtSearch.Text;
                 LoadWords();
             }
@@ -765,6 +774,9 @@ namespace EnglishDictionary.UI.Admin
 
         }
 
-
+        private void btnClearSearch_Click(object sender, RoutedEventArgs e)
+        {
+            txtSearch.Clear();
+        }
     }
 }
