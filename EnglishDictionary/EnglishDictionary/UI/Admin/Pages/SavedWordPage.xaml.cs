@@ -535,6 +535,7 @@ namespace EnglishDictionary.UI.Admin.Pages
                         MessageBox.Show($"Delete {count} words successful");
                         LoadWordInitialization();
                         btnDeleteAll.Visibility = Visibility.Hidden;
+                        btnUnsaveAll.Visibility = Visibility.Hidden;
                     }
                 }
             }
@@ -619,6 +620,7 @@ namespace EnglishDictionary.UI.Admin.Pages
                         IsSelectAllRecord = false;
                         LoadWordInitialization();
                         btnUnsaveAll.Visibility = Visibility.Hidden;
+                        btnDeleteAll.Visibility= Visibility.Hidden;
                         MessageBox.Show($"Unsave {count} words successful");
                     }
                 }

@@ -50,13 +50,12 @@
                     <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
                         <Button Style="{StaticResource AddButton}" Width="150" Margin="5 5 10 5"
                        x:Name="btnUnsaveAll"
-                                Visibility="Hidden"
                                 Background="Green"
-                        Click="btnUnsaveAll_Click"
+                        Click="btnUnsaveAll_Click"  Visibility="Hidden"
                         >
                             <StackPanel Orientation="Horizontal">
 
-                                <Icon:PackIconMaterial Kind="ContentSaveAll" VerticalAlignment="Center" Width="{DynamicResource textFontSize}" Height="{DynamicResource textFontSize}" 
+                                <Icon:PackIconMaterial Kind="ContentSaveOff" VerticalAlignment="Center" Width="{DynamicResource textFontSize}" Height="{DynamicResource textFontSize}" 
                                    Margin="0 0 10 0" />
                                 <TextBlock Text="Unsave All" FontWeight="Bold" FontSize="{DynamicResource textFontSize}" VerticalAlignment="Center" />
                             </StackPanel>
