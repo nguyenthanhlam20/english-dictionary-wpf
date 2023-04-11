@@ -22,6 +22,11 @@ namespace EnglishDictionary.Models
 
         public bool IsSelected { get; set; } = false;
 
+        public bool IsUserSaved { get; set; } = false;
+        public bool IsAdminSaved { get; set; } = false;
+        public string IconName { get; set; } = "ContentSaveOff";
+        public string UserSavedIconName { get; set; } = "ContentSaveOff";
+
         public List<WordMeaning> WordMeanings { get; set; }
         public List<WordExample> WordExamples { get; set; }
 
@@ -52,7 +57,7 @@ namespace EnglishDictionary.Models
                 using (var context = new DictionaryContext())
                 {
 
-                    WordExamples = context.WordExamples.Where(w => w.WordId== WordId).ToList();
+                    WordExamples = context.WordExamples.Where(w => w.WordId == WordId).ToList();
 
                     if (WordExamples != null && WordExamples.Count() > 0)
                     {
@@ -60,7 +65,7 @@ namespace EnglishDictionary.Models
                     }
                     return "";
                 }
-               
+
             }
         }
 

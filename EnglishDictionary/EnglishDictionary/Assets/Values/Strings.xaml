@@ -7,7 +7,7 @@
     <sys:String x:Key="signIn">Sign in</sys:String>
     <sys:String x:Key="forgotPassword">Forgot password</sys:String>
     <sys:String x:Key="signInTitle">Welcome back</sys:String>
-    <sys:String x:Key="signInMessage">Welcome back! Please enter your details.</sys:String>
+    <sys:String x:Key="signInMessage">Please enter your details.</sys:String>
     <sys:String x:Key="signInWithGoogle">Sign in with Google</sys:String>
     <sys:String x:Key="dontHaveAccount">Don't have an account?</sys:String>
     <sys:String x:Key="signUpForFree">Sign up for free</sys:String>

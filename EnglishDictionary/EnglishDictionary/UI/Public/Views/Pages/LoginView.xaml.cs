@@ -73,5 +73,7 @@ namespace FinancialWPFApp.UI.Public.Views.Pages
             _viewModel.Password = (sender as PasswordBox).Password;
 
         }
+
+      
     }
 }

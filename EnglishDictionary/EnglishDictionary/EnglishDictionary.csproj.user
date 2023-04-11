@@ -18,7 +18,19 @@
     <Compile Update="UI\Admin\EditWordWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UI\Admin\Pages\HomePage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UI\Admin\Pages\SavedWordPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UI\Admin\ViewWordWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UI\User\Pages\DictionaryPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UI\User\Pages\MyWordPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UI\User\UserMainWindow.xaml.cs">
@@ -65,6 +77,12 @@
     <Page Update="UI\Admin\EditWordWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="UI\Admin\Pages\HomePage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\Admin\Pages\SavedWordPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="UI\Admin\ViewWordWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -75,6 +93,12 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UI\Public\Views\Pages\RegisterView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\User\Pages\DictionaryPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\User\Pages\MyWordPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UI\User\UserMainWindow.xaml">

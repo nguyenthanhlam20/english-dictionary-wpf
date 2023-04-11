@@ -9,235 +9,110 @@
         Icon="/Assets/Images/app-icon.png"
         WindowStartupLocation="CenterScreen"
         Title="Admin" 
-        MinWidth="1200"
+        MinWidth="1500"
         Height="800" 
         Closing="Window_Closing"
         MinHeight="750"
-        Width="1300">
-    <Border Padding="30" 
-            Background="{DynamicResource SecondaryBackgroundColor}">
-        <DockPanel>
-            <StackPanel DockPanel.Dock="Top" Orientation="Vertical">
-                <DockPanel HorizontalAlignment="Stretch" Margin="0 0 0 20" >
-                    <StackPanel Orientation="Horizontal">
-                        <Border BorderBrush="{DynamicResource ButtonHover}" BorderThickness="2"
-                        CornerRadius="7 0 0 7" 
-                        Padding="10" 
-                        Height="38"
-                        Background="{DynamicResource ButtonHover}">
-                            <Icon:PackIconMaterial BorderBrush="Transparent" BorderThickness="1"
-                                      
-                                       Kind="SearchWeb" Width="15" Height="15"   Foreground="{DynamicResource TertiaryWhiteColor}"
-                                       Background="Transparent" />
-                        </Border>
-                        <TextBox Width="250" Height="40"
-                         Style="{DynamicResource StyledTextBoxSearch}" 
-                         HorizontalAlignment="Left" 
-                         Tag="Search word"
-                         x:Name="txtSearch"
-                         TextChanged="txtSearch_TextChanged"
+       >
+    <Border CornerRadius="10" Background="{DynamicResource PrimaryBackgroundColor}" >
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="230" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Border CornerRadius="10 0 0 10"
+                    Padding="10"
+                    Background="{DynamicResource SecondaryBackgroundColor}">
+                <Grid Grid.Column="0" x:Name="gridMenu">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="130" />
+                        <RowDefinition Height="80" />
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="0">
+                        <Icon:PackIconMaterial Kind="Book" Margin="5 15 5 5" 
+                                               Width="45" 
+                                               Height="45" 
+                                               
+                                                Foreground="BlueViolet"
+                                               VerticalAlignment="Center" />
+
+                        <Separator Margin="20 20" Background="{DynamicResource TertiaryBackgroundColor}" />
+
+
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1" Orientation="Vertical" >
+                        <RadioButton x:Name="rdHome" 
+                                     Content="Home" 
+                                     IsChecked="True"
+                                     Click="rdHome_Click"
+                                     Style="{DynamicResource MenuRadioButtonStyle}" 
+                                     Tag="{DynamicResource dashboard}"
+                                     Margin="0 30 0 0" ></RadioButton>
+                        <RadioButton x:Name="rdSavedWord"
+                                     Content="Saved Word"
+                                     Click="rdSavedWord_Click"
+                                     Style="{DynamicResource MenuRadioButtonStyle}" 
+                                     Tag="{DynamicResource collections}" 
+                                     Margin="0 1 0 0" ></RadioButton>
+
+                        <Separator Margin="20 20" Background="{DynamicResource TertiaryBackgroundColor}" />
+
+                    </StackPanel>
+                    <Button Style="{StaticResource PowerOffButton}"
+                            HorizontalAlignment="Left"  
+                            Margin="12 0 0 0" Grid.Row="3" 
+                            Height="35"
+                            Click="btnLogout_Click"
+                            x:Name="btnLogout"
+                            Width="45"
                          >
-
-                        </TextBox>
-                        <Button Margin="5 0 0 0" Height="30" Style="{StaticResource AddButton}" Width="70"
-                       x:Name="btnClearSearch"
-                                Visibility="Hidden"
-                                Background="Red"
-                        Click="btnClearSearch_Click"
-                        >
-                            <StackPanel Orientation="Horizontal">
-
-                                <TextBlock Text="Clear" FontWeight="Bold" FontSize="{DynamicResource textFontSize}" VerticalAlignment="Center" />
-                            </StackPanel>
-                        </Button>
-                    </StackPanel>
-                    <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
-                        <Button Style="{StaticResource AddButton}" Width="150" Margin="5"
-                       x:Name="btnDeleteAll"
-                                Visibility="Hidden"
-                                Background="Red"
-                        Click="btnDeleteAll_Click"
-                        >
-                            <StackPanel Orientation="Horizontal">
-
-                                <Icon:PackIconMaterial Kind="TrashCan" VerticalAlignment="Center" Width="{DynamicResource textFontSize}" Height="{DynamicResource textFontSize}" 
-                                   Margin="0 0 10 0" />
-                                <TextBlock Text="Delete All" FontWeight="Bold" FontSize="{DynamicResource textFontSize}" VerticalAlignment="Center" />
-                            </StackPanel>
-                        </Button>
-                        <Button Style="{StaticResource AddButton}" Width="150" Margin="5"
-                       x:Name="btnAddWord"
-                        Click="btnAddWord_Click"
-                        >
-                            <StackPanel Orientation="Horizontal">
-
-                                <Icon:PackIconMaterial Kind="Plus" VerticalAlignment="Center" Width="{DynamicResource textFontSize}" Height="{DynamicResource textFontSize}" 
-                                   Margin="0 0 10 0" />
-                                <TextBlock Text="New Word" FontWeight="Bold" FontSize="{DynamicResource textFontSize}" VerticalAlignment="Center" />
-                            </StackPanel>
-                        </Button>
-                        <Button Style="{StaticResource AddButton}" Width="120" Margin="5"
-                       x:Name="btnImport"
-                            Background="Green"
-                        Click="btnImport_Click"
-                        >
-                            <StackPanel Orientation="Horizontal">
-
-                                <Icon:PackIconMaterial Kind="Import" VerticalAlignment="Center" Width="{DynamicResource textFontSize}" Height="{DynamicResource textFontSize}" 
-                                   Margin="0 0 10 0" />
-                                <TextBlock Text="Import" FontWeight="Bold" FontSize="{DynamicResource textFontSize}" VerticalAlignment="Center" />
-                            </StackPanel>
-                        </Button>
-                        <Button Style="{StaticResource AddButton}" Width="120" Margin="5"
-                       x:Name="btnExport"
-                            Background="Teal"
-                        Click="btnExport_Click"
-                        >
-                            <StackPanel Orientation="Horizontal">
-
-                                <Icon:PackIconMaterial Kind="Export" VerticalAlignment="Center" Width="{DynamicResource textFontSize}" Height="{DynamicResource textFontSize}" 
-                                   Margin="0 0 10 0" />
-                                <TextBlock Text="Export" FontWeight="Bold" FontSize="{DynamicResource textFontSize}" VerticalAlignment="Center" />
-                            </StackPanel>
-                        </Button>
-                        <Button Style="{StaticResource AddButton}" Width="120" Margin="5"
-                       x:Name="btnDownloadTemplate"
-                            Background="IndianRed"
-                        Click="DownloadButton_Click"
-                        >
-                            <StackPanel Orientation="Horizontal">
-
-                                <Icon:PackIconMaterial Kind="BookOpen" VerticalAlignment="Center" Width="{DynamicResource textFontSize}" Height="{DynamicResource textFontSize}" 
-                                   Margin="0 0 10 0" />
-                                <TextBlock Text="Template" FontWeight="Bold" FontSize="{DynamicResource textFontSize}" VerticalAlignment="Center" />
-                            </StackPanel>
-                        </Button>
-                    </StackPanel>
-                </DockPanel>
-                <Separator Height="1" Background="#dae2ea" Margin="0 -1 0 8" />
-                <Label x:Name="lbNoRecords"
-               Content="There are no records found"
-               HorizontalAlignment="Center"
-               FontSize="{DynamicResource textFontSize}" 
-               FontWeight="Bold"
-               Foreground="{DynamicResource SecondaryTextColor}"
-               VerticalAlignment="Center" Visibility="Collapsed"/>
-                <!-- Datagrid -->
-                <DataGrid  ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" x:Name="dgWords"
-                 Style="{DynamicResource DataGridStyle1}" 
-                  CellStyle="{DynamicResource DataGridCellStyle1}" 
-                  RowStyle="{DynamicResource DataGridRowStyle1}"
-                  MaxHeight="500"  >
-
-                    <DataGrid.Columns>
-                        <DataGridTemplateColumn CanUserResize="False" IsReadOnly="True"  MinWidth="45"  MaxWidth="45">
-                            <DataGridTemplateColumn.HeaderTemplate>
-                                <DataTemplate>
-                                    
-                                    <CheckBox 
-                                        IsChecked="{Binding DataContext.IsSelectAllRecord, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
-                                        x:Name="cbSelectAll" 
-                                               Checked="cbSelectAll_Checked" 
-                                               Unchecked="cbSelectAll_Unchecked" />
-                                </DataTemplate>
-                            </DataGridTemplateColumn.HeaderTemplate>
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <CheckBox  
-                                        IsChecked="{Binding Path=IsSelected, Mode=TwoWay}"
-                                        Command="{Binding DataContext.SelectWordCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
-                                        CommandParameter="{Binding Path=WordId}"/>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-
-                        <DataGridTextColumn Header="Word" IsReadOnly="True" CanUserResize="False" Width="150" Binding="{Binding Path=WordName}" />
-                        <DataGridTextColumn Header="IPA" IsReadOnly="True" CanUserResize="False" Width="150" Binding="{Binding Path=IPA}" />
-                        <DataGridTextColumn Header="Type" IsReadOnly="True" CanUserResize="False" Width="120" Binding="{Binding Path=Type.WordTypeName}" />
-                        <DataGridTextColumn Header="Definitions" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding Path=DisplayMeaning}" />
-                        <DataGridTextColumn Header="Examples" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding Path=DisplayExample}" />
-                        <DataGridTemplateColumn Header="Action" IsReadOnly="True"  Width="175" >
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Button Style="{StaticResource GridButton}" Margin="0 0 10 0"
-                                        Command="{Binding DataContext.ViewWordCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
-                                        CommandParameter="{Binding Path=WordId}"
-                                        Background="BlueViolet" >
-                                            <Icon:PackIconMaterial Kind="Eye"  Style="{StaticResource GridButtonIcon}" />
-                                        </Button>
-                                        <Button Style="{StaticResource GridButton}"
-                                             Margin="0 0 10 0"
-                                        Command="{Binding DataContext.EditWordCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
-                                        CommandParameter="{Binding Path=WordId}" >
-                                            <Icon:PackIconMaterial Kind="PencilOutline" Style="{StaticResource GridButtonIcon}" />
-                                        </Button>
-                                        <Button Style="{StaticResource GridButton}"
-                                            Background="PaleVioletRed"
-                                        Command="{Binding DataContext.DeleteWordCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
-                                        CommandParameter="{Binding Path=WordId}" >
-                                            <Icon:PackIconMaterial Kind="TrashCan" Style="{StaticResource GridButtonIcon}" />
-                                        </Button>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
-                <Separator Height="1" Background="#dae2ea" Margin="0 10 0 10" />
-            </StackPanel>
-            <!-- Pagination -->
-            <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom" Orientation="Vertical">
-                <StackPanel Orientation="Vertical">
-                    <DockPanel  x:Name="bottomContent" >
-                        <StackPanel VerticalAlignment="Center" DockPanel.Dock="Left" Orientation="Horizontal" >
-                            <Label FontWeight="Bold" x:Name="lbMessage" FontSize="{DynamicResource textFontSize}" />
-                        </StackPanel>
-                        <StackPanel DockPanel.Dock="Right" HorizontalAlignment="Right" Orientation="Horizontal">
-                            <StackPanel VerticalAlignment="Center" Orientation="Horizontal" Margin="0 0 15 0">
-                                <Label Foreground="{DynamicResource PrimaryTextColor}" Content="Display" FontSize="{DynamicResource textFontSize}" VerticalAlignment="Center" FontWeight="Bold"></Label>
-                                <Border
-                            CornerRadius="7"
-                            Padding="1"
-                            BorderBrush="#dee4ec"
-                            BorderThickness="2" >
-                                    <ComboBox SelectionChanged="cbPage_SelectionChanged" x:Name="cbPage" Width="60" Height="30" Background="Transparent" 
-                                  BorderBrush="Transparent"  BorderThickness="0"
-                                  VerticalContentAlignment="Center"
-                                  FontSize="{DynamicResource textFontSize}"
-                                  VerticalAlignment="Center"  />
-                                </Border>
-                            </StackPanel>
-                            <Border HorizontalAlignment="Stretch" BorderBrush="#dee4ec" BorderThickness="1"
-                            CornerRadius="5" Padding="5" Background="White" Margin="0 10 10 10">
-                                <StackPanel Orientation="Horizontal">
-                                    <Button x:Name="btnFirst" Click="btnFirst_Click" Style="{StaticResource PagingButton}">
-                                        <Icon:PackIconMaterial Kind="PageFirst" />
-
-                                    </Button>
-                                    <Rectangle Width="1" Fill="#dee4ec" Margin="3 7" />
-                                    <StackPanel Orientation="Horizontal" x:Name="pageContainer">
-
-                                    </StackPanel>
-
-                                    <Rectangle Width="1" Fill="#dee4ec" Margin="3 7" />
-
-                                    <Button x:Name="btnLast" Click="btnLast_Click" Style="{StaticResource PagingButton}">
-                                        <Icon:PackIconMaterial Kind="PageLast" />
-                                    </Button>
-                                </StackPanel>
-                            </Border>
-                        </StackPanel>
-                    </DockPanel>
-                    <Button x:Name="btnExit"
-                            Margin="0 0 0 0" 
-                            Background="Transparent"
-                            Click="btnExit_Click"
-                            HorizontalAlignment="Left" Style="{StaticResource AddButton}">
-                        <Icon:PackIconMaterial Kind="Logout" HorizontalAlignment="Left" Width="36" Height="36" Flip="Horizontal" Foreground="Red"></Icon:PackIconMaterial>
+                        <Icon:PackIconMaterial Kind="Power" Width="22" Height="22" />
                     </Button>
-                </StackPanel>
-            </StackPanel>
-        </DockPanel>
+
+
+
+                </Grid>
+
+            </Border>
+
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Margin="17 15 0 0" FontSize="26" Padding="0"
+                       FontWeight="Bold"
+                       x:Name="lbTitle"
+                      
+                       Foreground="{DynamicResource SecondaryTextColor}"
+                       Grid.Row="0" 
+                            Grid.Column="0" Content="Title" HorizontalContentAlignment="Left" 
+                        VerticalContentAlignment="Center"/>
+                <!-- Start: Button Close | Restore | Minimize -->
+
+                <!-- Start: Frame Container -->
+                <Border Grid.Row="1" BorderBrush="{DynamicResource SecondaryBackgroundColor}" Margin="15" BorderThickness="5"  CornerRadius="10" 
+                        Background="Transparent">
+                    <Frame
+                       BorderBrush="{DynamicResource SecondaryBackgroundColor}"
+                        BorderThickness="0"
+                      Padding="20"
+                      Background="{DynamicResource SecondaryBackgroundColor}"
+                       x:Name="frameContent"
+                       NavigationUIVisibility="Hidden" 
+                        />
+                </Border>
+                <!-- End: Frame Container -->
+
+            </Grid>
+        </Grid>
+
+
     </Border>
+
 </Window>

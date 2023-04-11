@@ -44,8 +44,22 @@ namespace EnglishDictionary.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("IconName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsAdminSaved")
+                        .HasColumnType("INTEGER");
+
                     b.Property<bool>("IsSelected")
                         .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsUserSaved")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("UserSavedIconName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("WordName")
                         .IsRequired()

@@ -17,8 +17,8 @@
     <Border Background="{DynamicResource TertiaryBackgroundColor}">
         <StackPanel Orientation="Vertical">
             <StackPanel Orientation="Horizontal">
-                <Icon:PackIconMaterial Kind="Book" Foreground="{DynamicResource SecondaryTextColor}" Margin="0 0 10 0" Width="{DynamicResource appFontSize}" Height="{DynamicResource appFontSize}" VerticalAlignment="Center" />
-                <Label Foreground="{DynamicResource SecondaryTextColor}" Content="English Dictionary" 
+                <Icon:PackIconMaterial Kind="Book" Foreground="BlueViolet" Margin="0 0 10 0" Width="{DynamicResource appFontSize}" Height="{DynamicResource appFontSize}" VerticalAlignment="Center" />
+                <Label Foreground="BlueViolet" Content="English Dictionary" 
                        Style="{DynamicResource StyledLabel}"
                        FontWeight="ExtraBold"
                        FontSize="{DynamicResource appFontSize}" />

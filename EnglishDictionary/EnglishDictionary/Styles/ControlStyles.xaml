@@ -172,6 +172,8 @@
         <Setter Property ="VerticalAlignment" Value="Center" />
     </Style>
 
+
+
     <Style x:Key="GridButton" TargetType="Button">
         <Setter Property ="Background" Value="#512da8" />
         <Setter Property ="BorderBrush" Value="#4a148c" />
@@ -202,7 +204,37 @@
         </Style.Triggers>
 
     </Style>
+    <Style x:Key="AlphabetButton" TargetType="Button">
+        <Setter Property ="Background" Value="BlueViolet" />
+        <Setter Property ="BorderBrush" Value="#4a148c" />
+        <Setter Property ="Foreground" Value="#ffffff" />
+        <Setter Property ="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property ="VerticalAlignment" Value="Center" />
+        <Setter Property ="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Border" CornerRadius="5" 
+                            BorderThickness="1"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            Background="{TemplateBinding Background}"
+                            Padding="10 5">
+                        <ContentPresenter HorizontalAlignment="Center" 
+                                          VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
 
+            </Setter.Value>
+
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True" >
+                <Setter Property="Background" Value="{DynamicResource ButtonHover}" />
+                <Setter Property="Foreground" Value="{DynamicResource TertiaryWhiteColor}" />
+            </Trigger>
+            
+        </Style.Triggers>
+
+    </Style>
     <Style x:Key="PasswordButton" TargetType="{x:Type Button}">
         <Setter Property ="Foreground" Value="Black" />
         <Setter Property ="VerticalAlignment" Value="Center" />
@@ -226,7 +258,7 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True" >
-              
+
                 <Setter Property="Foreground" Value="{DynamicResource PrimaryBlueColor}" />
             </Trigger>
         </Style.Triggers>
@@ -254,7 +286,7 @@
     <Style x:Key="ComboBoxItemStyle" TargetType="{x:Type ComboBoxItem}">
         <Setter Property="FontWeight" Value="Normal"/>
         <Setter Property="Padding" Value="5 15 5 15"/>
-        
+
         <Setter Property="VerticalAlignment" Value="Center"/>
         <!--<Setter Property="BorderBrush" Value="{DynamicResource BorderTextBoxColor}"/>-->
         <Setter Property="VerticalContentAlignment" Value="Center"/>

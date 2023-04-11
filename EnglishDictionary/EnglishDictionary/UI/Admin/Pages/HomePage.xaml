@@ -1,0 +1,253 @@
+﻿<Page x:Class="EnglishDictionary.UI.Admin.Pages.HomePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+      xmlns:local="clr-namespace:EnglishDictionary.UI.Admin.Pages"
+      mc:Ignorable="d" 
+      MinWidth="1000"
+      MinHeight="500"
+     >
+
+    <Border Background="{DynamicResource SecondaryBackgroundColor}">
+        <DockPanel>
+            <StackPanel DockPanel.Dock="Top" Orientation="Vertical">
+                <DockPanel HorizontalAlignment="Stretch" Margin="0 0 0 20" >
+                    <StackPanel Orientation="Horizontal">
+                        <Border BorderBrush="{DynamicResource ButtonHover}" BorderThickness="2"
+                                CornerRadius="7 0 0 7" 
+                                Padding="10" 
+                                Height="38"
+                                Background="{DynamicResource ButtonHover}">
+                            <Icon:PackIconMaterial 
+                                BorderBrush="Transparent" BorderThickness="1"
+                           
+                                Kind="SearchWeb" Width="15" Height="15"   Foreground="{DynamicResource TertiaryWhiteColor}"
+                                Background="Transparent" />
+                        </Border>
+                        <TextBox Width="250" Height="40"
+                         Style="{DynamicResource StyledTextBoxSearch}" 
+                         HorizontalAlignment="Left" 
+                         Tag="Search word"
+                         x:Name="txtSearch"
+                         TextChanged="txtSearch_TextChanged"
+                         >
+
+                        </TextBox>
+                        <Button Margin="5 0 0 0" Height="30" Style="{StaticResource AddButton}" Width="70"
+                       x:Name="btnClearSearch"
+                                Visibility="Hidden"
+                                Background="Red"
+                        Click="btnClearSearch_Click"
+                        >
+                            <StackPanel Orientation="Horizontal">
+
+                                <TextBlock Text="Clear" FontWeight="Bold" FontSize="{DynamicResource textFontSize}" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                    <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+
+                        <Button Style="{StaticResource AddButton}" Width="130" Margin="5"
+                       x:Name="btnSaveAll"
+                                Visibility="Hidden"
+                                Background="Green"
+                        Click="btnSaveAll_Click"
+                        >
+                            <StackPanel Orientation="Horizontal">
+
+                                <Icon:PackIconMaterial Kind="ContentSaveAll" VerticalAlignment="Center" Width="{DynamicResource textFontSize}" Height="{DynamicResource textFontSize}" 
+                                   Margin="0 0 10 0" />
+                                <TextBlock Text="Save All" FontWeight="Bold" FontSize="{DynamicResource textFontSize}" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </Button>
+                        <Button Style="{StaticResource AddButton}" Width="130" Margin="5"
+                       x:Name="btnDeleteAll"
+                                Visibility="Hidden"
+                                Background="Red"
+                        Click="btnDeleteAll_Click"
+                        >
+                            <StackPanel Orientation="Horizontal">
+
+                                <Icon:PackIconMaterial Kind="TrashCan" VerticalAlignment="Center" Width="{DynamicResource textFontSize}" Height="{DynamicResource textFontSize}" 
+                                   Margin="0 0 10 0" />
+                                <TextBlock Text="Delete All" FontWeight="Bold" FontSize="{DynamicResource textFontSize}" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </Button>
+                        <Button Style="{StaticResource AddButton}" Width="130" Margin="5"
+                       x:Name="btnAddWord"
+                        Click="btnAddWord_Click"
+                        >
+                            <StackPanel Orientation="Horizontal">
+
+                                <Icon:PackIconMaterial Kind="Plus" VerticalAlignment="Center" Width="{DynamicResource textFontSize}" Height="{DynamicResource textFontSize}" 
+                                   Margin="0 0 10 0" />
+                                <TextBlock Text="New Word" FontWeight="Bold" FontSize="{DynamicResource textFontSize}" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </Button>
+                        <Button Style="{StaticResource AddButton}" Width="110" Margin="5"
+                       x:Name="btnImport"
+                            Background="Green"
+                        Click="btnImport_Click"
+                        >
+                            <StackPanel Orientation="Horizontal">
+
+                                <Icon:PackIconMaterial Kind="Import" VerticalAlignment="Center" Width="{DynamicResource textFontSize}" Height="{DynamicResource textFontSize}" 
+                                   Margin="0 0 10 0" />
+                                <TextBlock Text="Import" FontWeight="Bold" FontSize="{DynamicResource textFontSize}" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </Button>
+                        <Button Style="{StaticResource AddButton}" Width="110" Margin="5"
+                       x:Name="btnExport"
+                            Background="Teal"
+                        Click="btnExport_Click"
+                        >
+                            <StackPanel Orientation="Horizontal">
+
+                                <Icon:PackIconMaterial Kind="Export" VerticalAlignment="Center" Width="{DynamicResource textFontSize}" Height="{DynamicResource textFontSize}" 
+                                   Margin="0 0 10 0" />
+                                <TextBlock Text="Export" FontWeight="Bold" FontSize="{DynamicResource textFontSize}" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </Button>
+                        <Button Style="{StaticResource AddButton}" Width="120" Margin="5"
+                       x:Name="btnDownloadTemplate"
+                            Background="IndianRed"
+                        Click="DownloadButton_Click"
+                        >
+                            <StackPanel Orientation="Horizontal">
+
+                                <Icon:PackIconMaterial Kind="BookOpen" VerticalAlignment="Center" Width="{DynamicResource textFontSize}" Height="{DynamicResource textFontSize}" 
+                                   Margin="0 0 10 0" />
+                                <TextBlock Text="Template" FontWeight="Bold" FontSize="{DynamicResource textFontSize}" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </DockPanel>
+                <Label x:Name="lbNoRecords"
+               Content="There are no records found"
+               HorizontalAlignment="Center"
+               FontSize="{DynamicResource textFontSize}" 
+               FontWeight="Bold"
+               Foreground="{DynamicResource SecondaryTextColor}"
+               VerticalAlignment="Center" Visibility="Collapsed"/>
+                <!-- Datagrid -->
+                <DataGrid  ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" x:Name="dgWords"
+                 Style="{DynamicResource DataGridStyle1}" 
+                  CellStyle="{DynamicResource DataGridCellStyle1}" 
+                  RowStyle="{DynamicResource DataGridRowStyle1}"
+                  MaxHeight="480"  >
+
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn CanUserResize="False" IsReadOnly="True" 
+                                                MinWidth="45"  MaxWidth="45">
+                            <DataGridTemplateColumn.HeaderTemplate>
+                                <DataTemplate>
+
+                                    <CheckBox 
+                                        IsChecked="{Binding DataContext.IsSelectAllRecord, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                        x:Name="cbSelectAll" 
+                                               Checked="cbSelectAll_Checked" 
+                                               Unchecked="cbSelectAll_Unchecked" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.HeaderTemplate>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox  
+                                        IsChecked="{Binding Path=IsSelected, Mode=TwoWay}"
+                                        Command="{Binding DataContext.SelectWordCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                        CommandParameter="{Binding Path=WordId}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTextColumn Header="Word" IsReadOnly="True" CanUserResize="False" Width="150" Binding="{Binding Path=WordName}" />
+                        <DataGridTextColumn Header="IPA" IsReadOnly="True" CanUserResize="False" Width="150" Binding="{Binding Path=IPA}" />
+                        <DataGridTextColumn Header="Type" IsReadOnly="True" CanUserResize="False" Width="110" Binding="{Binding Path=Type.WordTypeName}" />
+                        <DataGridTextColumn Header="Definitions" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding Path=DisplayMeaning}" />
+                        <DataGridTextColumn Header="Examples" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding Path=DisplayExample}" />
+                        <DataGridTemplateColumn Header="Action" IsReadOnly="True"  Width="210" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button Style="{StaticResource GridButton}" Margin="0 0 10 0"
+                                        Command="{Binding DataContext.ViewWordCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                        CommandParameter="{Binding Path=WordId}"
+                                        Background="BlueViolet" >
+                                            <Icon:PackIconMaterial Kind="Eye"  Style="{StaticResource GridButtonIcon}" />
+                                        </Button>
+                                        <Button Style="{StaticResource GridButton}"
+                                             Margin="0 0 10 0"
+                                        Command="{Binding DataContext.EditWordCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                        CommandParameter="{Binding Path=WordId}" >
+                                            <Icon:PackIconMaterial Kind="PencilOutline" Style="{StaticResource GridButtonIcon}" />
+                                        </Button>
+                                        <Button Style="{StaticResource GridButton}"
+                                            Background="PaleVioletRed" Margin="0 0 10 0"
+                                        Command="{Binding DataContext.DeleteWordCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                        CommandParameter="{Binding Path=WordId}" >
+                                            <Icon:PackIconMaterial Kind="TrashCan" Style="{StaticResource GridButtonIcon}" />
+                                        </Button>
+                                        <Button Style="{StaticResource GridButton}"
+                                            Background="Green"
+                                           Command="{Binding DataContext.SaveWordCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                          CommandParameter="{Binding Path=WordId}" >
+                                            <Icon:PackIconMaterial Kind="{Binding Path=IconName}" Style="{StaticResource GridButtonIcon}" />
+                                        </Button>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Separator Height="1" Background="#dae2ea" Margin="0 10 0 10" />
+            </StackPanel>
+            <!-- Pagination -->
+            <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom" Orientation="Vertical">
+                <StackPanel Orientation="Vertical">
+                    <DockPanel  x:Name="bottomContent" >
+                        <StackPanel VerticalAlignment="Center" DockPanel.Dock="Left" Orientation="Horizontal" >
+                            <Label FontWeight="Bold" x:Name="lbMessage" FontSize="{DynamicResource textFontSize}" />
+                        </StackPanel>
+                        <StackPanel DockPanel.Dock="Right" HorizontalAlignment="Right" Orientation="Horizontal">
+                            <StackPanel VerticalAlignment="Center" Orientation="Horizontal" Margin="0 0 15 0">
+                                <Label Foreground="{DynamicResource PrimaryTextColor}" Content="Display" FontSize="{DynamicResource textFontSize}" VerticalAlignment="Center" FontWeight="Bold"></Label>
+                                <Border
+                            CornerRadius="7"
+                            Padding="1"
+                            BorderBrush="#dee4ec"
+                            BorderThickness="2" >
+                                    <ComboBox SelectionChanged="cbPage_SelectionChanged" x:Name="cbPage" Width="60" Height="30" Background="Transparent" 
+                                  BorderBrush="Transparent"  BorderThickness="0"
+                                  VerticalContentAlignment="Center"
+                                  FontSize="{DynamicResource textFontSize}"
+                                  VerticalAlignment="Center"  />
+                                </Border>
+                            </StackPanel>
+                            <Border HorizontalAlignment="Stretch" BorderBrush="#dee4ec" BorderThickness="1"
+                            CornerRadius="5" Padding="5" Background="White" Margin="0 10 10 10">
+                                <StackPanel Orientation="Horizontal">
+                                    <Button x:Name="btnFirst" Click="btnFirst_Click" Style="{StaticResource PagingButton}">
+                                        <Icon:PackIconMaterial Kind="PageFirst" />
+
+                                    </Button>
+                                    <Rectangle Width="1" Fill="#dee4ec" Margin="3 7" />
+                                    <StackPanel Orientation="Horizontal" x:Name="pageContainer">
+
+                                    </StackPanel>
+
+                                    <Rectangle Width="1" Fill="#dee4ec" Margin="3 7" />
+
+                                    <Button x:Name="btnLast" Click="btnLast_Click" Style="{StaticResource PagingButton}">
+                                        <Icon:PackIconMaterial Kind="PageLast" />
+                                    </Button>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                    </DockPanel>
+
+                </StackPanel>
+            </StackPanel>
+        </DockPanel>
+    </Border>
+</Page>

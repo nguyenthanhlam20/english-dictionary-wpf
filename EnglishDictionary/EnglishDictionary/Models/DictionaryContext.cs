@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,9 +24,8 @@ namespace EnglishDictionary.Models
         private static string GetDatabasePath()
         {
             string databaseName = "dictionary.db";
-            string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            string folderName = "EnglishDictionary";
-            string databasePath = Path.Combine(appDataPath, folderName, databaseName);
+            string currentDirectory = Directory.GetCurrentDirectory();
+            string databasePath = Path.Combine(currentDirectory, databaseName);
 
             if (!Directory.Exists(Path.GetDirectoryName(databasePath)))
             {

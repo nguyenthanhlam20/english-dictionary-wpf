@@ -25,6 +25,7 @@
                 <!-- Values Resources -->
                 <ResourceDictionary Source="/Assets/Values/Sizes.xaml" />
                 <ResourceDictionary Source="/Assets/Values/Strings.xaml" />
+                <ResourceDictionary Source="/Assets/Icons/Icons.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
 
@@ -43,10 +44,12 @@
             </Style>
             <Style x:Key="DataGridColumnHeaderStyle1" TargetType="{x:Type DataGridColumnHeader}">
                 <Setter Property="VerticalContentAlignment" Value="Center"/>
-                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Background" Value="LightBlue"/>
                 <Setter Property="Foreground" Value="{DynamicResource SecondaryTextColor}"/>
-                <Setter Property="Margin" Value="15 0 15 10"/>
+                <Setter Property="Padding" Value="15 13 0 13"/>
+                
                 <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="Margin" Value="0"/>
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
@@ -106,7 +109,6 @@
                 <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
                 <Setter Property="AutoGenerateColumns" Value="False"/>
                 <Setter Property="HeadersVisibility" Value="Column"/>
-                <Setter Property="Margin" Value="0 10 0 0"/>
                 <Setter Property="SelectionMode" Value="Single"/>
                 <Setter Property="SelectionUnit" Value="FullRow"/>
                 <Setter Property="CanUserAddRows" Value="False"/>

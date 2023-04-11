@@ -1,4 +1,5 @@
 ﻿using EnglishDictionary.Models;
+using EnglishDictionary.UI.Admin.Pages;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -27,14 +28,24 @@ namespace EnglishDictionary.UI.Admin
         private int reusableInt = 0;
 
 
-        private AdminMainWindow _mainWindow;
+        private HomePage _mainWindow1;
+        private SavedWordPage _mainWindow2;
         private int _wordId;
 
-        public EditWordWindow(int wordId, AdminMainWindow mainWindow)
+        public EditWordWindow(int wordId, HomePage mainWindow1, SavedWordPage mainWindow2)
         {
+
             InitializeComponent();
+            if (mainWindow1 != null)
+            {
+                _mainWindow1 = mainWindow1;
+            }
+            else
+            {
+                _mainWindow2 = mainWindow2;
+            }
+
             _wordId = wordId;
-            _mainWindow = mainWindow;
 
             LoadWordTypes();
             LoadWordDetails();
@@ -81,14 +92,14 @@ namespace EnglishDictionary.UI.Admin
 
             for (int i = 0; i < examples.Count(); i++)
             {
-               
+
                 WordExample we = examples[i];
                 // Get number of rows
-          
+
                 // Create container
                 CreateSpContainer("spExample" + i);
 
-               
+
 
                 if (i != 0)
                 {
@@ -100,7 +111,8 @@ namespace EnglishDictionary.UI.Admin
                     spConatainer.Children.Add(txtInput);
                     spConatainer.Children.Add(btnRemove);
                     // Add textbox and button to stack panel
-                } else
+                }
+                else
                 {
                     // Add input feild
                     CreateInputText("txtExample" + i, "Enter example", we.ExampleContent);
@@ -109,7 +121,7 @@ namespace EnglishDictionary.UI.Admin
                 }
 
 
-              
+
 
                 // Register name for container
                 listExample.RegisterName(spConatainer.Name, spConatainer);
@@ -148,7 +160,7 @@ namespace EnglishDictionary.UI.Admin
                 }
 
 
-              
+
 
                 // Register name for container
                 listMeaning.RegisterName(spConatainer.Name, spConatainer);
@@ -356,7 +368,7 @@ namespace EnglishDictionary.UI.Admin
 
                 if (context.SaveChanges() > 0)
                 {
-                   
+
 
                 }
 
@@ -377,7 +389,15 @@ namespace EnglishDictionary.UI.Admin
                     UpdateWord();
                     AddMeanings();
                     AddExamples();
-                    _mainWindow.LoadWords();
+                    if (_mainWindow1 != null)
+                    {
+                        _mainWindow1.LoadWords();
+                    }
+                    else
+                    {
+                        _mainWindow2.LoadWords();
+
+                    }
                     this.Close();
                 }
                 else
@@ -398,7 +418,7 @@ namespace EnglishDictionary.UI.Admin
         {
             using (var context = new DictionaryContext())
             {
-               
+
                 TextBox txt = new TextBox();
                 WordMeaning wd = new WordMeaning();
 
@@ -460,14 +480,14 @@ namespace EnglishDictionary.UI.Admin
         {
             using (var context = new DictionaryContext())
             {
-                Word w = new Word()
-                {
-                    WordId = _wordId,
-                    WordName = txtWord.Text,
-                    IPA = txtIPA.Text,
-                    WordTypeId = int.Parse(cbWordType.SelectedValue.ToString()),
 
-                };
+                Word w = context.Words.SingleOrDefault(w => w.WordId == _wordId);
+
+                w.WordName = txtWord.Text;
+                w.IPA = txtIPA.Text;
+                w.WordTypeId = int.Parse(cbWordType.SelectedValue.ToString());
+
+
                 context.Words.Update(w);
                 if (context.SaveChanges() > 0)
                 {

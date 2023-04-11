@@ -1,4 +1,5 @@
 ﻿using EnglishDictionary.Models;
+using EnglishDictionary.UI.Admin.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,14 +28,24 @@ namespace EnglishDictionary.UI.Admin
         private int reusableInt = 0;
 
 
-        private AdminMainWindow _mainWindow;
+        private HomePage _mainWindow1;
+        private SavedWordPage _mainWindow2;
 
-        public AddWordWindow(AdminMainWindow mainWindow)
+        public AddWordWindow(HomePage mainWindow1, SavedWordPage mainWindow2)
         {
             InitializeComponent();
+            if (mainWindow1 != null)
+            {
+                _mainWindow1 = mainWindow1;
+            }
+            else
+            {
+                _mainWindow2 = mainWindow2;
+            }
+
+
             LoadWordTypes();
 
-            _mainWindow = mainWindow;
         }
 
         public void LoadWordTypes()
@@ -220,7 +231,15 @@ namespace EnglishDictionary.UI.Admin
                     AddNewWord();
                     AddExamples();
                     AddMeanings();
-                    _mainWindow.LoadWordInitialization();
+                    if (_mainWindow1 != null)
+                    {
+                        _mainWindow1.LoadWords();
+                    }
+                    else
+                    {
+                        _mainWindow2.LoadWords();
+
+                    }
                     this.Close();
                 }
                 else
