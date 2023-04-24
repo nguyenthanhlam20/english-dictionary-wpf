@@ -21,12 +21,52 @@ namespace EnglishDictionary.UI.Admin
     /// </summary>
     public partial class AddWordWindow : Window
     {
+        //private void btnSearch_Click(object sender, RoutedEventArgs e)
+        //{
+        //    var lstMember = memberRepository.GetMembers().ToList();
+        //    var memberId = String.IsNullOrEmpty(txtMemberId.Text) == true ? "": txtMemberId.Text;
+        //    var email = String.IsNullOrEmpty( txtEmail.Text) == true ? "": txtEmail.Text;
+        //    var company = String.IsNullOrEmpty(txtCompanyName.Text) == true ? "": txtCompanyName.Text;
+        //    var city = String.IsNullOrEmpty(txtCity.Text) == true ? "" : txtCity.Text;
+        //    var country = String.IsNullOrEmpty(txtCountry.Text) == true ? "" : txtCountry.Text;
+
+        //    lstMember = lstMember.Where(x => x.Email.ToLower().Contains(email.ToLower())
+        //       && x.CompanyName.ToLower().Contains(company.ToLower())
+        //       && x.City.ToLower().Contains(city.ToLower())
+        //       && x.Country.ToLower().Contains(country.ToLower())
+        //       ).ToList();
+
+
+        //    lvMembers.ItemsSource = lstMember;
+        //}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         private Button btnRemove;
         private StackPanel spConatainer;
         private TextBox txtInput;
         private int reusableInt = 0;
 
+        private int definitionCount = 1;
+        private int exampleCount = 1;
 
         private HomePage _mainWindow1;
         private SavedWordPage _mainWindow2;
@@ -95,8 +135,9 @@ namespace EnglishDictionary.UI.Admin
         {
             try
             {
+                reusableInt = definitionCount;
+                definitionCount++;
                 // Get number of rows
-                reusableInt = listMeaning.Children.Count;
 
                 // Create container
                 CreateSpContainer("spMeaning" + reusableInt);
@@ -119,10 +160,10 @@ namespace EnglishDictionary.UI.Admin
                 // Add to list meaning
                 listMeaning.Children.Add(spConatainer);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                MessageBox.Show("Error when trying to add new definition");
+                MessageBox.Show("Error when trying to add new definition " + ex);
             }
         }
 
@@ -174,8 +215,8 @@ namespace EnglishDictionary.UI.Admin
         {
             try
             {
-                // Get number of rows
-                reusableInt = listExample.Children.Count;
+                reusableInt = exampleCount;
+                exampleCount++;
 
                 // Create container
                 CreateSpContainer("spExample" + reusableInt);

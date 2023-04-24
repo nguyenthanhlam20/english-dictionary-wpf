@@ -31,6 +31,8 @@ namespace EnglishDictionary.UI.Admin
         private HomePage _mainWindow1;
         private SavedWordPage _mainWindow2;
         private int _wordId;
+        private int definitionCount = 1;
+        private int exampleCount = 1;
 
         public EditWordWindow(int wordId, HomePage mainWindow1, SavedWordPage mainWindow2)
         {
@@ -49,6 +51,10 @@ namespace EnglishDictionary.UI.Admin
 
             LoadWordTypes();
             LoadWordDetails();
+
+            definitionCount = listMeaning.Children.Count + 1;
+            exampleCount = listExample.Children.Count + 1;
+
         }
 
         public void LoadWordDetails()
@@ -206,8 +212,9 @@ namespace EnglishDictionary.UI.Admin
         {
             try
             {
+                reusableInt = exampleCount;
+                exampleCount++;
                 // Get number of rows
-                reusableInt = listExample.Children.Count;
 
                 // Create container
                 CreateSpContainer("spExample" + reusableInt);
@@ -243,7 +250,8 @@ namespace EnglishDictionary.UI.Admin
             try
             {
                 // Get number of rows
-                reusableInt = listMeaning.Children.Count;
+                reusableInt = definitionCount;
+                definitionCount++;
 
                 // Create container
                 CreateSpContainer("spMeaning" + reusableInt);

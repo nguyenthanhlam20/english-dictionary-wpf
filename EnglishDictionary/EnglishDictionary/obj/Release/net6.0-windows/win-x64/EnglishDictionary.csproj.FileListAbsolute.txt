@@ -98,3 +98,8 @@ C:\Users\ADMIN\Documents\C#_Project\english-dictionary-wpf\EnglishDictionary\Eng
 C:\Users\ADMIN\Documents\C#_Project\english-dictionary-wpf\EnglishDictionary\EnglishDictionary\obj\Release\net6.0-windows\win-x64\UI\Admin\Pages\SavedWordPage.baml
 C:\Users\ADMIN\Documents\C#_Project\english-dictionary-wpf\EnglishDictionary\EnglishDictionary\obj\Release\net6.0-windows\win-x64\UI\User\Pages\DictionaryPage.baml
 C:\Users\ADMIN\Documents\C#_Project\english-dictionary-wpf\EnglishDictionary\EnglishDictionary\obj\Release\net6.0-windows\win-x64\UI\User\Pages\MyWordPage.baml
+C:\Users\ADMIN\Documents\C#_Project\english-dictionary-wpf\EnglishDictionary\EnglishDictionary\bin\Release\net6.0-windows\win-x64\EnglishDictionary.dll.config
+C:\Users\ADMIN\Documents\C#_Project\english-dictionary-wpf\EnglishDictionary\EnglishDictionary\obj\Release\net6.0-windows\win-x64\UI\Admin\Pages\AdminSettingPage.g.cs
+C:\Users\ADMIN\Documents\C#_Project\english-dictionary-wpf\EnglishDictionary\EnglishDictionary\obj\Release\net6.0-windows\win-x64\UI\User\Pages\UserSettingPage.g.cs
+C:\Users\ADMIN\Documents\C#_Project\english-dictionary-wpf\EnglishDictionary\EnglishDictionary\obj\Release\net6.0-windows\win-x64\UI\Admin\Pages\AdminSettingPage.baml
+C:\Users\ADMIN\Documents\C#_Project\english-dictionary-wpf\EnglishDictionary\EnglishDictionary\obj\Release\net6.0-windows\win-x64\UI\User\Pages\UserSettingPage.baml

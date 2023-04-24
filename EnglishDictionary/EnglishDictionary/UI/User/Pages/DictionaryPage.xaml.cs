@@ -87,7 +87,7 @@ namespace EnglishDictionary.UI.User.Pages
 
             btnAll.Background = Brushes.Gray;
             txtSearch.Clear();
-            resultContainer.Visibility = Visibility.Visible;
+            dgWords.Visibility = Visibility.Visible;
 
             lbResult.Visibility = Visibility.Visible;
 
@@ -96,12 +96,12 @@ namespace EnglishDictionary.UI.User.Pages
             {
                 lbResult.Content = $"Total {words.Count()} words";
                 dgWords.ItemsSource = words;
-                resultContainer.Visibility = Visibility.Visible;
+                dgWords.Visibility = Visibility.Visible;
             }
             else
             {
                 lbResult.Content = $"No words found";
-                resultContainer.Visibility = Visibility.Hidden;
+                dgWords.Visibility = Visibility.Hidden;
                 vocabulary.Visibility = Visibility.Hidden;
             }
         }
@@ -144,12 +144,12 @@ namespace EnglishDictionary.UI.User.Pages
             {
                 lbResult.Content = $"Found {words.Count()} words";
                 dgWords.ItemsSource = words;
-                resultContainer.Visibility = Visibility.Visible;
+                dgWords.Visibility = Visibility.Visible;
             }
             else
             {
                 lbResult.Content = $"No words found";
-                resultContainer.Visibility = Visibility.Hidden;
+                dgWords.Visibility = Visibility.Hidden;
                 vocabulary.Visibility = Visibility.Hidden;
 
             }
@@ -161,8 +161,8 @@ namespace EnglishDictionary.UI.User.Pages
             {
                 if (String.IsNullOrEmpty(filterStart) == false)
                 {
-                    return context.Words.Include(w => w.Type).Where(w => (w.WordName.ToUpper().StartsWith(filterStart) && w.WordName.Contains(filterSearch))
-               || filterSearch.Contains(w.WordName)).ToList();
+                    return context.Words.Include(w => w.Type).Where(w => ((w.WordName.ToUpper().StartsWith(filterStart) && w.WordName.Contains(filterSearch))
+                || (filterSearch.Contains(w.WordName) && w.WordName.ToUpper().StartsWith(filterStart)))).ToList();
                 }
                 else
                 {

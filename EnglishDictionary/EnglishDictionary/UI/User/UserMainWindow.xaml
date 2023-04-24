@@ -61,7 +61,12 @@
                                      Margin="0 1 0 0" ></RadioButton>
 
                         <Separator Margin="10" Background="{DynamicResource TertiaryBackgroundColor}" />
-
+                        <RadioButton x:Name="rdSettings"
+                                     Content="Settings"
+                                     Click="rdSettings_Click"
+                                     Style="{DynamicResource MenuRadioButtonStyle}" 
+                                     Tag="{DynamicResource settings}" 
+                                     Margin="0 1 0 0" ></RadioButton>
                     </StackPanel>
                     <Button Style="{StaticResource PowerOffButton}"
                             HorizontalAlignment="Left"  

@@ -18,6 +18,9 @@
     <Compile Update="UI\Admin\EditWordWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UI\Admin\Pages\AdminSettingPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UI\Admin\Pages\HomePage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -31,6 +34,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UI\User\Pages\MyWordPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UI\User\Pages\UserSettingPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UI\User\UserMainWindow.xaml.cs">
@@ -77,6 +83,9 @@
     <Page Update="UI\Admin\EditWordWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="UI\Admin\Pages\AdminSettingPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="UI\Admin\Pages\HomePage.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -99,6 +108,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UI\User\Pages\MyWordPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\User\Pages\UserSettingPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UI\User\UserMainWindow.xaml">

@@ -12,7 +12,7 @@
             Background="{DynamicResource SecondaryBackgroundColor}">
         <Grid >
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="520" />
+                <ColumnDefinition Width="530" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Border Padding="0 0 10 0" Grid.Column="0"  BorderBrush="Black" BorderThickness="0 0 2 0" >
@@ -67,9 +67,10 @@
                                     Background="Gray"
                                             Style="{StaticResource AlphabetButton}"
                                              Margin="0 0 0 10"   
-                                    Height="30"
                                             Content="ALL"                                         
-FontSize="9"
+   Height="27"
+                                    Width="41"
+                                    FontSize="10"
                                             FontWeight="Bold"
                                             Click="btnAll_Click">
 
@@ -78,12 +79,19 @@ FontSize="9"
                                 x:Name="lbResult" Content="Result" FontWeight="Bold" FontStyle="Italic" 
                                Foreground="Teal" FontSize="16" HorizontalAlignment="Center" />
                         </DockPanel>
-                        <Border x:Name="resultContainer" 
+                        <Border  
                                 Grid.Column="1" Grid.Row="0"  BorderThickness="1" CornerRadius="10" >
 
-                            <StackPanel Orientation="Vertical">
-                                <StackPanel Orientation="Horizontal">
-                                    <StackPanel Orientation="Vertical" Margin="0 0 10 0">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="610" />
+                                </Grid.RowDefinitions>
+                                <ScrollViewer VerticalScrollBarVisibility="Hidden" Grid.Row="0" Grid.Column="0">
+                                    <StackPanel  Orientation="Vertical" Margin="0 0 10 0">
 
                                         <Button
                                             x:Name="A"
@@ -148,87 +156,86 @@ FontSize="9"
                                              Margin="0 0 0 10"                                             Click="btnAlphabetSearch_Click">
                                             <Icon:PackIconMaterial Kind="AlphaO" Style="{StaticResource GridButtonIcon}" />
                                         </Button>
+
+                                        <Button Style="{StaticResource AlphabetButton}"   Click="btnAlphabetSearch_Click"  x:Name="P"
+                                             Margin="0 0 0 10">
+                                            <Icon:PackIconMaterial Kind="AlphaP" Style="{StaticResource GridButtonIcon}" />
+                                        </Button>
+                                        <Button Style="{StaticResource AlphabetButton}"  Click="btnAlphabetSearch_Click" x:Name="Q"
+                                             Margin="0 0 0 10">
+                                            <Icon:PackIconMaterial Kind="AlphaQ" Style="{StaticResource GridButtonIcon}" />
+                                        </Button>
+                                        <Button Style="{StaticResource AlphabetButton}"  Click="btnAlphabetSearch_Click" x:Name="R"
+                                             Margin="0 0 0 10">
+                                            <Icon:PackIconMaterial Kind="AlphaR" Style="{StaticResource GridButtonIcon}" />
+                                        </Button>
+                                        <Button Style="{StaticResource AlphabetButton}"  Click="btnAlphabetSearch_Click" x:Name="S"
+                                             Margin="0 0 0 10">
+                                            <Icon:PackIconMaterial Kind="AlphaS" Style="{StaticResource GridButtonIcon}" />
+                                        </Button>
+                                        <Button Style="{StaticResource AlphabetButton}"  Click="btnAlphabetSearch_Click" x:Name="T"
+                                             Margin="0 0 0 10">
+                                            <Icon:PackIconMaterial Kind="AlphaT" Style="{StaticResource GridButtonIcon}" />
+                                        </Button>
+                                        <Button Style="{StaticResource AlphabetButton}"  Click="btnAlphabetSearch_Click" x:Name="U"
+                                             Margin="0 0 0 10">
+                                            <Icon:PackIconMaterial Kind="AlphaU" Style="{StaticResource GridButtonIcon}" />
+                                        </Button>
+                                        <Button Style="{StaticResource AlphabetButton}"  Click="btnAlphabetSearch_Click" x:Name="V"
+                                             Margin="0 0 0 10">
+                                            <Icon:PackIconMaterial Kind="AlphaV" Style="{StaticResource GridButtonIcon}" />
+                                        </Button>
+                                        <Button Style="{StaticResource AlphabetButton}"  Click="btnAlphabetSearch_Click" x:Name="W"
+                                             Margin="0 0 0 10">
+                                            <Icon:PackIconMaterial Kind="AlphaW" Style="{StaticResource GridButtonIcon}" />
+                                        </Button>
+                                        <Button Style="{StaticResource AlphabetButton}"  Click="btnAlphabetSearch_Click" x:Name="X"
+                                             Margin="0 0 0 10">
+                                            <Icon:PackIconMaterial Kind="AlphaX" Style="{StaticResource GridButtonIcon}" />
+                                        </Button>
+                                        <Button Style="{StaticResource AlphabetButton}"  Click="btnAlphabetSearch_Click" x:Name="Y"
+                                             Margin="0 0 0 10">
+                                            <Icon:PackIconMaterial Kind="AlphaY" Style="{StaticResource GridButtonIcon}" />
+                                        </Button>
+                                        <Button Style="{StaticResource AlphabetButton}"  Click="btnAlphabetSearch_Click" x:Name="Z"
+                                             Margin="0 0 0 10">
+                                            <Icon:PackIconMaterial Kind="AlphaZ" Style="{StaticResource GridButtonIcon}" />
+                                        </Button>
                                     </StackPanel>
-                                    <DataGrid SelectionChanged="dgWords_SelectionChanged" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" x:Name="dgWords"
+                                </ScrollViewer>
+                                <DataGrid SelectionChanged="dgWords_SelectionChanged" 
+                                              Grid.Column="1"
+                                              Grid.Row="0"
+                                         
+                                              ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" x:Name="dgWords"
                                                   Style="{DynamicResource DataGridStyle1}" 
                                                   CellStyle="{DynamicResource DataGridCellStyle1}" 
                                                   RowStyle="{DynamicResource DataGridRowStyle1}"
-                                                  MinWidth="450" MaxHeight="510" VerticalAlignment="Top" >
+                                                 VerticalAlignment="Top" >
 
-                                        <DataGrid.Columns>
+                                    <DataGrid.Columns>
 
-                                            <DataGridTextColumn Header="Word" IsReadOnly="True" CanUserResize="False" Width="135" Binding="{Binding Path=WordName}" />
-                                            <DataGridTextColumn Header="IPA" IsReadOnly="True" CanUserResize="False" Width="135" Binding="{Binding Path=IPA}" />
-                                            <DataGridTextColumn Header="Type" IsReadOnly="True" CanUserResize="False" Width="105" Binding="{Binding Path=Type.WordTypeName}" />
-                                            <DataGridTemplateColumn Header="Action" IsReadOnly="True"  Width="70" >
-                                                <DataGridTemplateColumn.CellTemplate>
-                                                    <DataTemplate>
-                                                        <StackPanel Orientation="Horizontal">
+                                        <DataGridTextColumn Header="Word" IsReadOnly="True" CanUserResize="False" Width="135" Binding="{Binding Path=WordName}" />
+                                        <DataGridTextColumn Header="IPA" IsReadOnly="True" CanUserResize="False" Width="135" Binding="{Binding Path=IPA}" />
+                                        <DataGridTextColumn Header="Type" IsReadOnly="True" CanUserResize="False" Width="105" Binding="{Binding Path=Type.WordTypeName}" />
+                                        <DataGridTemplateColumn Header="Action" IsReadOnly="True"  Width="70" >
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
 
-                                                            <Button Style="{StaticResource AlphabetButton}"
+                                                        <Button Style="{StaticResource AlphabetButton}"
                                             Background="Green"
                                            Command="{Binding DataContext.SaveWordCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
                                           CommandParameter="{Binding Path=WordId}" >
-                                                                <Icon:PackIconMaterial Kind="{Binding Path=UserSavedIconName}" Style="{StaticResource GridButtonIcon}" />
-                                                            </Button>
-                                                        </StackPanel>
-                                                    </DataTemplate>
-                                                </DataGridTemplateColumn.CellTemplate>
-                                            </DataGridTemplateColumn>
-                                        </DataGrid.Columns>
-                                    </DataGrid>
-
-
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal" Margin="0 0 0 0">
-
-
-                                    <Button Style="{StaticResource AlphabetButton}"   Click="btnAlphabetSearch_Click"  x:Name="P"
-                                             Margin="0 0 10 0">
-                                        <Icon:PackIconMaterial Kind="AlphaP" Style="{StaticResource GridButtonIcon}" />
-                                    </Button>
-                                    <Button Style="{StaticResource AlphabetButton}"  Click="btnAlphabetSearch_Click" x:Name="Q"
-                                             Margin="0 0 10 0">
-                                        <Icon:PackIconMaterial Kind="AlphaQ" Style="{StaticResource GridButtonIcon}" />
-                                    </Button>
-                                    <Button Style="{StaticResource AlphabetButton}"  Click="btnAlphabetSearch_Click" x:Name="R"
-                                             Margin="0 0 10 0">
-                                        <Icon:PackIconMaterial Kind="AlphaR" Style="{StaticResource GridButtonIcon}" />
-                                    </Button>
-                                    <Button Style="{StaticResource AlphabetButton}"  Click="btnAlphabetSearch_Click" x:Name="S"
-                                             Margin="0 0 10 0">
-                                        <Icon:PackIconMaterial Kind="AlphaS" Style="{StaticResource GridButtonIcon}" />
-                                    </Button>
-                                    <Button Style="{StaticResource AlphabetButton}"  Click="btnAlphabetSearch_Click" x:Name="T"
-                                             Margin="0 0 10 0">
-                                        <Icon:PackIconMaterial Kind="AlphaT" Style="{StaticResource GridButtonIcon}" />
-                                    </Button>
-                                    <Button Style="{StaticResource AlphabetButton}"  Click="btnAlphabetSearch_Click" x:Name="U"
-                                             Margin="0 0 10 0">
-                                        <Icon:PackIconMaterial Kind="AlphaU" Style="{StaticResource GridButtonIcon}" />
-                                    </Button>
-                                    <Button Style="{StaticResource AlphabetButton}"  Click="btnAlphabetSearch_Click" x:Name="V"
-                                             Margin="0 0 10 0">
-                                        <Icon:PackIconMaterial Kind="AlphaV" Style="{StaticResource GridButtonIcon}" />
-                                    </Button>
-                                    <Button Style="{StaticResource AlphabetButton}"  Click="btnAlphabetSearch_Click" x:Name="W"
-                                             Margin="0 0 10 0">
-                                        <Icon:PackIconMaterial Kind="AlphaW" Style="{StaticResource GridButtonIcon}" />
-                                    </Button>
-                                    <Button Style="{StaticResource AlphabetButton}"  Click="btnAlphabetSearch_Click" x:Name="X"
-                                             Margin="0 0 10 0">
-                                        <Icon:PackIconMaterial Kind="AlphaX" Style="{StaticResource GridButtonIcon}" />
-                                    </Button>
-                                    <Button Style="{StaticResource AlphabetButton}"  Click="btnAlphabetSearch_Click" x:Name="Y"
-                                             Margin="0 0 10 0">
-                                        <Icon:PackIconMaterial Kind="AlphaY" Style="{StaticResource GridButtonIcon}" />
-                                    </Button>
-                                    <Button Style="{StaticResource AlphabetButton}"  Click="btnAlphabetSearch_Click" x:Name="Z"
-                                             Margin="0 0 10 0">
-                                        <Icon:PackIconMaterial Kind="AlphaZ" Style="{StaticResource GridButtonIcon}" />
-                                    </Button>
-                                </StackPanel>
-                            </StackPanel>
+                                                            <Icon:PackIconMaterial Kind="{Binding Path=UserSavedIconName}" Style="{StaticResource GridButtonIcon}" />
+                                                        </Button>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
                         </Border>
                     </StackPanel>
 

@@ -2,6 +2,7 @@
 using CsvHelper.Configuration;
 using EnglishDictionary.Models;
 using EnglishDictionary.UI.Admin.Pages;
+using EnglishDictionary.UI.User.Pages;
 using FinancialWPFApp.UI;
 using FinancialWPFApp.UI.Public.Views;
 using MahApps.Metro.IconPacks;
@@ -80,6 +81,14 @@ namespace EnglishDictionary.UI.Admin
             lbTitle.Content = "Saved Word";
 
             SavedWordPage page = new SavedWordPage();
+            frameContent.Content = page;
+        }
+
+        private void rdSettings_Click(object sender, RoutedEventArgs e)
+        {
+            AdminSettingPage page = new AdminSettingPage();
+            lbTitle.Content = "Settings";
+
             frameContent.Content = page;
         }
     }

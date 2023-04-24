@@ -1,0 +1,75 @@
+﻿<Page x:Class="EnglishDictionary.UI.Admin.Pages.AdminSettingPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:EnglishDictionary.UI.Admin.Pages"
+      xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+      mc:Ignorable="d" 
+     d:DesignWidth="800"
+      Title="AdminSettingPage">
+
+    <Border  Margin="30" Width="600" HorizontalAlignment="Left">
+        <StackPanel Orientation="Vertical">
+
+            <StackPanel  Orientation="Vertical">
+                <Label Foreground="{DynamicResource SecondaryTextColor}"
+                       Content="Change your password" FontSize="{DynamicResource titleFontSize}" FontWeight="Bold"   />
+                <Label Foreground="{DynamicResource SecondaryTextColor}" 
+                       Content="Enter your old and new password to continue" FontSize="{DynamicResource textFontSize}" Opacity="0.8" />
+
+                <StackPanel Margin="0 30 0 0 " Orientation="Vertical">
+                    <Label Foreground="{DynamicResource SecondaryTextColor}" 
+                          
+                           Content="Old Password" 
+                           x:Name="lbOldPassword"
+                           FontWeight="SemiBold" 
+                           Margin="0 0 0 5"/>
+                    <TextBox Style="{DynamicResource StyledTextBox}" 
+                             Text="{Binding Email}"
+                            x:Name="txtOldPassword"
+                             />
+                </StackPanel>
+                <StackPanel Margin="0 10 0 0" Orientation="Vertical">
+                    <Label Foreground="{DynamicResource SecondaryTextColor}"
+                           Content="New Password" 
+                           FontWeight="SemiBold"
+                           
+                           Margin="0 0 0 5"/>
+                    <TextBox Style="{DynamicResource StyledTextBox}" 
+                             Text="{Binding Password}"
+                             x:Name="txtNewPassword"
+                             />
+                </StackPanel>
+                <StackPanel Margin="0 10 0 20" Orientation="Vertical">
+                    <Label
+                           Content="Confirm Password" 
+                           FontWeight="SemiBold"
+                           Foreground="{DynamicResource SecondaryTextColor}"
+                           Margin="0 0 0 5"/>
+                    <TextBox Style="{DynamicResource StyledTextBox}" 
+                             Text="{Binding ConfirmPassword}"
+                             x:Name="txtConfirmPassword"
+                             />
+                </StackPanel>
+
+                <Button Style="{DynamicResource ProButtonStyle}" 
+                        Content="Save" 
+                        Background="{DynamicResource SecondaryBlueColor}" 
+                        FontWeight="Bold" 
+                        HorizontalAlignment="Left"
+                        Width="200"
+                        x:Name="btnSave"
+                        Click="btnSave_Click"
+                        Foreground="{DynamicResource TertiaryWhiteColor}"
+                        Command="{Binding Path=SignUpCommand}"
+                        FontSize="{DynamicResource textFontSize}"/>
+
+
+
+            </StackPanel>
+
+
+        </StackPanel>
+    </Border>
+</Page>

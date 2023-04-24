@@ -1,6 +1,7 @@
 ﻿
 
 using EnglishDictionary.Models;
+using EnglishDictionary.Properties;
 using EnglishDictionary.UI.Admin;
 using EnglishDictionary.UI.User;
 using FinancialWPFApp.UI.Public.ViewModels.Pages;
@@ -46,6 +47,13 @@ namespace FinancialWPFApp.UI.Public.Commands.Pages
                     Account account = context.Accounts.SingleOrDefault(u => u.Username == _viewModel.Username && u.Password == _viewModel.Password);
                     if (account != null)
                     {
+
+                        Settings.Default.Username = account.Username;
+                        Settings.Default.Password = account.Password;
+                        Settings.Default.Role = account.Role;
+
+                        // Save the settings
+                        Settings.Default.Save();
                         Application.Current.MainWindow.Hide();
                         if (account.Role.ToLower() == "admin")
                         {

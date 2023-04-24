@@ -63,5 +63,13 @@ namespace EnglishDictionary.UI.User
 
             frameContent.Content = page;
         }
+
+        private void rdSettings_Click(object sender, RoutedEventArgs e)
+        {
+            UserSettingPage page = new UserSettingPage();
+            lbTitle.Content = "Settings";
+
+            frameContent.Content = page;
+        }
     }
 }

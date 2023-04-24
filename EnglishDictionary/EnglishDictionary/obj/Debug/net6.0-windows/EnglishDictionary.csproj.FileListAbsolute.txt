@@ -204,3 +204,8 @@ C:\Users\ADMIN\Documents\C#_Project\english-dictionary-wpf\EnglishDictionary\Eng
 C:\Users\ADMIN\Documents\C#_Project\english-dictionary-wpf\EnglishDictionary\EnglishDictionary\obj\Debug\net6.0-windows\UI\User\Pages\MyWordPage.g.cs
 C:\Users\ADMIN\Documents\C#_Project\english-dictionary-wpf\EnglishDictionary\EnglishDictionary\obj\Debug\net6.0-windows\UI\User\Pages\DictionaryPage.baml
 C:\Users\ADMIN\Documents\C#_Project\english-dictionary-wpf\EnglishDictionary\EnglishDictionary\obj\Debug\net6.0-windows\UI\User\Pages\MyWordPage.baml
+C:\Users\ADMIN\Documents\C#_Project\english-dictionary-wpf\EnglishDictionary\EnglishDictionary\obj\Debug\net6.0-windows\UI\User\Pages\UserSettingPage.g.cs
+C:\Users\ADMIN\Documents\C#_Project\english-dictionary-wpf\EnglishDictionary\EnglishDictionary\obj\Debug\net6.0-windows\UI\User\Pages\UserSettingPage.baml
+C:\Users\ADMIN\Documents\C#_Project\english-dictionary-wpf\EnglishDictionary\EnglishDictionary\bin\Debug\net6.0-windows\EnglishDictionary.dll.config
+C:\Users\ADMIN\Documents\C#_Project\english-dictionary-wpf\EnglishDictionary\EnglishDictionary\obj\Debug\net6.0-windows\UI\Admin\Pages\AdminSettingPage.g.cs
+C:\Users\ADMIN\Documents\C#_Project\english-dictionary-wpf\EnglishDictionary\EnglishDictionary\obj\Debug\net6.0-windows\UI\Admin\Pages\AdminSettingPage.baml

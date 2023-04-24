@@ -31,7 +31,9 @@ namespace FinancialWPFApp.UI.Public.Commands.Pages
             {
                 Frame frame = (Frame)Application.Current.MainWindow.FindName("frameContent");
 
-                if (String.IsNullOrEmpty(_viewModel.Email) || String.IsNullOrEmpty(_viewModel.Password) || String.IsNullOrEmpty(_viewModel.ConfirmPassword))
+                if (String.IsNullOrEmpty(_viewModel.Email)
+                    || String.IsNullOrEmpty(_viewModel.Password)
+                    || String.IsNullOrEmpty(_viewModel.ConfirmPassword))
                 {
                     MessageBox.Show("Please enter all required feilds");
                 }
@@ -41,32 +43,40 @@ namespace FinancialWPFApp.UI.Public.Commands.Pages
                     if (_viewModel.Email.StartsWith("admin") == false)
                     {
 
-                        using (var context = new DictionaryContext())
+                        if (_viewModel.Password != _viewModel.ConfirmPassword)
                         {
-                            Account account = context.Accounts.SingleOrDefault(a => a.Username == _viewModel.Email);
-                            if(account == null)
+                            MessageBox.Show("Password doesn't match");
+                        }
+                        else
+                        {
+                            using (var context = new DictionaryContext())
                             {
-                                account =  new Account();
-                                account.Username = _viewModel.Email;
-                                account.Password = _viewModel.Password;
-                                account.Role = "User";
-
-
-                                context.Accounts.Add(account);
-                                if (context.SaveChanges() > 0)
+                                Account account = context.Accounts.SingleOrDefault(a => a.Username == _viewModel.Email);
+                                if (account == null)
                                 {
+                                    account = new Account();
+                                    account.Username = _viewModel.Email;
+                                    account.Password = _viewModel.Password;
+                                    account.Role = "User";
 
-                                    RedirectToSignIn(parameter);
+
+                                    context.Accounts.Add(account);
+                                    if (context.SaveChanges() > 0)
+                                    {
+
+                                        RedirectToSignIn(parameter);
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Failed to sign up new account");
+                                    }
                                 }
                                 else
                                 {
-                                    MessageBox.Show("Failed to sign up new account");
+                                    MessageBox.Show("Account is already exist");
                                 }
-                            } else
-                            {
-                                MessageBox.Show("Account is already exist");
-                            }
 
+                            }
                         }
 
                     }
