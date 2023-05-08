@@ -6,14 +6,14 @@
       xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
       xmlns:local="clr-namespace:EnglishDictionary.UI.Admin.Pages"
       mc:Ignorable="d" 
-      MinWidth="1000"
+      MinWidth="700"
       MinHeight="500"
      >
 
     <Border Background="{DynamicResource SecondaryBackgroundColor}">
         <DockPanel>
             <StackPanel DockPanel.Dock="Top" Orientation="Vertical">
-                <DockPanel HorizontalAlignment="Stretch" Margin="0 0 0 20" >
+                <DockPanel HorizontalAlignment="Stretch" Margin="0 0 0 10" >
                     <StackPanel Orientation="Horizontal">
                         <Border BorderBrush="{DynamicResource ButtonHover}" BorderThickness="2"
                                 CornerRadius="7 0 0 7" 
@@ -26,7 +26,7 @@
                                 Kind="SearchWeb" Width="15" Height="15"   Foreground="{DynamicResource TertiaryWhiteColor}"
                                 Background="Transparent" />
                         </Border>
-                        <TextBox Width="250" Height="40"
+                        <TextBox Width="200" Height="40"
                          Style="{DynamicResource StyledTextBoxSearch}" 
                          HorizontalAlignment="Left" 
                          Tag="Search word"
@@ -35,21 +35,24 @@
                          >
 
                         </TextBox>
-                        <Button Margin="5 0 0 0" Height="30" Style="{StaticResource AddButton}" Width="70"
+                        <Button Margin="5 0 0 0" Height="30" Style="{StaticResource AddButton}" Width="50"
                        x:Name="btnClearSearch"
-                                Visibility="Hidden"
+                              Visibility="Hidden"
+
                                 Background="Red"
                         Click="btnClearSearch_Click"
                         >
                             <StackPanel Orientation="Horizontal">
 
-                                <TextBlock Text="Clear" FontWeight="Bold" FontSize="{DynamicResource textFontSize}" VerticalAlignment="Center" />
+                                <TextBlock Text="Clear" FontWeight="Bold" 
+                                           FontSize="{DynamicResource textFontSize}"
+                                           VerticalAlignment="Center" />
                             </StackPanel>
                         </Button>
                     </StackPanel>
-                    <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
-
-                        <Button Style="{StaticResource AddButton}" Width="130" Margin="5"
+                    <StackPanel DockPanel.Dock="Right" Orientation="Horizontal"
+                                VerticalAlignment="Center" HorizontalAlignment="Right">
+                        <Button Style="{StaticResource AddButton}" Width="100" Margin="5"
                        x:Name="btnSaveAll"
                                 Visibility="Hidden"
                                 Background="Green"
@@ -62,10 +65,11 @@
                                 <TextBlock Text="Save All" FontWeight="Bold" FontSize="{DynamicResource textFontSize}" VerticalAlignment="Center" />
                             </StackPanel>
                         </Button>
-                        <Button Style="{StaticResource AddButton}" Width="130" Margin="5"
+                        <Button Style="{StaticResource AddButton}" Width="110" Margin="5"
                        x:Name="btnDeleteAll"
-                                Visibility="Hidden"
                                 Background="Red"
+                                                                Visibility="Hidden"
+
                         Click="btnDeleteAll_Click"
                         >
                             <StackPanel Orientation="Horizontal">
@@ -75,7 +79,7 @@
                                 <TextBlock Text="Delete All" FontWeight="Bold" FontSize="{DynamicResource textFontSize}" VerticalAlignment="Center" />
                             </StackPanel>
                         </Button>
-                        <Button Style="{StaticResource AddButton}" Width="130" Margin="5"
+                        <Button Style="{StaticResource AddButton}" Width="110" Margin="5"
                        x:Name="btnAddWord"
                         Click="btnAddWord_Click"
                         >
@@ -86,7 +90,7 @@
                                 <TextBlock Text="New Word" FontWeight="Bold" FontSize="{DynamicResource textFontSize}" VerticalAlignment="Center" />
                             </StackPanel>
                         </Button>
-                        <Button Style="{StaticResource AddButton}" Width="110" Margin="5"
+                        <Button Style="{StaticResource AddButton}" Width="100" Margin="5"
                        x:Name="btnImport"
                             Background="Green"
                         Click="btnImport_Click"
@@ -99,18 +103,6 @@
                             </StackPanel>
                         </Button>
                         <Button Style="{StaticResource AddButton}" Width="110" Margin="5"
-                       x:Name="btnExport"
-                            Background="Teal"
-                        Click="btnExport_Click"
-                        >
-                            <StackPanel Orientation="Horizontal">
-
-                                <Icon:PackIconMaterial Kind="Export" VerticalAlignment="Center" Width="{DynamicResource textFontSize}" Height="{DynamicResource textFontSize}" 
-                                   Margin="0 0 10 0" />
-                                <TextBlock Text="Export" FontWeight="Bold" FontSize="{DynamicResource textFontSize}" VerticalAlignment="Center" />
-                            </StackPanel>
-                        </Button>
-                        <Button Style="{StaticResource AddButton}" Width="120" Margin="5"
                        x:Name="btnDownloadTemplate"
                             Background="IndianRed"
                         Click="DownloadButton_Click"
@@ -125,19 +117,19 @@
                     </StackPanel>
                 </DockPanel>
                 <Label x:Name="lbNoRecords"
-               Content="There are no records found"
-               HorizontalAlignment="Center"
-               FontSize="{DynamicResource textFontSize}" 
-               FontWeight="Bold"
-               Foreground="{DynamicResource SecondaryTextColor}"
-               VerticalAlignment="Center" Visibility="Collapsed"/>
+                     Content="There are no records found"
+                   HorizontalAlignment="Center"
+                   FontSize="{DynamicResource textFontSize}" 
+                   FontWeight="Bold"
+                   Foreground="{DynamicResource SecondaryTextColor}"
+                   VerticalAlignment="Center" Visibility="Collapsed"/>  
                 <!-- Datagrid -->
-                <DataGrid  ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" x:Name="dgWords"
-                 Style="{DynamicResource DataGridStyle1}" 
+                <DataGrid  ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                  x:Name="dgWords"
+                  Style="{DynamicResource DataGridStyle1}" 
                   CellStyle="{DynamicResource DataGridCellStyle1}" 
                   RowStyle="{DynamicResource DataGridRowStyle1}"
-                  MaxHeight="480"  >
-
+                  MaxHeight="{Binding ScreenHeight}" >
                     <DataGrid.Columns>
                         <DataGridTemplateColumn CanUserResize="False" IsReadOnly="True" 
                                                 MinWidth="45"  MaxWidth="45">
@@ -160,10 +152,9 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-
-                        <DataGridTextColumn Header="Word" IsReadOnly="True" CanUserResize="False" Width="150" Binding="{Binding Path=WordName}" />
-                        <DataGridTextColumn Header="IPA" IsReadOnly="True" CanUserResize="False" Width="150" Binding="{Binding Path=IPA}" />
-                        <DataGridTextColumn Header="Type" IsReadOnly="True" CanUserResize="False" Width="110" Binding="{Binding Path=Type.WordTypeName}" />
+                        <DataGridTextColumn Header="Word" IsReadOnly="True" CanUserResize="False" Width="110" Binding="{Binding Path=WordName}" />
+                        <DataGridTextColumn Header="IPA" IsReadOnly="True" CanUserResize="False" Width="110" Binding="{Binding Path=IPA}" />
+                        <DataGridTextColumn Header="Type" IsReadOnly="True" CanUserResize="False" Width="100" Binding="{Binding Path=Type.WordTypeName}" />
                         <DataGridTextColumn Header="Definitions" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding Path=DisplayMeaning}" />
                         <DataGridTextColumn Header="Examples" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding Path=DisplayExample}" />
                         <DataGridTemplateColumn Header="Action" IsReadOnly="True"  Width="210" >
@@ -207,7 +198,19 @@
                 <StackPanel Orientation="Vertical">
                     <DockPanel  x:Name="bottomContent" >
                         <StackPanel VerticalAlignment="Center" DockPanel.Dock="Left" Orientation="Horizontal" >
-                            <Label FontWeight="Bold" x:Name="lbMessage" FontSize="{DynamicResource textFontSize}" />
+                            <Label FontWeight="Bold" x:Name="lbMessage" VerticalAlignment="Center" FontSize="{DynamicResource textFontSize}" />
+                            <Button Style="{StaticResource AddButton}" Width="90" Margin="5"
+                       x:Name="btnExport"
+                            Background="Teal"
+                        Click="btnExport_Click"
+                        >
+                                <StackPanel Orientation="Horizontal">
+
+                                    <Icon:PackIconMaterial Kind="Export" VerticalAlignment="Center" Width="{DynamicResource textFontSize}" Height="{DynamicResource textFontSize}" 
+                                   Margin="0 0 10 0" />
+                                    <TextBlock Text="Export" FontWeight="Bold" FontSize="{DynamicResource textFontSize}" VerticalAlignment="Center" />
+                                </StackPanel>
+                            </Button>
                         </StackPanel>
                         <StackPanel DockPanel.Dock="Right" HorizontalAlignment="Right" Orientation="Horizontal">
                             <StackPanel VerticalAlignment="Center" Orientation="Horizontal" Margin="0 0 15 0">

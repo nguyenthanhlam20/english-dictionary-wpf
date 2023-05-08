@@ -12,7 +12,7 @@
             Background="{DynamicResource SecondaryBackgroundColor}">
         <Grid >
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="530" />
+                <ColumnDefinition Width="435" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Border Padding="0 0 10 0" Grid.Column="0"  BorderBrush="Black" BorderThickness="0 0 2 0" >
@@ -215,8 +215,8 @@
 
                                     <DataGrid.Columns>
 
-                                        <DataGridTextColumn Header="Word" IsReadOnly="True" CanUserResize="False" Width="135" Binding="{Binding Path=WordName}" />
-                                        <DataGridTextColumn Header="IPA" IsReadOnly="True" CanUserResize="False" Width="135" Binding="{Binding Path=IPA}" />
+                                        <DataGridTextColumn Header="Word" IsReadOnly="True" CanUserResize="False" Width="90" Binding="{Binding Path=WordName}" />
+                                        <DataGridTextColumn Header="IPA" IsReadOnly="True" CanUserResize="False" Width="90" Binding="{Binding Path=IPA}" />
                                         <DataGridTextColumn Header="Type" IsReadOnly="True" CanUserResize="False" Width="105" Binding="{Binding Path=Type.WordTypeName}" />
                                         <DataGridTemplateColumn Header="Action" IsReadOnly="True"  Width="70" >
                                             <DataGridTemplateColumn.CellTemplate>
@@ -246,28 +246,29 @@
                     <Label Content="Vocabulary" HorizontalAlignment="Center" FontWeight="Black" 
                            Foreground="Green" FontSize="24" Margin="0 0 0 10"      />
                     <StackPanel Orientation="Vertical"
+                                x:Name="vocabulary"
                                 Visibility="Hidden"
-                                x:Name="vocabulary" >
+                                >
                         <Border Margin="0 0 0 20" Padding="20" CornerRadius="7" BorderBrush="{DynamicResource SecondaryBackgroundColor}" 
                      Background="{DynamicResource TertiaryBackgroundColor}"
                     BorderThickness="1">
                             <DockPanel LastChildFill="False" >
-                                <StackPanel DockPanel.Dock="Left" Orientation="Vertical" VerticalAlignment="Center">
+                                <StackPanel DockPanel.Dock="Top" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <TextBlock Padding="0"
-                                    TextWrapping="Wrap"
-                                    x:Name="lbWordName"
-                                    FontSize="{DynamicResource titleFontSize}" Text="Earth" 
-                                    Foreground="DarkMagenta"
-                                    FontWeight="Bold"/>
+                                        TextWrapping="Wrap"
+                                        x:Name="lbWordName"
+                                        FontSize="{DynamicResource titleFontSize}" Text="Earth" 
+                                        Foreground="DarkMagenta"
+                                        FontWeight="Bold"/>
                                     <Label 
-                                    Margin="0 5 0 0"
-                                    Padding="0"
-                                    FontStyle="Italic"
-                                    x:Name="lbWordType"
-                                    FontSize="{DynamicResource textFontSize}"
-                                    VerticalContentAlignment="Center" Content="noun" 
-                                    Foreground="{DynamicResource PrimaryGreenColor}"
-                                    FontWeight="Bold"/>
+                                        Margin="0 5 0 0"
+                                        Padding="0"
+                                        FontStyle="Italic"
+                                        x:Name="lbWordType"
+                                        FontSize="{DynamicResource textFontSize}"
+                                        VerticalContentAlignment="Center" Content="noun" 
+                                        Foreground="{DynamicResource PrimaryGreenColor}"
+                                        FontWeight="Bold"/>
                                     <StackPanel Orientation="Horizontal" Margin="0 5 0 0" >
                                         <Icon:PackIconMaterial Kind="VolumeHigh"
                                                    VerticalAlignment="Center" Margin="0 3 5 0" Width="{DynamicResource textFontSize}" Height="{DynamicResource textFontSize}" />
@@ -281,7 +282,7 @@
                                     </StackPanel>
 
                                 </StackPanel>
-                                <StackPanel Width="450" DockPanel.Dock="Right" Orientation="Vertical">
+                                <StackPanel DockPanel.Dock="Bottom" HorizontalAlignment="Left" Orientation="Vertical">
                                     <Label Padding="0"
                                Margin="0 0 0 7"
                             VerticalContentAlignment="Center"
@@ -332,7 +333,7 @@
                             </DockPanel>
                         </Border>
 
-                        <ScrollViewer  VerticalScrollBarVisibility="Hidden" MaxHeight="380">
+                        <ScrollViewer  VerticalScrollBarVisibility="Hidden" MaxHeight="{Binding ScreenHeight}">
                             <StackPanel Orientation="Vertical">
                                 <Border
                 HorizontalAlignment="Stretch"

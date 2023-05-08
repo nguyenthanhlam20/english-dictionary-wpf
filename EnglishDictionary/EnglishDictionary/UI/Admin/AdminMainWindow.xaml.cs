@@ -42,13 +42,16 @@ namespace EnglishDictionary.UI.Admin
     /// </summary>
     public partial class AdminMainWindow : Window
     {
-
+        public double ScreenHeight { get; set; }
         public AdminMainWindow()
         {
+            ScreenHeight = SystemParameters.PrimaryScreenHeight - 100;
             InitializeComponent();
             HomePage page = new HomePage();
             frameContent.Content = page;
             lbTitle.Content = "Home";
+
+            DataContext = this;
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

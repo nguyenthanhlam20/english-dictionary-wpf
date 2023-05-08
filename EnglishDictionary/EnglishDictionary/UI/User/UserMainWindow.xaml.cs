@@ -25,13 +25,18 @@ namespace EnglishDictionary.UI.User
     /// </summary>
     public partial class UserMainWindow : Window
     {
+        public double ScreenHeight { get; set; }
+
         public UserMainWindow()
         {
+            ScreenHeight = SystemParameters.PrimaryScreenHeight - 100;
             InitializeComponent();
 
             DictionaryPage page = new DictionaryPage();
 
             frameContent.Content = page;
+
+            DataContext = this;
         }
 
         private void btnExit_Click(object sender, RoutedEventArgs e)

@@ -9,7 +9,7 @@
         <Setter Property="Background" Value="Transparent"  />
         <Setter Property="Foreground" Value="{DynamicResource PrimaryTextColor}" />
         <Setter Property="FontWeight" Value="Medium"    />
-        <Setter Property="FontSize" Value="15" />
+        <Setter Property="FontSize" Value="13" />
         <Setter Property="Height" Value="48" />
         <Setter Property="Template">
             <Setter.Value>
@@ -55,7 +55,7 @@
 
                             <!-- Text -->
                             <TextBlock x:Name="txtName" HorizontalAlignment="Left"
-                                           VerticalAlignment="Center" Margin="12 0 0 0"
+                                           VerticalAlignment="Center" Margin="5 0 0 0"
                                            Grid.Column="1" Text="{TemplateBinding Content}"
                                            Foreground="{TemplateBinding Foreground}"
                                            FontWeight="{TemplateBinding FontWeight}"

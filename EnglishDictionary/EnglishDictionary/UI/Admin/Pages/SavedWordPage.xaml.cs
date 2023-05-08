@@ -50,9 +50,11 @@ namespace EnglishDictionary.UI.Admin.Pages
         public ReplayCommand DeleteWordCommand { get; set; }
         public ReplayCommand SelectWordCommand { get; set; }
         public ReplayCommand SaveWordCommand { get; set; }
-
+        public double ScreenHeight { get; set; }
         public SavedWordPage()
         {
+            ScreenHeight = SystemParameters.PrimaryScreenHeight - 300;
+
             InitializeComponent();
             InitializePageSize();
             InitializeCommand();

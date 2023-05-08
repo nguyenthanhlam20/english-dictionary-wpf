@@ -10,15 +10,14 @@
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"
         Title="User" 
-        MinWidth="1500"
-        Height="800" 
+        MinWidth="1000"
         Closing="Window_Closing"
-        MinHeight="800"
+         MinHeight="{Binding Path=ScreenHeight}"
        >
     <Border CornerRadius="10" Background="{DynamicResource PrimaryBackgroundColor}" >
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="160" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 

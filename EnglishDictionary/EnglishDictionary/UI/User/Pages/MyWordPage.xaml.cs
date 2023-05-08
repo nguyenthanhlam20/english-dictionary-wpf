@@ -33,8 +33,15 @@ namespace EnglishDictionary.UI.User.Pages
         public ReplayCommand SaveWordCommand { get; set; }
 
         public List<Button> _alphabetButtons = new List<Button>();
+
+
+        public double ScreenHeight { get; set; }
+        public double ScreenWidth { get; set; }
         public MyWordPage()
         {
+            ScreenHeight = SystemParameters.PrimaryScreenHeight - 480;
+            ScreenWidth = SystemParameters.PrimaryScreenWidth - 856;
+          
             InitializeComponent();
             SaveWordCommand = new ReplayCommand(SaveWord);
 
@@ -255,7 +262,7 @@ namespace EnglishDictionary.UI.User.Pages
                 tb = new TextBlock();
                 tb.TextWrapping = TextWrapping.Wrap;
                 tb.FontSize = 14;
-                tb.MaxWidth = 680;
+                tb.MaxWidth = ScreenWidth;
                 tb.Text = we.ExampleContent;
 
                 // Add icon and text block to row container
@@ -295,7 +302,7 @@ namespace EnglishDictionary.UI.User.Pages
                 tb.TextWrapping = TextWrapping.Wrap;
                 tb.FontSize = 14;
                 tb.Text = we.MeaningContent;
-                tb.MaxWidth = 680;
+                tb.MaxWidth = ScreenWidth;
 
                 // Add icon and text block to row container
                 sp.Children.Add(icon);

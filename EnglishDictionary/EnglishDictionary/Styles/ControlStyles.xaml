@@ -48,10 +48,10 @@
         <Setter Property ="Background" Value="#6741d9" />
         <Setter Property ="Foreground" Value="{DynamicResource TertiaryWhiteColor}" />
         <Setter Property ="FocusVisualStyle" Value="{x:Null}" />
-        <Setter Property ="Height" Value="40" />
+        <Setter Property ="Height" Value="35" />
         <Setter Property ="HorizontalAlignment" Value="Right" />
         <Setter Property ="Margin" Value="0" />
-        <Setter Property ="FontSize" Value="13" />
+        <Setter Property ="FontSize" Value="12" />
         <Setter Property ="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">

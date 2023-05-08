@@ -9,7 +9,7 @@
         Icon="/Assets/Images/app-icon.png"
         ResizeMode="NoResize"
        WindowStartupLocation="CenterScreen"
-        Title="" Height="785" Width="850">
+        Title="" Height="600" Width="850">
     <Border Padding="30 0 30 0" Background="{DynamicResource SecondaryBackgroundColor}">
         <DockPanel >
             <StackPanel DockPanel.Dock="Top" Orientation="Vertical">
@@ -105,7 +105,7 @@
                     </DockPanel>
                 </Border>
 
-                <ScrollViewer  VerticalScrollBarVisibility="Hidden" MaxHeight="380">
+                <ScrollViewer  VerticalScrollBarVisibility="Hidden" MaxHeight="270">
                     <StackPanel Orientation="Vertical">
                         <Border
                 HorizontalAlignment="Stretch"

@@ -21,45 +21,6 @@ namespace EnglishDictionary.UI.Admin
     /// </summary>
     public partial class AddWordWindow : Window
     {
-        //private void btnSearch_Click(object sender, RoutedEventArgs e)
-        //{
-        //    var lstMember = memberRepository.GetMembers().ToList();
-        //    var memberId = String.IsNullOrEmpty(txtMemberId.Text) == true ? "": txtMemberId.Text;
-        //    var email = String.IsNullOrEmpty( txtEmail.Text) == true ? "": txtEmail.Text;
-        //    var company = String.IsNullOrEmpty(txtCompanyName.Text) == true ? "": txtCompanyName.Text;
-        //    var city = String.IsNullOrEmpty(txtCity.Text) == true ? "" : txtCity.Text;
-        //    var country = String.IsNullOrEmpty(txtCountry.Text) == true ? "" : txtCountry.Text;
-
-        //    lstMember = lstMember.Where(x => x.Email.ToLower().Contains(email.ToLower())
-        //       && x.CompanyName.ToLower().Contains(company.ToLower())
-        //       && x.City.ToLower().Contains(city.ToLower())
-        //       && x.Country.ToLower().Contains(country.ToLower())
-        //       ).ToList();
-
-
-        //    lvMembers.ItemsSource = lstMember;
-        //}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         private Button btnRemove;
         private StackPanel spConatainer;
         private TextBox txtInput;
@@ -70,9 +31,13 @@ namespace EnglishDictionary.UI.Admin
 
         private HomePage _mainWindow1;
         private SavedWordPage _mainWindow2;
+        public double ScreenHeight { get; set; }
+        public double SHeight { get; set; }
 
         public AddWordWindow(HomePage mainWindow1, SavedWordPage mainWindow2)
         {
+            SHeight = SystemParameters.PrimaryScreenHeight;
+            ScreenHeight = SHeight - 400;
             InitializeComponent();
             if (mainWindow1 != null)
             {
@@ -83,8 +48,9 @@ namespace EnglishDictionary.UI.Admin
                 _mainWindow2 = mainWindow2;
             }
 
-
             LoadWordTypes();
+
+            DataContext = this;
 
         }
 
@@ -252,7 +218,7 @@ namespace EnglishDictionary.UI.Admin
             // Check whether user input all required fields or not
             if (String.IsNullOrEmpty(txtWord.Text) || String.IsNullOrEmpty(txtIPA.Text))
             {
-                return new Tuple<bool, string>(false, "Please enter all word name and ipa");
+                return new Tuple<bool, string>(false, "Please enter word name and ipa");
             }
 
             return new Tuple<bool, string>(true, "Valid input"); ;

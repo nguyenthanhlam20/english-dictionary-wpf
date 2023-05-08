@@ -6,13 +6,14 @@
       xmlns:local="clr-namespace:EnglishDictionary.UI.User.Pages"
       xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
       mc:Ignorable="d" 
+      
       Title="">
 
     <Border  
             Background="{DynamicResource SecondaryBackgroundColor}">
         <Grid >
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="530" />
+                <ColumnDefinition Width="435" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Border Padding="0 0 10 0" Grid.Column="0"  BorderBrush="Black" BorderThickness="0 0 2 0" >
@@ -213,8 +214,8 @@
 
                                     <DataGrid.Columns>
 
-                                        <DataGridTextColumn Header="Word" IsReadOnly="True" CanUserResize="False" Width="135" Binding="{Binding Path=WordName}" />
-                                        <DataGridTextColumn Header="IPA" IsReadOnly="True" CanUserResize="False" Width="135" Binding="{Binding Path=IPA}" />
+                                        <DataGridTextColumn Header="Word" IsReadOnly="True" CanUserResize="False" Width="90" Binding="{Binding Path=WordName}" />
+                                        <DataGridTextColumn Header="IPA" IsReadOnly="True" CanUserResize="False" Width="90" Binding="{Binding Path=IPA}" />
                                         <DataGridTextColumn Header="Type" IsReadOnly="True" CanUserResize="False" Width="105" Binding="{Binding Path=Type.WordTypeName}" />
                                         <DataGridTemplateColumn Header="Action" IsReadOnly="True"  Width="70" >
                                             <DataGridTemplateColumn.CellTemplate>
@@ -244,13 +245,13 @@
                     <Label Content="Vocabulary" HorizontalAlignment="Center" FontWeight="Black" 
                            Foreground="Green" FontSize="24" Margin="0 0 0 10"      />
                     <StackPanel Orientation="Vertical"
-                                Visibility="Hidden"
+                                 Visibility="Hidden"
                                 x:Name="vocabulary" >
                         <Border Margin="0 0 0 20" Padding="20" CornerRadius="7" BorderBrush="{DynamicResource SecondaryBackgroundColor}" 
-                     Background="{DynamicResource TertiaryBackgroundColor}"
-                    BorderThickness="1">
+                             Background="{DynamicResource TertiaryBackgroundColor}"
+                            BorderThickness="1">    
                             <DockPanel LastChildFill="False" >
-                                <StackPanel DockPanel.Dock="Left" Orientation="Vertical" VerticalAlignment="Center">
+                                <StackPanel DockPanel.Dock="Top" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <TextBlock Padding="0"
                                     TextWrapping="Wrap"
                                     x:Name="lbWordName"
@@ -279,32 +280,32 @@
                                     </StackPanel>
 
                                 </StackPanel>
-                                <StackPanel Width="450" DockPanel.Dock="Right" Orientation="Vertical">
+                                <StackPanel DockPanel.Dock="Bottom" HorizontalAlignment="Left" Orientation="Vertical">
                                     <Label Padding="0"
-                               Margin="0 0 0 7"
-                            VerticalContentAlignment="Center"
-                            FontSize="16" Content="Frequently Used As" 
-                             Foreground="{DynamicResource SecondaryBlueColor}"
-                               FontWeight="Bold"/>
+                                           Margin="0 0 0 7"
+                                           VerticalContentAlignment="Center"
+                                           FontSize="16" Content="Frequently Used As" 
+                                           Foreground="{DynamicResource SecondaryBlueColor}"
+                                           FontWeight="Bold"/>
                                     <StackPanel Orientation="Vertical" Margin="0 0 0 10"            
                                                >
                                         <Label 
-                                Margin="0 0 0 10"                              
-                                Opacity="0.6"
-                                Padding="0"
-                                FontStyle="Italic"
-                                FontSize="11"
-                                VerticalContentAlignment="Center" Content="Definition" 
-                                Foreground="{DynamicResource SecondaryTealColor}"
-                                FontWeight="Bold"/>
+                                            Margin="0 0 0 10"                              
+                                            Opacity="0.6"
+                                            Padding="0"
+                                            FontStyle="Italic"
+                                            FontSize="11"
+                                            VerticalContentAlignment="Center" Content="Definition" 
+                                            Foreground="{DynamicResource SecondaryTealColor}"
+                                            FontWeight="Bold"/>
 
                                         <TextBlock
-                                Padding="0"
-                                TextWrapping="Wrap"
-                                x:Name="txtMeaning"
-                                FontSize="{DynamicResource textFontSize}"
-                                Text="The earth and all the people, places, and things on it"
-                                Foreground="{DynamicResource SecondaryTextColor}" />
+                                            Padding="0"
+                                            TextWrapping="Wrap"
+                                            x:Name="txtMeaning"
+                                            FontSize="{DynamicResource textFontSize}"
+                                            Text="The earth and all the people, places, and things on it"
+                                            Foreground="{DynamicResource SecondaryTextColor}" />
                                     </StackPanel>
                                     <StackPanel Orientation="Vertical" >
                                         <Label 
@@ -318,85 +319,84 @@
                                         FontWeight="Bold"/>
 
                                         <TextBlock 
-                                x:Name="txtExample"
-                                Padding="0"
-                                TextWrapping="Wrap"
-                                FontSize="{DynamicResource textFontSize}"
-                                Text="Different parts of the world have very different climatic conditions"
-                                Foreground="{DynamicResource SecondaryTextColor}" />
+                                            x:Name="txtExample"
+                                            Padding="0"
+                                            TextWrapping="Wrap"
+                                            FontSize="{DynamicResource textFontSize}"
+                                            Text="Different parts of the world have very different climatic conditions"
+                                            Foreground="{DynamicResource SecondaryTextColor}" />
                                     </StackPanel>
 
                                 </StackPanel>
                             </DockPanel>
                         </Border>
 
-                        <ScrollViewer  VerticalScrollBarVisibility="Hidden" MaxHeight="380">
+                        <ScrollViewer  VerticalScrollBarVisibility="Hidden" MaxHeight="{Binding ScreenHeight}">
                             <StackPanel Orientation="Vertical">
                                 <Border
-                HorizontalAlignment="Stretch"
-                MaxHeight="350"
-                Padding="20" CornerRadius="7" 
-                    BorderBrush="{DynamicResource SecondaryBackgroundColor}" 
-                     Background="{DynamicResource TertiaryBackgroundColor}"
-                    BorderThickness="1">
-                                    <StackPanel HorizontalAlignment="Stretch" Orientation="Vertical">
+                                    HorizontalAlignment="Stretch"
+                                    MaxHeight="350"
+                                    Padding="20" CornerRadius="7" 
+                                    BorderBrush="{DynamicResource SecondaryBackgroundColor}" 
+                                    Background="{DynamicResource TertiaryBackgroundColor}"
+                                    BorderThickness="1">
+                                    <StackPanel Orientation="Vertical">
                                         <TextBlock Text="DEFINITIONS"
-                               FontSize="18"
-                               FontWeight="Bold" 
-                               Margin="0 0 0 10"                                          
-                              />
-                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" x:Name="meaningContainer">
+                                                   FontSize="18"
+                                                   FontWeight="Bold" 
+                                                   Margin="0 0 0 10" />
+                                        <StackPanel Orientation="Vertical" 
+                                                    x:Name="meaningContainer">
                                             <StackPanel Orientation="Horizontal" >
-                                                <Icon:PackIconMaterial Kind="Circle" Foreground="YellowGreen"
-                                                       Width="10" Height="10"
-                                                       VerticalAlignment="Center" Margin="0 1 10 0" />
+                                                <Icon:PackIconMaterial 
+                                                    Kind="Circle" 
+                                                    Foreground="YellowGreen"
+                                                    Width="10" Height="10"
+                                                    VerticalAlignment="Center" Margin="0 1 10 0" />
                                                 <TextBlock 
-                                    TextWrapping="Wrap"
-                                    FontSize="14"
-                                   MaxWidth="720"
-                                    Text="an extremely large, round mass of rock and metal, such as Earth, or of gas, such as Jupiter, that moves in a circular path around the sun or another star" />
+                                                    TextWrapping="Wrap"
+                                                    FontSize="14"
+                                                    MaxWidth="500"
+                                                    Text="an extremely large, round mass of rock and metal, such as Earth, or of gas, such as Jupiter, that moves in a circular path around the sun or another star" />
                                             </StackPanel>
                                         </StackPanel>
-
                                     </StackPanel>
                                 </Border>
 
                                 <Border
-                MaxHeight="350"
-                Padding="20" CornerRadius="7" 
-                    Margin="0 20 0 0"
-                    BorderBrush="{DynamicResource SecondaryBackgroundColor}" 
-                     Background="{DynamicResource TertiaryBackgroundColor}"
-                    BorderThickness="1">
+                                    MaxHeight="350"
+                                    Padding="20" CornerRadius="7" 
+                                    Margin="0 20 0 0"
+                                    BorderBrush="{DynamicResource SecondaryBackgroundColor}" 
+                                    Background="{DynamicResource TertiaryBackgroundColor}"
+                                    BorderThickness="1" >
                                     <StackPanel Orientation="Vertical">
                                         <TextBlock Text="EXAMPLES"
-                               FontSize="18"
-                               FontWeight="Bold" 
-                               Margin="0 0 0 10"                                            
-                              />
+                                                   FontSize="18"
+                                                   FontWeight="Bold" 
+                                                   Margin="0 0 0 10" />
                                         <StackPanel Orientation="Vertical" x:Name="exampleContainer">
                                             <StackPanel Orientation="Horizontal" >
-                                                <Icon:PackIconMaterial Kind="Circle" Foreground="YellowGreen"
-                                                       Width="10" Height="10"
-                                                       VerticalAlignment="Center" Margin="0 0 0 10" />
+                                                <Icon:PackIconMaterial 
+                                                    Kind="Circle" 
+                                                    Foreground="YellowGreen"
+                                                    Width="10" Height="10"
+                                                    VerticalAlignment="Center" Margin="0 0 0 10" />
                                                 <TextBlock 
-                                    Padding="0"
-                                    TextWrapping="Wrap"
-                                    FontSize="14"
-                                    Text="Different parts of the world have very different climatic conditions"
-                                    Foreground="Black" />
+                                                    Padding="0"
+                                                    TextWrapping="Wrap"
+                                                    FontSize="14"
+                                                    Text="Different parts of the world have very different climatic conditions"
+                                                    Foreground="Black" />
                                             </StackPanel>
                                         </StackPanel>
                                     </StackPanel>
                                 </Border>
                             </StackPanel>
                         </ScrollViewer>
-
                     </StackPanel>
                 </StackPanel>
             </Border>
-
-
         </Grid>
     </Border>
 </Page>
