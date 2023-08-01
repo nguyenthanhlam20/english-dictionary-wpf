@@ -1,25 +1,12 @@
-﻿using CsvHelper.Configuration;
-using CsvHelper;
-using EnglishDictionary.Models;
+﻿using EnglishDictionary.Models;
 using FinancialWPFApp.UI;
 using MahApps.Metro.IconPacks;
-using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.ComponentModel;
 using Microsoft.EntityFrameworkCore;
 
@@ -50,7 +37,18 @@ namespace EnglishDictionary.UI.Admin.Pages
         public ReplayCommand DeleteWordCommand { get; set; }
         public ReplayCommand SelectWordCommand { get; set; }
         public ReplayCommand SaveWordCommand { get; set; }
-        public double ScreenHeight { get; set; }
+
+        private double _screenHeight = 0f;
+        public double ScreenHeight
+        {
+            get { return _screenHeight; }
+            set
+            {
+                _screenHeight = value;
+                OnPropertyChanged("ScreenHeight");
+            }
+        }
+
         public SavedWordPage()
         {
             ScreenHeight = SystemParameters.PrimaryScreenHeight - 300;
@@ -632,6 +630,13 @@ namespace EnglishDictionary.UI.Admin.Pages
 
 
             }
+        }
+
+        public void ResizeTable(double actualHeight)
+        {
+            ScreenHeight = actualHeight - 250;
+
+            dgWords.MaxHeight = ScreenHeight;
         }
     }
 }

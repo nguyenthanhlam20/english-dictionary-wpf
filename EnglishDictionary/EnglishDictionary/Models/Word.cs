@@ -49,6 +49,15 @@ namespace EnglishDictionary.Models
             }
         }
 
+
+        public string DisplayWord
+        {
+            get
+            {
+                return WordName + " (" + Type.WordTypeName + ")";
+
+            }
+        }
         public string DisplayExample
         {
             get

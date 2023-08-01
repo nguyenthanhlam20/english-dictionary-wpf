@@ -143,7 +143,7 @@ namespace EnglishDictionary.UI.Admin {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/EnglishDictionary;V1.0.0.0;component/ui/admin/addwordwindow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/EnglishDictionary;component/ui/admin/addwordwindow.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\UI\Admin\AddWordWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

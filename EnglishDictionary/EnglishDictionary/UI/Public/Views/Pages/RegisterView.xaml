@@ -25,7 +25,7 @@
 
 
             </StackPanel>
-            <StackPanel Margin="0 50 0 0" Orientation="Vertical">
+            <StackPanel Margin="0 40 0 0" Orientation="Vertical">
                 <Label Foreground="{DynamicResource SecondaryTextColor}" Style="{DynamicResource StyledLabel}" Content="{DynamicResource signUpTitle}" FontSize="{DynamicResource titleFontSize}" FontWeight="Bold"   />
                 <Label Foreground="{DynamicResource SecondaryTextColor}" Style="{DynamicResource StyledLabel}" Content="{DynamicResource signUpMessage}" FontSize="{DynamicResource textFontSize}" Opacity="0.8" />
                

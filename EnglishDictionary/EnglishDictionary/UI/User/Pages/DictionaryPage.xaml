@@ -237,7 +237,13 @@
                             </Grid>
                         </Border>
                     </StackPanel>
-
+                    <Popup x:Name="searchResultsPopup" Width="200" PlacementTarget="{Binding ElementName=txtSearch}" Placement="Bottom" StaysOpen="True" IsOpen="False">
+                        <Border BorderThickness="1" BorderBrush="Gray" Background="White">
+                            <ListBox x:Name="searchResultsListBox" SelectionChanged="searchResultsListBox_SelectionChanged">
+                               
+                            </ListBox>
+                        </Border>
+                    </Popup>
                 </Grid>
             </Border>
             <Border  Padding="10" Grid.Column="1" >

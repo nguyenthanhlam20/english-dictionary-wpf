@@ -8,10 +8,11 @@
         mc:Ignorable="d"
         Icon="/Assets/Images/app-icon.png"
         WindowStartupLocation="CenterScreen"
-        WindowState="Maximized"
+        WindowState="Normal"
         Title="User" 
-        MinWidth="1000"
+        MinWidth="1100"
         Closing="Window_Closing"
+        SizeChanged="Window_SizeChanged"
          MinHeight="{Binding Path=ScreenHeight}"
        >
     <Border CornerRadius="10" Background="{DynamicResource PrimaryBackgroundColor}" >

@@ -1,22 +1,13 @@
 ﻿using EnglishDictionary.Models;
 using FinancialWPFApp.UI;
-using FinancialWPFApp.UI.Public.Views;
 using MahApps.Metro.IconPacks;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace EnglishDictionary.UI.User.Pages
 {
@@ -36,6 +27,8 @@ namespace EnglishDictionary.UI.User.Pages
         public List<Button> _alphabetButtons = new List<Button>();
         public double ScreenHeight { get; set; }
         public double ScreenWidth { get; set; }
+
+        public List<Word> defaultWords = new();
         public DictionaryPage()
         {
             ScreenHeight = SystemParameters.PrimaryScreenHeight - 480;
@@ -45,7 +38,8 @@ namespace EnglishDictionary.UI.User.Pages
             RegisterButtons();
             DataContext = this;
 
-
+            AssignDefaultWords();
+            LoadAllWords();
         }
 
 
@@ -96,11 +90,11 @@ namespace EnglishDictionary.UI.User.Pages
 
             lbResult.Visibility = Visibility.Visible;
 
-            List<Word> words = GetAllWords();
-            if (words.Count() > 0)
+            
+            if (defaultWords.Count() > 0)
             {
-                lbResult.Content = $"Total {words.Count()} words";
-                dgWords.ItemsSource = words;
+                lbResult.Content = $"Total {defaultWords.Count()} words";
+                dgWords.ItemsSource = defaultWords;
                 dgWords.Visibility = Visibility.Visible;
             }
             else
@@ -122,14 +116,17 @@ namespace EnglishDictionary.UI.User.Pages
                 filterSearch = txt.Text;
                 if (String.IsNullOrEmpty(txt.Text) == false)
                 {
+                    searchResultsPopup.IsOpen = true;
                     btnClearSearch.Visibility = Visibility.Visible;
 
-                    SearchWords();
+                    SuggestWords();
                 }
                 else
                 {
                     btnClearSearch.Visibility = Visibility.Hidden;
-                    LoadAllWords();
+                    searchResultsPopup.IsOpen = false;
+
+                    //LoadAllWords();
                 }
             }
             catch (Exception)
@@ -139,7 +136,7 @@ namespace EnglishDictionary.UI.User.Pages
             }
         }
 
-        public void SearchWords()
+        public void SearchWordByAlphabet()
         {
             lbResult.Visibility = Visibility.Visible;
             btnAll.Background = Brushes.BlueViolet;
@@ -160,29 +157,42 @@ namespace EnglishDictionary.UI.User.Pages
             }
         }
 
-        public List<Word> GetResult()
+        public void SuggestWords()
         {
-            using (var context = new DictionaryContext())
+            List<Word> words = GetResult();
+            if (words.Count() > 0)
             {
-                if (String.IsNullOrEmpty(filterStart) == false)
-                {
-                    return context.Words.Include(w => w.Type).Where(w => ((w.WordName.ToUpper().StartsWith(filterStart) && w.WordName.Contains(filterSearch))
-                || (filterSearch.Contains(w.WordName) && w.WordName.ToUpper().StartsWith(filterStart)))).ToList();
-                }
-                else
-                {
-                    return context.Words.Include(w => w.Type).Where(w => w.WordName.Contains(filterSearch)
-              || filterSearch.Contains(w.WordName)).ToList();
-                }
+                searchResultsListBox.ItemsSource = words;
+                searchResultsListBox.DisplayMemberPath = "DisplayWord";
+                searchResultsListBox.SelectedValuePath = "WordId";
+            }
+            else
+            {
+                searchResultsListBox.ItemsSource = null;
             }
         }
 
-        public List<Word> GetAllWords()
+        public List<Word> GetResult()
+        {
+            if (String.IsNullOrEmpty(filterStart) == false)
+            {
+                return defaultWords.Where(w => ((w.WordName.ToUpper().StartsWith(filterStart) && w.WordName.Contains(filterSearch))
+            || (filterSearch.Contains(w.WordName) && w.WordName.ToUpper().StartsWith(filterStart)))).ToList();
+            }
+            else
+            {
+                return defaultWords.Where(w => w.WordName.StartsWith(filterSearch)).ToList();
+            }
+        }
+
+        public void AssignDefaultWords()
         {
             using (var context = new DictionaryContext())
             {
-                return context.Words.Include(w => w.Type).ToList();
+                defaultWords = context.Words.Include(w => w.Type).ToList();
             }
+
+            
         }
 
         private void LoadWordDetails()
@@ -336,7 +346,7 @@ namespace EnglishDictionary.UI.User.Pages
             btn.Background = Brushes.Gray;
 
             filterStart = btn.Name;
-            SearchWords();
+            SearchWordByAlphabet();
 
         }
 
@@ -361,6 +371,11 @@ namespace EnglishDictionary.UI.User.Pages
             filterStart = "";
             txtSearch.Clear();
             LoadAllWords();
+        }
+
+        private void searchResultsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

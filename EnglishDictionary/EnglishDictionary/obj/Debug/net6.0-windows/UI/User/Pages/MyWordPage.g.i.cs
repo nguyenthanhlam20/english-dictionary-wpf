@@ -375,7 +375,7 @@ namespace EnglishDictionary.UI.User.Pages {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/EnglishDictionary;V1.0.0.0;component/ui/user/pages/mywordpage.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/EnglishDictionary;component/ui/user/pages/mywordpage.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\..\UI\User\Pages\MyWordPage.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

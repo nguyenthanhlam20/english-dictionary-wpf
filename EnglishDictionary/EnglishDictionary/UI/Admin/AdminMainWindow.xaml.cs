@@ -1,39 +1,7 @@
-﻿using CsvHelper;
-using CsvHelper.Configuration;
-using EnglishDictionary.Models;
-using EnglishDictionary.UI.Admin.Pages;
-using EnglishDictionary.UI.User.Pages;
-using FinancialWPFApp.UI;
+﻿using EnglishDictionary.UI.Admin.Pages;
 using FinancialWPFApp.UI.Public.Views;
-using MahApps.Metro.IconPacks;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration;
-using System.Data;
-using System.Diagnostics;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Reflection.Metadata;
-using System.Reflection.PortableExecutable;
-using System.Runtime.Intrinsics.X86;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace EnglishDictionary.UI.Admin
 {
@@ -42,13 +10,24 @@ namespace EnglishDictionary.UI.Admin
     /// </summary>
     public partial class AdminMainWindow : Window
     {
-        public double ScreenHeight { get; set; }
+        public double ScreenHeight { get; set; } = 0f;
+
+        private HomePage homePage;
+        private SavedWordPage saveWordPage;
+
+        public enum Page
+        {
+            HomePage,
+            SaveWordPage,
+        }
+
+        public Page currentPage = Page.HomePage;
         public AdminMainWindow()
         {
-            ScreenHeight = SystemParameters.PrimaryScreenHeight - 100;
+            ScreenHeight = SystemParameters.PrimaryScreenHeight - 250;
             InitializeComponent();
-            HomePage page = new HomePage();
-            frameContent.Content = page;
+            homePage = new HomePage();
+            frameContent.Content = homePage;
             lbTitle.Content = "Home";
 
             DataContext = this;
@@ -73,18 +52,21 @@ namespace EnglishDictionary.UI.Admin
 
         private void rdHome_Click(object sender, RoutedEventArgs e)
         {
-            HomePage page = new HomePage();
+            homePage = new HomePage();
             lbTitle.Content = "Home";
-
-            frameContent.Content = page;
+            currentPage = Page.HomePage;
+            frameContent.Content = homePage;
+            ResizeTable();
         }
 
         private void rdSavedWord_Click(object sender, RoutedEventArgs e)
         {
             lbTitle.Content = "Saved Word";
+            currentPage = Page.SaveWordPage;
+            saveWordPage = new SavedWordPage();
+            frameContent.Content = saveWordPage;
+            ResizeTable();
 
-            SavedWordPage page = new SavedWordPage();
-            frameContent.Content = page;
         }
 
         private void rdSettings_Click(object sender, RoutedEventArgs e)
@@ -93,6 +75,31 @@ namespace EnglishDictionary.UI.Admin
             lbTitle.Content = "Settings";
 
             frameContent.Content = page;
+        }
+
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+
+            ResizeTable();
+        }
+
+        private void ResizeTable()
+        {
+            if (!double.IsNaN(this.ActualHeight))
+            {
+                switch (currentPage)
+                {
+                    case Page.HomePage:
+                        homePage.ResizeTable(this.ActualHeight);
+                        break;
+                    case Page.SaveWordPage:
+                        saveWordPage.ResizeTable(this.ActualHeight);
+                        break;
+
+                }
+
+            }
+
         }
     }
 }

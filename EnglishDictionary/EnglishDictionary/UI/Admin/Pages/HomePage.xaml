@@ -8,6 +8,7 @@
       mc:Ignorable="d" 
       MinWidth="700"
       MinHeight="500"
+      
      >
 
     <Border Background="{DynamicResource SecondaryBackgroundColor}">
@@ -129,7 +130,7 @@
                   Style="{DynamicResource DataGridStyle1}" 
                   CellStyle="{DynamicResource DataGridCellStyle1}" 
                   RowStyle="{DynamicResource DataGridRowStyle1}"
-                  MaxHeight="{Binding ScreenHeight}" >
+                  MaxHeight="{Binding Path=ScreenHeight}" >
                     <DataGrid.Columns>
                         <DataGridTemplateColumn CanUserResize="False" IsReadOnly="True" 
                                                 MinWidth="45"  MaxWidth="45">

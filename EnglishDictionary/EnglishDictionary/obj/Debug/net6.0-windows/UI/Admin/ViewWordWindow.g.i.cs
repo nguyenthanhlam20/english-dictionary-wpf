@@ -119,7 +119,7 @@ namespace EnglishDictionary.UI.Admin {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/EnglishDictionary;V1.0.0.0;component/ui/admin/viewwordwindow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/EnglishDictionary;component/ui/admin/viewwordwindow.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\UI\Admin\ViewWordWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

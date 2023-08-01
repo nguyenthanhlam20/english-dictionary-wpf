@@ -8,11 +8,12 @@
         mc:Ignorable="d"
         Icon="/Assets/Images/app-icon.png"
         WindowStartupLocation="CenterScreen"
-        WindowState="Maximized"
+        WindowState="Normal"
         Title="Admin" 
         MinWidth="1110"
+       ResizeMode="CanResize"
         Closing="Window_Closing"
-        
+        SizeChanged="Window_SizeChanged"
         MinHeight="{Binding Path=ScreenHeight}"
        >
     <Border CornerRadius="10" Background="{DynamicResource PrimaryBackgroundColor}" >
@@ -77,9 +78,6 @@
                          >
                         <Icon:PackIconMaterial Kind="Power" Width="22" Height="22" />
                     </Button>
-
-
-
                 </Grid>
 
             </Border>

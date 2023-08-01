@@ -1,7 +1,6 @@
 ﻿using CsvHelper.Configuration;
 using CsvHelper;
 using EnglishDictionary.Models;
-using FinancialWPFApp.UI.Public.Views;
 using FinancialWPFApp.UI;
 using MahApps.Metro.IconPacks;
 using Microsoft.EntityFrameworkCore;
@@ -11,17 +10,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.ComponentModel;
 
 namespace EnglishDictionary.UI.Admin.Pages
@@ -49,12 +40,12 @@ namespace EnglishDictionary.UI.Admin.Pages
         public ReplayCommand ViewWordCommand { get; set; }
         public ReplayCommand DeleteWordCommand { get; set; }
         public ReplayCommand SelectWordCommand { get; set; }
-        public double ScreenHeight { get; set; }
+       
         public ReplayCommand SaveWordCommand { get; set; }
 
         public HomePage()
         {
-            ScreenHeight = SystemParameters.PrimaryScreenHeight - 300;
+            ScreenHeight = SystemParameters.PrimaryScreenHeight - 400;
             InitializeComponent();
             InitializePageSize();
             InitializeCommand();
@@ -83,6 +74,17 @@ namespace EnglishDictionary.UI.Admin.Pages
             }
         }
 
+        public double _screenHeight = 0;
+
+        public double ScreenHeight
+        {
+            get { return _screenHeight; }
+            set
+            {
+                _screenHeight = value;
+                OnPropertyChanged("ScreenHeight");
+            }
+        }
 
 
         public void LoadWordInitialization()
@@ -842,6 +844,13 @@ namespace EnglishDictionary.UI.Admin.Pages
 
 
             }
+        }
+
+        public void ResizeTable(double height)
+        {
+            ScreenHeight = height - 250;
+
+            dgWords.MaxHeight = ScreenHeight;
         }
     }
 }

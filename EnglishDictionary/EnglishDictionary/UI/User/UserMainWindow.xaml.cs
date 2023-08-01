@@ -29,7 +29,7 @@ namespace EnglishDictionary.UI.User
 
         public UserMainWindow()
         {
-            ScreenHeight = SystemParameters.PrimaryScreenHeight - 100;
+            ScreenHeight = SystemParameters.PrimaryScreenHeight - 250;
             InitializeComponent();
 
             DictionaryPage page = new DictionaryPage();
@@ -75,6 +75,11 @@ namespace EnglishDictionary.UI.User
             lbTitle.Content = "Settings";
 
             frameContent.Content = page;
+        }
+
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+
         }
     }
 }

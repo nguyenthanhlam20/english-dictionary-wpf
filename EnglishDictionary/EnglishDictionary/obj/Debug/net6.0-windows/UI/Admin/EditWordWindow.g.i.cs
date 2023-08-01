@@ -127,7 +127,7 @@ namespace EnglishDictionary.UI.Admin {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/EnglishDictionary;V1.0.0.0;component/ui/admin/editwordwindow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/EnglishDictionary;component/ui/admin/editwordwindow.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\UI\Admin\EditWordWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

@@ -26,7 +26,7 @@
 
 
             </StackPanel>
-            <StackPanel Margin="0 50 0 0" Orientation="Vertical">
+            <StackPanel Margin="0 40 0 0" Orientation="Vertical">
                 <Label Foreground="{DynamicResource SecondaryTextColor}" 
                        Style="{DynamicResource StyledLabel}" Content="{DynamicResource signInTitle}" 
                        FontSize="{DynamicResource titleFontSize}" FontWeight="Bold"   />

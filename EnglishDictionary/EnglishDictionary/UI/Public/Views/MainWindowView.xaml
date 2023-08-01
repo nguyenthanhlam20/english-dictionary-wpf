@@ -8,11 +8,11 @@
         mc:Ignorable="d"
         x:Name="PublicMainWindow"
         xmlns:vm="clr-namespace:FinancialWPFApp.UI.Public.ViewModels"
-        Title="Access" Height="650" Width="1200" 
+        Title="Access" MinHeight="600" MinWidth="1200" 
         WindowStartupLocation="CenterScreen" 
-                Icon="/Assets/Images/app-icon.png"
-Closing="PublicMainWindow_Closing"
-        ResizeMode="NoResize"
+        Icon="/Assets/Images/app-icon.png"
+        Closing="PublicMainWindow_Closing"
+        ResizeMode="CanResize"
         WindowState="Normal">
 
 
@@ -29,7 +29,7 @@ Closing="PublicMainWindow_Closing"
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="650" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Border Grid.Column="0" Background="{DynamicResource SecondaryBackgroundColor}" >
                 <Frame
