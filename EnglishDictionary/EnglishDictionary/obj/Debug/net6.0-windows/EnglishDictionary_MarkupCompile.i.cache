@@ -12,9 +12,9 @@ TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 D:\projects\english-dictionary-wpf\EnglishDictionary\EnglishDictionary\App.xaml
 25-149212998
 12096179246
-37350798365
+37596414243
 2201556090832
 Assets\Icons\Icons.xaml;Assets\Values\Sizes.xaml;Assets\Values\Strings.xaml;Styles\ButtonStyle.xaml;Styles\ControlStyles.xaml;Styles\DataGridStyle.xaml;Styles\LabelStyle.xaml;Styles\RadioButtonStyle.xaml;Styles\TextBoxStyle.xaml;Themes\DarkTheme.xaml;Themes\LightTheme.xaml;UI\Admin\AddWordWindow.xaml;UI\Admin\AdminMainWindow.xaml;UI\Admin\EditWordWindow.xaml;UI\Admin\Pages\AdminSettingPage.xaml;UI\Admin\Pages\HomePage.xaml;UI\Admin\Pages\SavedWordPage.xaml;UI\Admin\ViewWordWindow.xaml;UI\Public\Views\MainWindowView.xaml;UI\Public\Views\Pages\LoginView.xaml;UI\Public\Views\Pages\RegisterView.xaml;UI\User\Pages\DictionaryPage.xaml;UI\User\Pages\MyWordPage.xaml;UI\User\Pages\UserSettingPage.xaml;UI\User\UserMainWindow.xaml;
 
-False
+True
 

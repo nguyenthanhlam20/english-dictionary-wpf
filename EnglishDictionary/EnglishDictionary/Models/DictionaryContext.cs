@@ -26,7 +26,6 @@ namespace EnglishDictionary.Models
             string databaseName = "dictionary.db";
             string currentDirectory = Directory.GetCurrentDirectory();
             string databasePath = Path.Combine(currentDirectory, databaseName);
-
             if (!Directory.Exists(Path.GetDirectoryName(databasePath)))
             {
                 Directory.CreateDirectory(Path.GetDirectoryName(databasePath));

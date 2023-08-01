@@ -84,26 +84,15 @@ namespace EnglishDictionary.UI.Admin
             {
                 // Create row container
                 sp = new StackPanel();
-                sp.Orientation = Orientation.Horizontal;
+                sp.Orientation = Orientation.Vertical;
                 sp.Margin = new Thickness(0, 0, 0, 10);
-                // Create icon
-                var icon = new PackIconMaterial();
-                icon.Kind = PackIconMaterialKind.Circle;
-                icon.Foreground = new SolidColorBrush(Colors.YellowGreen);
-                icon.Width = 10;
-                icon.Height = 10;
-                icon.VerticalAlignment = VerticalAlignment.Center;
-                icon.Margin = new Thickness(0, 2, 10, 0);
+               
 
                 // Create text block for containing text
                 tb = new TextBlock();
                 tb.TextWrapping = TextWrapping.Wrap;
                 tb.FontSize = 14;
-                tb.MaxWidth = 680;
-                tb.Text = we.ExampleContent;
-
-                // Add icon and text block to row container
-                sp.Children.Add(icon);
+                tb.Text = "- " + we.ExampleContent;
                 sp.Children.Add(tb);
 
                 // Add to list
@@ -122,27 +111,18 @@ namespace EnglishDictionary.UI.Admin
             {
                 // Create row container
                 sp = new StackPanel();
-                sp.Orientation = Orientation.Horizontal;
+                sp.Orientation = Orientation.Vertical;
                 sp.Margin = new Thickness(0, 0, 0, 10);
 
-                // Create icon
-                var icon = new PackIconMaterial();
-                icon.Kind = PackIconMaterialKind.Circle;
-                icon.Foreground = new SolidColorBrush(Colors.YellowGreen);
-                icon.Width = 10;
-                icon.Height = 10;
-                icon.VerticalAlignment = VerticalAlignment.Center;
-                icon.Margin = new Thickness(0, 1, 10, 0);
+               
 
                 // Create text block for containing text
                 tb = new TextBlock();
                 tb.TextWrapping = TextWrapping.Wrap;
                 tb.FontSize = 14;
-                tb.Text = we.MeaningContent;
-                tb.MaxWidth = 680;
+                tb.Text = "- " + we.MeaningContent;
 
                 // Add icon and text block to row container
-                sp.Children.Add(icon);
                 sp.Children.Add(tb);
 
                 // Add to list

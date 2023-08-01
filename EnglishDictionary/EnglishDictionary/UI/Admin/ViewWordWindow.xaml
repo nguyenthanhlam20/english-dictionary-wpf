@@ -105,11 +105,10 @@
                     </DockPanel>
                 </Border>
 
-                <ScrollViewer  VerticalScrollBarVisibility="Hidden" MaxHeight="270">
+                <ScrollViewer  VerticalScrollBarVisibility="Hidden" MaxHeight="250">
                     <StackPanel Orientation="Vertical">
                         <Border
                 HorizontalAlignment="Stretch"
-                MaxHeight="350"
                 Padding="20" CornerRadius="7" 
                     BorderBrush="{DynamicResource SecondaryBackgroundColor}" 
                      Background="{DynamicResource TertiaryBackgroundColor}"
@@ -135,9 +134,7 @@
 
                             </StackPanel>
                         </Border>
-
                         <Border
-                MaxHeight="350"
                 Padding="20" CornerRadius="7" 
                     Margin="0 20 0 0"
                     BorderBrush="{DynamicResource SecondaryBackgroundColor}" 

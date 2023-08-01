@@ -54,7 +54,7 @@
                                      Tag="{DynamicResource dashboard}"
                                      Margin="0 30 0 0" ></RadioButton>
                         <RadioButton x:Name="rdMyWord"
-                                     Content="My Words"
+                                     Content="History"
                                      Click="rdMyWord_Click"
                                      Style="{DynamicResource MenuRadioButtonStyle}" 
                                      Tag="{DynamicResource collections}" 
@@ -96,7 +96,7 @@
                       
                        Foreground="{DynamicResource SecondaryTextColor}"
                        Grid.Row="0" 
-                            Grid.Column="0" Content="Title" HorizontalContentAlignment="Left" 
+                            Grid.Column="0" Content="Dictionary" HorizontalContentAlignment="Left" 
                         VerticalContentAlignment="Center"/>
                 <!-- Start: Button Close | Restore | Minimize -->
 

@@ -1,0 +1,4 @@
+C:\Users\ADMIN\Desktop\DictionaryApp\64bit\EnglishDictionary.pdb
+C:\Users\ADMIN\Desktop\DictionaryApp\64bit\EnglishDictionary.dll.config
+C:\Users\ADMIN\Desktop\DictionaryApp\64bit\e_sqlite3.dll
+C:\Users\ADMIN\Desktop\DictionaryApp\64bit\EnglishDictionary.exe

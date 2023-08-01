@@ -4,17 +4,19 @@ using MahApps.Metro.IconPacks;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Media3D;
 
 namespace EnglishDictionary.UI.User.Pages
 {
     /// <summary>
     /// Interaction logic for DictionaryPage.xaml
     /// </summary>
-    public partial class DictionaryPage : Page
+    public partial class DictionaryPage : Page, INotifyPropertyChanged
     {
         private int _targetWordId;
         private string filterSearch = "";
@@ -25,10 +27,30 @@ namespace EnglishDictionary.UI.User.Pages
         public ReplayCommand SaveWordCommand { get; set; }
 
         public List<Button> _alphabetButtons = new List<Button>();
-        public double ScreenHeight { get; set; }
         public double ScreenWidth { get; set; }
 
         public List<Word> defaultWords = new();
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+
+        public double _screenHeight = 0;
+
+        public double ScreenHeight
+        {
+            get { return _screenHeight; }
+            set
+            {
+                _screenHeight = value;
+                OnPropertyChanged("ScreenHeight");
+            }
+        }
+
         public DictionaryPage()
         {
             ScreenHeight = SystemParameters.PrimaryScreenHeight - 480;
@@ -60,15 +82,18 @@ namespace EnglishDictionary.UI.User.Pages
                     {
                         word.IsUserSaved = true;
                         word.UserSavedIconName = "ContentSaveCheck";
+                        defaultWords.SingleOrDefault(x => x.WordId == wordId).UserSavedIconName = "ContentSaveCheck";
                     }
                     else
                     {
                         word.IsUserSaved = false;
                         word.UserSavedIconName = "ContentSaveOff";
+                        defaultWords.SingleOrDefault(x => x.WordId == wordId).UserSavedIconName = "ContentSaveOff";
                     }
                     context.Words.Update(word);
 
                     context.SaveChanges();
+
 
                     dgWords.ItemsSource = GetResult();
                 }
@@ -90,7 +115,7 @@ namespace EnglishDictionary.UI.User.Pages
 
             lbResult.Visibility = Visibility.Visible;
 
-            
+
             if (defaultWords.Count() > 0)
             {
                 lbResult.Content = $"Total {defaultWords.Count()} words";
@@ -111,28 +136,25 @@ namespace EnglishDictionary.UI.User.Pages
         {
             try
             {
-                TextBox txt = sender as TextBox;
-
-                filterSearch = txt.Text;
-                if (String.IsNullOrEmpty(txt.Text) == false)
+                if (String.IsNullOrEmpty(txtSearch.Text) == false)
                 {
-                    searchResultsPopup.IsOpen = true;
+                    filterSearch = txtSearch.Text;
                     btnClearSearch.Visibility = Visibility.Visible;
-
                     SuggestWords();
                 }
                 else
                 {
                     btnClearSearch.Visibility = Visibility.Hidden;
-                    searchResultsPopup.IsOpen = false;
-
-                    //LoadAllWords();
+                    if (searchResultsPopup.IsOpen)
+                    {
+                        ShowHistoryWords();
+                    }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                MessageBox.Show("Cannot search");
+                //MessageBox.Show("Cannot search: " + ex);
             }
         }
 
@@ -162,13 +184,11 @@ namespace EnglishDictionary.UI.User.Pages
             List<Word> words = GetResult();
             if (words.Count() > 0)
             {
+                searchResultsPopup.IsOpen = true;
                 searchResultsListBox.ItemsSource = words;
-                searchResultsListBox.DisplayMemberPath = "DisplayWord";
-                searchResultsListBox.SelectedValuePath = "WordId";
             }
             else
             {
-                searchResultsListBox.ItemsSource = null;
             }
         }
 
@@ -192,7 +212,7 @@ namespace EnglishDictionary.UI.User.Pages
                 defaultWords = context.Words.Include(w => w.Type).ToList();
             }
 
-            
+
         }
 
         private void LoadWordDetails()
@@ -243,26 +263,18 @@ namespace EnglishDictionary.UI.User.Pages
             {
                 // Create row container
                 sp = new StackPanel();
-                sp.Orientation = Orientation.Horizontal;
+                sp.Orientation = Orientation.Vertical;
                 sp.Margin = new Thickness(0, 0, 0, 10);
                 // Create icon
-                var icon = new PackIconMaterial();
-                icon.Kind = PackIconMaterialKind.Circle;
-                icon.Foreground = new SolidColorBrush(Colors.YellowGreen);
-                icon.Width = 10;
-                icon.Height = 10;
-                icon.VerticalAlignment = VerticalAlignment.Center;
-                icon.Margin = new Thickness(0, 2, 10, 0);
+              
 
                 // Create text block for containing text
                 tb = new TextBlock();
                 tb.TextWrapping = TextWrapping.Wrap;
                 tb.FontSize = 14;
-                tb.MaxWidth = ScreenWidth;
-                tb.Text = we.ExampleContent;
+                tb.Text = "- " + we.ExampleContent;
 
                 // Add icon and text block to row container
-                sp.Children.Add(icon);
                 sp.Children.Add(tb);
 
                 // Add to list
@@ -281,27 +293,15 @@ namespace EnglishDictionary.UI.User.Pages
             {
                 // Create row container
                 sp = new StackPanel();
-                sp.Orientation = Orientation.Horizontal;
+                sp.Orientation = Orientation.Vertical;
                 sp.Margin = new Thickness(0, 0, 0, 10);
-
-                // Create icon
-                var icon = new PackIconMaterial();
-                icon.Kind = PackIconMaterialKind.Circle;
-                icon.Foreground = new SolidColorBrush(Colors.YellowGreen);
-                icon.Width = 10;
-                icon.Height = 10;
-                icon.VerticalAlignment = VerticalAlignment.Center;
-                icon.Margin = new Thickness(0, 1, 10, 0);
-
                 // Create text block for containing text
                 tb = new TextBlock();
                 tb.TextWrapping = TextWrapping.Wrap;
                 tb.FontSize = 14;
-                tb.Text = we.MeaningContent;
-                tb.MaxWidth = ScreenWidth;
+                tb.Text = "- " + we.MeaningContent;
 
                 // Add icon and text block to row container
-                sp.Children.Add(icon);
                 sp.Children.Add(tb);
 
                 // Add to list
@@ -314,6 +314,7 @@ namespace EnglishDictionary.UI.User.Pages
         private void btnClearSearch_Click(object sender, RoutedEventArgs e)
         {
             txtSearch.Clear();
+            CloseSuggestion();
         }
 
         private void dgWords_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -376,6 +377,91 @@ namespace EnglishDictionary.UI.User.Pages
         private void searchResultsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+            try
+            {
+                ListBox lv = (ListBox)sender;
+
+                Word word = lv.SelectedItem as Word;
+
+                if (word != null)
+                {
+                    _targetWordId = word.WordId;
+
+
+                    if (word.IsHistory == false)
+                    {
+                        defaultWords.SingleOrDefault(x => x.WordId == word.WordId).IsHistory = true;
+                        defaultWords.SingleOrDefault(x => x.WordId == word.WordId).SearchIconName = "History";
+                        UpdateWordHistory(word.WordId);
+                    }
+
+                    LoadWordDetails();
+
+                    CloseSuggestion();
+
+                }
+            }
+            catch (Exception)
+            {
+
+
+            }
+        }
+
+        private void CloseSuggestion()
+        {
+            searchResultsPopup.IsOpen = false;
+            searchResultsListBox.ItemsSource = null;
+        }
+
+        private void UpdateWordHistory(int wordId)
+        {
+
+            using (var context = new DictionaryContext())
+            {
+                Word word = context.Words.SingleOrDefault(x => x.WordId == wordId);
+                word.IsHistory = true;
+                word.SearchIconName = "History";
+                word.HistoryDate = DateTime.Now;
+
+                context.Words.Update(word);
+                context.SaveChanges();
+            }
+        }
+
+
+        private void txtSearch_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (String.IsNullOrEmpty(txtSearch.Text))
+            {
+                ShowHistoryWords();
+            }
+            else
+            {
+                SuggestWords();
+            }
+        }
+
+        private void ShowHistoryWords()
+        {
+            List<Word> words = defaultWords.Where(x => x.IsHistory == true)
+
+               .OrderByDescending(x => x.HistoryDate)
+               .ToList();
+            if (words.Count() > 0)
+            {
+                searchResultsPopup.IsOpen = true;
+
+                searchResultsListBox.ItemsSource = words;
+            }
+        }
+
+
+        public void ResizeTable(double height)
+        {
+            ScreenHeight = height - 210;
+
+            dgWords.MaxHeight = height - 230;
         }
     }
 }

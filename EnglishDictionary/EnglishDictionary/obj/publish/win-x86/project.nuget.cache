@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "SESRyoV8tHUZjTBMBlIzKsewVPHFIAFmnwh4Ei7W0JCwJ5s8xvh5+AoVk2m713I17CWSxSTyEvW3aAoG5TonnA==",
+  "dgSpecHash": "//R4boH20uC1phGXV8ZvP5UZ9I4Fuf9ObtcdAND32kAazQl9sR+OUHgguyZqNiIq2/AhTnM5AQEPh+cunF+w+g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ADMIN\\Documents\\C#_Project\\english-dictionary-wpf\\EnglishDictionary\\EnglishDictionary\\EnglishDictionary.csproj",
+  "projectFilePath": "D:\\projects\\english-dictionary-wpf\\EnglishDictionary\\EnglishDictionary\\EnglishDictionary.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ADMIN\\.nuget\\packages\\csvhelper\\30.0.1\\csvhelper.30.0.1.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\extended.wpf.toolkit\\4.5.0\\extended.wpf.toolkit.4.5.0.nupkg.sha512",

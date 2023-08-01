@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ADMIN\\Documents\\C#_Project\\english-dictionary-wpf\\EnglishDictionary\\EnglishDictionary\\EnglishDictionary.csproj": {}
+    "D:\\projects\\english-dictionary-wpf\\EnglishDictionary\\EnglishDictionary\\EnglishDictionary.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ADMIN\\Documents\\C#_Project\\english-dictionary-wpf\\EnglishDictionary\\EnglishDictionary\\EnglishDictionary.csproj": {
+    "D:\\projects\\english-dictionary-wpf\\EnglishDictionary\\EnglishDictionary\\EnglishDictionary.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ADMIN\\Documents\\C#_Project\\english-dictionary-wpf\\EnglishDictionary\\EnglishDictionary\\EnglishDictionary.csproj",
+        "projectUniqueName": "D:\\projects\\english-dictionary-wpf\\EnglishDictionary\\EnglishDictionary\\EnglishDictionary.csproj",
         "projectName": "EnglishDictionary",
-        "projectPath": "C:\\Users\\ADMIN\\Documents\\C#_Project\\english-dictionary-wpf\\EnglishDictionary\\EnglishDictionary\\EnglishDictionary.csproj",
+        "projectPath": "D:\\projects\\english-dictionary-wpf\\EnglishDictionary\\EnglishDictionary\\EnglishDictionary.csproj",
         "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ADMIN\\Documents\\C#_Project\\english-dictionary-wpf\\EnglishDictionary\\EnglishDictionary\\obj\\publish\\win-x86\\",
+        "outputPath": "D:\\projects\\english-dictionary-wpf\\EnglishDictionary\\EnglishDictionary\\obj\\publish\\win-x86\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

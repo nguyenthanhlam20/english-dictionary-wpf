@@ -1,40 +1,52 @@
-﻿using EnglishDictionary.Models;
-using EnglishDictionary.UI.User.Pages;
+﻿using EnglishDictionary.UI.User.Pages;
 using FinancialWPFApp.UI.Public.Views;
-using MahApps.Metro.IconPacks;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.ConstrainedExecution;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace EnglishDictionary.UI.User
 {
     /// <summary>
     /// Interaction logic for UserMainWindow.xaml
     /// </summary>
-    public partial class UserMainWindow : Window
+    public partial class UserMainWindow : Window, INotifyPropertyChanged
     {
-        public double ScreenHeight { get; set; }
 
+        public enum Page
+        {
+            DictionaryPage,
+            MyWordPage,
+        }
+
+        private Page currentPage = Page.DictionaryPage;
+
+        public double _screenHeight = 0f;
+
+        public double ScreenHeight
+        {
+            get { return _screenHeight; }
+            set
+            {
+                _screenHeight = value;
+                OnPropertyChanged("ScreenHeight");
+            }
+        }
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private DictionaryPage dictionaryPage;
+        private MyWordPage myWordPage;
         public UserMainWindow()
         {
             ScreenHeight = SystemParameters.PrimaryScreenHeight - 250;
             InitializeComponent();
 
-            DictionaryPage page = new DictionaryPage();
+            dictionaryPage = new DictionaryPage();
 
-            frameContent.Content = page;
+            frameContent.Content = dictionaryPage;
 
             DataContext = this;
         }
@@ -56,17 +68,22 @@ namespace EnglishDictionary.UI.User
 
         private void rdMyWord_Click(object sender, RoutedEventArgs e)
         {
-            MyWordPage page = new MyWordPage();
-            lbTitle.Content = "My Words";
-            frameContent.Content = page;
+            myWordPage = new MyWordPage();
+            myWordPage.ResizeTable(this.ActualHeight);
+            currentPage = Page.MyWordPage;
+            lbTitle.Content = "History";
+            frameContent.Content = myWordPage;
         }
 
         private void rdDictionary_Click(object sender, RoutedEventArgs e)
         {
-            DictionaryPage page = new DictionaryPage();
+            dictionaryPage = new DictionaryPage();
+            dictionaryPage.ResizeTable(this.ActualHeight);
+            currentPage = Page.DictionaryPage;
+
             lbTitle.Content = "Dictionary";
 
-            frameContent.Content = page;
+            frameContent.Content = dictionaryPage;
         }
 
         private void rdSettings_Click(object sender, RoutedEventArgs e)
@@ -79,7 +96,18 @@ namespace EnglishDictionary.UI.User
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-
+            switch(currentPage)
+            {
+                case Page.DictionaryPage:
+                    dictionaryPage.ResizeTable(this.ActualHeight);
+                    break;
+                case Page.MyWordPage:
+                    myWordPage.ResizeTable(this.ActualHeight);
+                    break;
+            }
         }
     }
 }
+
+
+

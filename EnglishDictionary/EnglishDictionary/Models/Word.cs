@@ -12,21 +12,17 @@ namespace EnglishDictionary.Models
         [Key]
         public int WordId { get; set; }
         public string WordName { get; set; }
-
         public WordType Type { get; set; }
-
-
         public int WordTypeId { get; set; }
-
         public string IPA { get; set; }
-
         public bool IsSelected { get; set; } = false;
-
         public bool IsUserSaved { get; set; } = false;
         public bool IsAdminSaved { get; set; } = false;
+        public bool IsHistory { get; set; } = false;
+        public DateTime HistoryDate { get; set; } 
         public string IconName { get; set; } = "ContentSaveOff";
+        public string SearchIconName { get; set; } = "Magnify";
         public string UserSavedIconName { get; set; } = "ContentSaveOff";
-
         public List<WordMeaning> WordMeanings { get; set; }
         public List<WordExample> WordExamples { get; set; }
 
